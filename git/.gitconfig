@@ -1,0 +1,49 @@
+[user]
+    name = dgronskij
+    email = gronsky.dm@gmail.com
+
+[includeIf "gitdir:~/ozon/"]
+    path = ~/.dotfiles/git/gitconfig_user.ozon
+
+[push]
+    default = current
+[core]
+    editor = "/usr/bin/vim"
+	#excludesfile = /home/dgronsky/.gitignore_global
+	#exludesfile = /home/dgronsky/.git
+[alias]
+    sun = status -uno
+    ls = log --graph --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate
+    g = grep -n
+    f = "!git ls-files | grep -i --color=auto"
+    lf = "!f() { if [ -z "$1" ] ; then range="HEAD~..HEAD" ; else range=$1; fi; git diff --name-only  $range; }; f"
+    #lf = "!f() { if [ -z "$1" ] ; then commit="HEAD" ; else commit=$1; fi; git diff-tree --no-commit-id --name-only -r $commit; }; f"
+    #lfe = "!f() { git lf $1 | xargs vim; }; f"
+    lfe = "!f() { git lf $1 | xargs bash -c '</dev/tty vim "$@"' ignoreme; }; f"  # http://superuser.com/questions/336016/invoking-vi-through-find-xargs-breaks-my-terminal-why
+    lm  = "!git status --porcelain   | grep -v '^??'  | awk '{print $2;}'"
+    lma = "!git status --porcelain `#| grep -v '^??'` | awk '{print $2;}'"
+    lme = "! git lm | xargs bash -c '</dev/tty vim "$@"' ignoreme "  # http://superuser.com/questions/336016/invoking-vi-through-find-xargs-breaks-my-terminal-why
+    lmae = "! git lma | xargs bash -c '</dev/tty vim "$@"' ignoreme "  # http://superuser.com/questions/336016/invoking-vi-through-find-xargs-breaks-my-terminal-why
+    hide = update-index --assume-unchanged
+    unhide = update-index --no-assume-unchanged
+    ca = "commit --amend --no-edit"
+    cjira = "! f() { JIRA=`git rev-parse --abbrev-ref HEAD | egrep -o '[^0-9]*-[0-9]+' | head -n1 || echo '???'` && git commit -m \"${JIRA}: $1\"; }; f"
+    mt = "tag -l "mt_*""
+    mta = "!f() { [ $# -ne 1 ] && { echo "specify tag name" ; exit 1 ; } ; git tag mt_`date +%s`_`git rev-parse --abbrev-ref HEAD`_$1; }; f"
+
+    # interactively checkout to branch, list local ones by default, extra args are passed to git branch as is
+    co  =  "!f() { git branch "${@}" | cut -c 3- | grep -v HEAD  | fzf --preview 'git ls --color {}' | sed s@remotes/@@g | sed s@origin/@@g | xargs -n1 git checkout; }; f"
+    cot =  "!f() { git tag -l                                    | fzf --preview 'git ls --color {}' | sed s@remotes/@@g | sed s@origin/@@g | xargs -n1 git checkout; }; f"
+[pager]
+    #log = perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight | less
+    #show = perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight | less
+    #diff = perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight | less
+[core]
+	excludesfile = ~/.gitignore_global
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[url "git@gitlab.ozon.ru:"]
+	insteadOf = https://gitlab.ozon.ru/

@@ -1,0 +1,13 @@
+tags
+.tags
+.tags_sorted_by_file
+CMakeLists.txt.user
+#build/
+rb2/
+
+.ctags
+.ycm_extra_conf.py
+*.swp
+*.swo
+
+.git
