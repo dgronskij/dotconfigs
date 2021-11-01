@@ -11,3 +11,5 @@ rb2/
 *.swo
 
 .git
+
+workspace.code-workspace
