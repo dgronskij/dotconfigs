@@ -14,12 +14,14 @@ Plug 'https://github.com/moll/vim-bbye.git'
 Plug 'https://github.com/AndrewRadev/linediff.vim.git'
 Plug 'https://github.com/junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'https://github.com/junegunn/fzf.vim'
-" Plug 'https://github.com/scrooloose/nerdcommenter.git'
+Plug 'https://github.com/preservim/nerdcommenter'
 " Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 Plug 'https://github.com/scrooloose/nerdtree.git'
 Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/bling/vim-bufferline'
 Plug 'https://github.com/teoljungberg/vim-grep.git'
+
+Plug 'https://github.com/tpope/vim-fugitive'
 " Plug 'https://github.com/easymotion/vim-easymotion'
 " Plug 'https://github.com/jceb/vim-orgmode.git'
 " Plug 'https://github.com/terryma/vim-smooth-scroll.git'
@@ -40,6 +42,9 @@ set fileencoding=utf-8
 map <Leader>dark :colorscheme solarized<CR>:set background=dark<CR>
 map <Leader>light :colorscheme solarized<CR>:set background=light<CR>
 map <Leader>monokai :colorscheme monokai<CR>
+
+vnoremap <Leader>cat :'<,'>w !tee <CR>
+vnoremap <Leader>cp  :'<,'>w !~/.iterm2/it2copy<CR>
 
 
 set cursorline
@@ -152,15 +157,6 @@ let g:fc_current = 1
 " Set default font
 let &guifont = g:fc_list[g:fc_current]
 
-" function! FontCycle()
-"   " Increment circular list. See :help expr-%
-"   let g:fc_current = (g:fc_current + 1) % len(g:fc_list)
-"   let &guifont = g:fc_list[g:fc_current]
-" endfunction
-" 
-" noremap <leader>fc :call FontCycle()<cr>
-
-
 " set guifont=Monospace\ Bold\ 8
 " set guifont=Menlo\ Bold:h13
 " set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline:h13
@@ -194,8 +190,10 @@ vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
 " copy filename and line to clipboard
-nnoremap <Leader>cfn :let @+=expand("%").":".line(".")
 
+"nnoremap <Leader>cfn :let @+=expand("%").":".line(".")
+nnoremap <Leader>cfn :echo expand("%").":".line(".") <CR>
+"
 " NERDTree toggle
 map <Leader>tre :NERDTreeToggle<CR>
 nmap <Leader>trr :NERDTreeFind<CR>
