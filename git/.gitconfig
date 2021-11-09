@@ -8,7 +8,7 @@
 [push]
     default = current
 [core]
-    editor = "/usr/bin/vim"
+    editor = /usr/bin/env vim
 	#excludesfile = /home/dgronsky/.gitignore_global
 	#exludesfile = /home/dgronsky/.git
 [alias]
@@ -16,7 +16,7 @@
     ls = log --graph --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate
     g = grep -n
     f = "!git ls-files | grep -i --color=auto"
-    lf = "!f() { if [ -z "$1" ] ; then range="HEAD~..HEAD" ; else range=$1; fi; git diff --name-only  $range; }; f"
+    lf = "!f() { if [ -z "$1" ] ; then range="HEAD~..HEAD" ; else range="$1"; fi; git diff --name-only  $range; }; f"
     #lf = "!f() { if [ -z "$1" ] ; then commit="HEAD" ; else commit=$1; fi; git diff-tree --no-commit-id --name-only -r $commit; }; f"
     #lfe = "!f() { git lf $1 | xargs vim; }; f"
     lfe = "!f() { git lf $1 | xargs bash -c '</dev/tty vim "$@"' ignoreme; }; f"  # http://superuser.com/questions/336016/invoking-vi-through-find-xargs-breaks-my-terminal-why
