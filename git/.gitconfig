@@ -47,3 +47,5 @@
 	process = git-lfs filter-process
 [url "git@gitlab.ozon.ru:"]
 	insteadOf = https://gitlab.ozon.ru/
+[pull]
+	ff = only
