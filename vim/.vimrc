@@ -22,6 +22,9 @@ Plug 'https://github.com/bling/vim-bufferline'
 Plug 'https://github.com/teoljungberg/vim-grep.git'
 
 Plug 'https://github.com/tpope/vim-fugitive'
+Plug 'https://github.com/airblade/vim-gitgutter'
+
+Plug 'https://github.com/iautom8things/gitlink-vim'
 " Plug 'https://github.com/easymotion/vim-easymotion'
 " Plug 'https://github.com/jceb/vim-orgmode.git'
 " Plug 'https://github.com/terryma/vim-smooth-scroll.git'
@@ -69,6 +72,9 @@ set foldmethod=syntax
 set foldlevelstart=100
 
 set scrolloff=3
+
+command GitLink :echo gitlink#GitLink()
+
 
 
 "set winheight=30
