@@ -12,4 +12,5 @@ rb2/
 
 .git
 
+.vscode
 workspace.code-workspace
