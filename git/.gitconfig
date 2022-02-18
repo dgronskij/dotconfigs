@@ -2,7 +2,7 @@
     name = dgronskij
     email = gronsky.dm@gmail.com
 
-[includeIf "gitdir:~/src/gitlab.ozon.ru"]
+[includeIf "gitdir:~/src/gitlab.ozon.ru/"]
     path = ~/.dotfiles/git/gitconfig_user.ozon
 
 [push]
