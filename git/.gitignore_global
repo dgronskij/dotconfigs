@@ -16,3 +16,9 @@ rb2/
 
 .vscode
 workspace.code-workspace
+
+# Python
+__pycache__
+**/__pycache__
+*.py[cod]
+.mypy_cache
