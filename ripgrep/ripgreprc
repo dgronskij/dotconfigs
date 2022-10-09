@@ -1,0 +1,5 @@
+--hidden
+--follow
+--smart-case
+--glob=!git/*
+--ignore-file=/home/d.gronsky/.gitignore_global
