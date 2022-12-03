@@ -49,3 +49,7 @@
 	insteadOf = https://gitlab.ozon.ru/
 [pull]
 	ff = only
+
+[init]
+    # see: https://pre-commit.com/#automatically-enabling-pre-commit-on-repositories
+	templateDir = ~/.git-template
