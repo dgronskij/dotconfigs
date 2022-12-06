@@ -41,6 +41,16 @@ function M.astronvim_mappings_callback(_)
     },
   })
 
+
+  -- ThePrimeagen: center viewport for up/down motions
+  -- https://youtu.be/KfENDDEpCsI?t=337
+
+  keymap = require("dgronskiy_nvim.keymap")
+  keymap.nnoremap("<C-d>", "<C-d>zz")
+  keymap.nnoremap("<C-u>", "<C-u>zz")
+  keymap.nnoremap("n", "nzzzv")
+  keymap.nnoremap("N", "Nzzzv")
+
   return merged
 end
 
