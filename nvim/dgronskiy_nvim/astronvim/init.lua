@@ -136,7 +136,7 @@ config = {
         -- })
 
         -- vim.keymap.set("n", "<leader>f", function() print("here we go") end, {nowait = true, buffer = true})
-        vim.cmd [[ nnoremap * :keepjumps normal! mi*`i<CR> """ * ]]
+        vim.cmd [[ nnoremap * :keepjumps normal! mi*`i<CR>zz """ * ]]
         vim.cmd [[ command GitLink :echo gitlink#GitLink() ]]
 
         vim.cmd [[ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]]
