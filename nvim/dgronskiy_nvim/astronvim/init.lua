@@ -66,6 +66,13 @@ config = {
                 --     vim.cmd('colorscheme rose-pine')
                 -- end
             },
+            ['https://github.com/ggandor/leap.nvim'] = {
+                config = function()
+                    require('leap').add_default_mappings()
+                end,
+            },
+            -- do not enable until https://github.com/elihunter173/dirbuf.nvim#notes is resolved
+            -- ["https://github.com/elihunter173/dirbuf.nvim"] = {}
         },
         ["mason-lspconfig"] = {
             ensure_installed = { "pyright", "sumneko_lua", "bashls", "gopls", },
