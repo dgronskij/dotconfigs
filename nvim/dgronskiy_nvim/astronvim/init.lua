@@ -27,6 +27,9 @@ config = {
 
     mappings = require("dgronskiy_nvim.astronvim.mappings").astronvim_mappings_callback,
     plugins = {
+        --
+        -- https://github.com/wbthomason/packer.nvim#specifying-plugins
+        --
         init = {
             -- configuratino of plugins shipped with Astronvim
             ["goolord/alpha-nvim"] = { disable = true },
@@ -106,6 +109,10 @@ config = {
         },
     },
     polish = function()
+        vim.cmd [[ set wildmode=longest:full,full ]] -- https://vi.stackexchange.com/a/11424/7248
+
+
+
 
         -- vim.cmd [[ autocmd FileType * nnoremap <nowait> <buffer> <leader>f :lua print("another one")<CR> ]]
         -- vim.cmd [[ autocmd FileType * nnoremap <nowait> <buffer> <leader>f :lua print("another one") ]]
