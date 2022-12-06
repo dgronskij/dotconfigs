@@ -13,6 +13,7 @@ rb2/
 *.swo
 
 .git
+.venv
 
 .vscode
 workspace.code-workspace
