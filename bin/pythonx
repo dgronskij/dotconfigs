@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# `echo` is a hack for trimming penv versions output through bash parameter expansion ^_^ 
+
+set -e
+set -o pipefail
+
+version=$(pyenv versions --bare | fzf | grep -oP '\d+(\.\d+)*')
+PYENV_VERSION=$( echo $version ) && export PYENV_VERSION && exec python "$@"

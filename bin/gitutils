@@ -1,0 +1,97 @@
+#!/bin/bash
+
+#function __git_list_repos() {
+#    find "$1" -type d -name .git | xargs -n1 dirname
+#}
+
+function __git_list_repos() {
+    python3 <(cat <<END
+import sys
+def get_git_repos(root):
+    import os
+    from collections import deque
+    root = os.path.expanduser(root)
+
+    for cur_root, dirs, files in os.walk(root):
+        if '.git' in dirs:
+            dirs.clear()  # this will stop recursion into current directory tree
+            yield cur_root
+
+    return
+
+    # this is a slower version of the snippet above
+
+    queue = deque()
+
+    if os.path.isdir(root):
+        queue.append(root)
+
+    while queue:
+        popped_path = queue.popleft()
+        if os.path.isdir(os.path.join(popped_path, '.git')):
+            yield popped_path
+            continue
+
+
+        for fn in os.listdir(popped_path):
+            fn_path = os.path.join(popped_path, fn)
+            if os.path.isdir(fn_path):
+                queue.appendleft(fn_path)
+if __name__ == '__main__':
+    for path in get_git_repos(sys.argv[-1]):
+        print(path)
+END
+    ) "$@"
+}
+
+function __git_switch_repos() {
+    cd $1
+    cd "$1/$(__git_list_repos . | sort | fzf)"
+}
+
+function __git_clone() {
+    cmd=$(python3 <(cat <<END
+from __future__ import print_function
+import sys
+import os
+SRC_ROOT = os.environ['GIT_SRC_ROOT']
+repo = sys.argv[-1]
+extra_args = ' '.join(sys.argv[1:-1])  # OK, this would break on spaces
+
+# https://github.com/python-greenlet/greenlet.git
+# git@github.com:python-greenlet/greenlet.git
+repo_path = repo
+
+if repo.startswith('http'):
+    repo_path = repo_path.split('//', 1)[-1]
+    repo_path = repo_path.rsplit('.git', 1)[0]
+elif repo.startswith('git'):
+    repo_path = repo_path.split('git@', 1)[-1]
+    repo_path = repo_path.rsplit('.git', 1)[0]
+    repo_path = repo_path.replace(':', '/')
+else:
+    raise ValueError("wrong repo format")
+
+
+repo_path = os.path.join(SRC_ROOT, repo_path)
+
+
+cmd = '''
+git clone {extra_args} {repo} {repo_path}
+cd {repo_path}
+'''.format(extra_args=extra_args, repo=repo, repo_path=repo_path)
+
+print(cmd, file=sys.stderr)
+print(cmd)
+
+END
+    ) "$@"
+    )
+
+    eval "$cmd"
+}
+
+function __git_clone_shallow() {
+    __git_clone --depth 1 "$@"
+}
+
