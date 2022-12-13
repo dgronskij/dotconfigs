@@ -1,9 +1,1 @@
-#!/bin/bash
-
-if [[ $# != 0 ]] ; then
-    args="$@"
-else
-    args=( -c 'Telescope find_files' )
-fi
-
-exec vim "${args[@]}"
+vim
