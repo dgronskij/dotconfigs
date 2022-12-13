@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -x
+
+stow -v -t ~/bin bin
