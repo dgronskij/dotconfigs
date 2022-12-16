@@ -12,6 +12,7 @@
 	#excludesfile = /home/dgronsky/.gitignore_global
 	#exludesfile = /home/dgronsky/.git
 [alias]
+    w = worktree
     sun = status -uno
     ls = log --graph --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate
     g = grep -n
