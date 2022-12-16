@@ -53,3 +53,5 @@
 [init]
     # see: https://pre-commit.com/#automatically-enabling-pre-commit-on-repositories
 	templateDir = ~/.git-template
+[worktree]
+	guessRemote = true # see: https://stackoverflow.com/a/47915237/539570
