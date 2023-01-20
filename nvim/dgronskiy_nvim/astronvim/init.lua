@@ -59,7 +59,17 @@ config = {
             -- },
             ['https://github.com/junegunn/fzf'] = {},
             ['https://github.com/junegunn/fzf.vim'] = {},
-            ['https://github.com/iautom8things/gitlink-vim'] = {},
+            -- ['https://github.com/iautom8things/gitlink-vim'] = {},
+
+            ['https://github.com/dgronskij/gitlink-vim'] = {},
+
+            -- ['https://github.com/ruifm/gitlinker.nvim'] = {
+            --     requires = 'nvim-lua/plenary.nvim',
+            --     config = function() require("gitlinker").setup() end,
+            -- },
+
+
+
             ['gruvbox-community/gruvbox'] = {},
             ['rose-pine/neovim'] = {
                 as = 'rose-pine',
@@ -74,6 +84,7 @@ config = {
             },
             -- do not enable until https://github.com/elihunter173/dirbuf.nvim#notes is resolved
             -- ["https://github.com/elihunter173/dirbuf.nvim"] = {}
+            ['https://github.com/tpope/vim-fugitive'] = {},
         },
         ["mason-lspconfig"] = {
             ensure_installed = { "pyright", "sumneko_lua", "bashls", "gopls", },
