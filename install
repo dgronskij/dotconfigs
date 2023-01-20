@@ -3,3 +3,4 @@
 set -x
 
 stow -v -t ~/bin bin
+stow -v tmux
