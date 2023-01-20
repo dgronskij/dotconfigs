@@ -3,7 +3,8 @@
 if [[ $# != 0 ]] ; then
     args=( "$@" )
 else
-    args=( -c 'Telescope find_files' )
+    # args=( -c 'Telescope find_files' )
+    args=( "$@" )
 fi
 
 exec nvim "${args[@]}"
