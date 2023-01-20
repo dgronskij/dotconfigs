@@ -106,7 +106,7 @@ config = {
                 -- null_ls.builtins.diagnostics.pydocstyle,
                 -- null_ls.builtins.diagnostics.pylint,
                 null_ls.builtins.formatting.black,
-                -- null_ls.builtins.formatting.isort,
+                null_ls.builtins.formatting.isort,
 
             }
 
@@ -125,6 +125,12 @@ config = {
                     },
                 },
             },
+        },
+        notify = {
+            -- https://github.com/rcarriga/nvim-notify/blob/master/lua/notify/config/init.lua#L22
+            -- default is 5000ms, which is TOO long
+            -- for some reason, 1000ms waits longer than expected, so I just put the smallest possible value here
+            timeout = 1,
         },
     },
     polish = function()
