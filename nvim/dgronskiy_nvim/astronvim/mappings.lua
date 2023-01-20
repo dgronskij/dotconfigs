@@ -27,6 +27,12 @@ function M.astronvim_mappings_callback(_)
       --
       ["<S-K>"] = { ":FindExact <C-R><C-W><CR>", desc = "FZF: find the word under cursor" },
       ["<leader>/"] = { ":BLines<CR>", desc = "FZF: Buffer lines" },
+
+      -- jump to the tab by its number
+      ["<leader>1"] = { "1gt" },
+      ["<leader>2"] = { "2gt" },
+      ["<leader>3"] = { "3gt" },
+      ["<leader>4"] = { "4gt" },
     },
     v = {
       ["<S-K>"] = { '"vy :FindExact <C-R>v<CR>', desc = "FZF: find the selection" },
