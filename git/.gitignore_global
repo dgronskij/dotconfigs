@@ -23,3 +23,7 @@ __pycache__
 **/__pycache__
 *.py[cod]
 .mypy_cache
+
+
+
+node_modules/
