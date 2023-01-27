@@ -1,2 +1,3 @@
-vim/plugged
-vim/bundle
+# # vim has its own .gitignore
+# vim/plugged
+# vim/bundle
