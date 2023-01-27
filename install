@@ -2,5 +2,14 @@
 
 set -x
 
-stow -v -t ~/bin bin
-stow -v tmux
+# (
+#     stow
+#     -v                # verbose mode
+#     [=n]              # NOOP mode
+#     -t <TARGET_DIR>   # target directory. default would be `parent of pwd`
+#     [-D]              # specify this to undo links
+#     <COMPONENT>       # stow will start within this direcotyr, recursively walking it aroung
+#_)
+
+stow -v -t ~ bin
+stow -v -t ~ tmux
