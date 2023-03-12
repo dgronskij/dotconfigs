@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -e -o pipefail
+
+OUTFMT="${OUTFMT-%Y-%m-%d}"
+STEP="${STEP-1 day}"
+
+opt_err_inv_ope () {
+    echo "invalid option: '$OPTARG'" >&2
+    exit 1
+}
+
+opt_err_no_arg () {
+    echo "option '$OPTARG' requires an argument" >&2
+    exit 1
+}
+
+while getopts 's:f:' OPTION ; do
+    case $OPTION in
+        s) STEP="$OPTARG" ;;
+        f) OUTFMT="$OPTARG" ;;
+        \?) opt_err_inv_opt ;;
+        :)  opt_err_no_arg  ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+FROM="$1"
+TO="${2-today}"
+
+FMT="%Y-%m-%d"
+
+if [[ -z "$FROM" || -z "$TO" ]] ; then
+    echo "usage: $0  [-f OUTPUT-FORMAT] [-s STEP] FROM_INCL TO_EXCL" >&2
+    exit 1
+fi
+
+NOW=$(date +"$FMT" -d "$FROM")
+END=$(date +"$FMT" -d "$TO")
+
+while [[ "$NOW" < "$END" ]] ; do
+    OUT=$(date +"$OUTFMT" -d "$NOW")
+    echo "$OUT"
+    NOW=$(date +"$FMT" -d "$NOW + $STEP")
+done
