@@ -18,6 +18,7 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 source ~/bin/sshutils.incl.sh
+source ~/bin/makeenv.incl.sh
 _sshutils_relink_ssh_auth
 
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
