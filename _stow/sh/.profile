@@ -71,11 +71,16 @@ alias gs="__git_switch_repos ~/src/gitlab.ozon.ru"
 alias ml="__git_switch_repos ~/src/gitlab.ozon.ru/data_science/mlp"
 alias 3p="__git_switch_repos ~/src/github.com"
 alias om="__git_switch_repos ~/src/python_course_2022"
+alias aim="__git_switch_repos ~/src/158.160.16.51"
 
 
 alias k-prod-ds="kubectl --context=o-prod --namespace ds"
+alias k="kubectl --context=o-prod --namespace ds"
 alias k-dev-ds="kubectl --context=o-dev --namespace ds"
 alias k-stg-ds="kubectl --context=o-stg --namespace ds"
+
+alias k9="k9s --context=o-prod --namespace ds --command=service"
+alias k9x='k9s --context=o-$(echo -e "prod\nstg\ndev" | fzf) --namespace ds --command=service'
 
 alias por="poetry run"
 alias pvim="poetry run vim"
