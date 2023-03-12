@@ -85,6 +85,11 @@ config = {
             -- do not enable until https://github.com/elihunter173/dirbuf.nvim#notes is resolved
             -- ["https://github.com/elihunter173/dirbuf.nvim"] = {}
             ['https://github.com/tpope/vim-fugitive'] = {},
+            ['https://github.com/ThePrimeagen/harpoon'] = {
+                config = function()
+                    require("harpoon").setup({})
+                end
+            },
         },
         ["mason-lspconfig"] = {
             ensure_installed = { "pyright", "sumneko_lua", "bashls", "gopls", },
@@ -134,6 +139,11 @@ config = {
         },
     },
     polish = function()
+        require("telescope").load_extension('harpoon')
+
+
+
+
         vim.cmd [[ set wildmode=longest:full,full ]] -- https://vi.stackexchange.com/a/11424/7248
 
 
