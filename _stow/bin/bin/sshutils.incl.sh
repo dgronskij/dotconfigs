@@ -2,6 +2,7 @@
 
 # TODO: environment variable to set link location
 
+# this function should be called in ~/.profile
 function _sshutils_relink_ssh_auth() {
     # https://gist.github.com/martijnvermaat/8070533
     if [[ -S "$SSH_AUTH_SOCK" && ! -h "$SSH_AUTH_SOCK" ]]; then
