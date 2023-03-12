@@ -95,9 +95,9 @@ function M.saner_astronvim_defaults()
 
   -- Bufdelete
   if is_available "bufdelete.nvim" then
-    maps.n["<leader>c"] = { "<cmd>Bdelete<cr>", desc = "Close buffer" }
+    maps.n["<leader>q"] = { "<cmd>Bdelete<cr>", desc = "Close buffer" }
   else
-    maps.n["<leader>c"] = { "<cmd>bdelete<cr>", desc = "Close buffer" }
+    maps.n["<leader>q"] = { "<cmd>bdelete<cr>", desc = "Close buffer" }
   end
 
   -- Navigate buffers
