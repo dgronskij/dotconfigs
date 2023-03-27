@@ -90,6 +90,7 @@ config = {
                     require("harpoon").setup({})
                 end
             },
+            ['https://github.com/editorconfig/editorconfig-vim'] = {},
         },
         ["mason-lspconfig"] = {
             ensure_installed = { "pyright", "sumneko_lua", "bashls", "gopls", },
