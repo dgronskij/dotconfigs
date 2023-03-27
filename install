@@ -1,6 +1,7 @@
 #!/bin/bash
 
-set -x
+set -xe
+set -o pipefail
 
 # (
 #     stow
@@ -11,5 +12,6 @@ set -x
 #     <COMPONENT>       # stow will start within this direcotyr, recursively walking it aroung
 #_)
 
-stow -v -t ~ bin
-stow -v -t ~ tmux
+cd _stow
+stow -n -v -t ~ bin
+# stow -v -t ~ tmux
