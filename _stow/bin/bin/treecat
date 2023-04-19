@@ -1,0 +1,22 @@
+#!/bin/bash
+
+target_path="$1"
+
+# https://stackoverflow.com/questions/5947742/how-to-change-the-output-color-of-echo-in-linux
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BGREEN='\033[1;32m'
+NC='\033[0m' # No Color
+
+echo_green() {
+    local msg="$1"
+    echo -e "${BGREEN}${msg}${NC}"
+}
+
+rg --files $1 | sort | {
+    while IFS= read -r filename; do
+        echo_green "$filename"
+        cat "$filename"
+        echo
+    done;
+}
