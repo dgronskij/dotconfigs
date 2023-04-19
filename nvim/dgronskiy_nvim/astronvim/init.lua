@@ -91,6 +91,7 @@ config = {
                 end
             },
             ['https://github.com/editorconfig/editorconfig-vim'] = {},
+            ['ojroques/nvim-osc52'] = {},
         },
         ["mason-lspconfig"] = {
             ensure_installed = { "pyright", "sumneko_lua", "bashls", "gopls", },
