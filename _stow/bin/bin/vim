@@ -3,7 +3,7 @@
 if [[ $# != 0 ]] ; then
     args=( "$@" )
 else
-    # args=( -c 'Telescope find_files' )
+    # args=( -c 'Telescope find_files' )  # this shows not all files
     args=( "$@" )
 fi
 
