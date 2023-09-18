@@ -28,7 +28,7 @@
     hide = update-index --assume-unchanged
     unhide = update-index --no-assume-unchanged
     ca = "commit --amend --no-edit"
-    cjira = "! f() { JIRA=`git rev-parse --abbrev-ref HEAD | egrep -o '[^0-9]*-[0-9]+' | head -n1 | tr a-z A-Z || echo '???'` && git commit -m \"[${JIRA}] $1\"; }; f"
+    cjira = "! f() { JIRA=`git rev-parse --abbrev-ref HEAD | egrep -o '[^/0-9]*-[0-9]+' | head -n1 | tr a-z A-Z || echo '???'` && git commit -m \"[${JIRA}] $1\"; }; f"
     mt = "tag -l "mt_*""
     mta = "!f() { [ $# -ne 1 ] && { echo "specify tag name" ; exit 1 ; } ; git tag mt/`git rev-parse --abbrev-ref HEAD`/`date +%Y%m%d`/$1; }; f"
 
