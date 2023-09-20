@@ -175,9 +175,9 @@ config = {
         vim.cmd [[ command! -bang -nargs=* FindExact call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]]
 
         vim.cmd [[ vnoremap <Leader>cat :'<,'>w !tee<CR> ]]
-        vim.cmd [[ vnoremap <Leader>cp  :'<,'>w !~/.iterm2/it2copy<CR> ]]
 
         vim.cmd [[ nnoremap <Leader>find :Find  ]]
+        vim.cmd [[ nnoremap <Leader>fd :Find  ]]
 
         -- vim.cmd [[ nnoremap K :FindExact <C-R><C-W><CR> ]]
 
@@ -187,6 +187,11 @@ config = {
         --     nnoremap <Leader>/ :BLines<CR>
         --     vnoremap <Leader>/ "vy :BLines '<C-R>v<CR>
         -- ]]
+        
+        -- vim.cmd [[ vnoremap <Leader>cp  :'<,'>w !~/.iterm2/it2copy<CR> ]]
+        -- vim.keymap.set('n', '<leader>c', require('osc52').copy_operator, {expr = true})
+        -- vim.keymap.set('n', '<leader>cc', '<leader>c_', {remap = true})
+        vim.keymap.set('v', '<leader>cp', require('osc52').copy_visual)
     end,
 }
 
