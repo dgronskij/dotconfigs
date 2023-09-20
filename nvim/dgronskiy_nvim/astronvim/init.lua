@@ -18,12 +18,8 @@ config = {
             return astronvim_defaults
         end,
         ["server-settings"] = {
-            pyright = {
-                autostart = false,
-            },
-            gopls = {
-                autostart = false,
-            },
+            pyright = { autostart = false, },
+            gopls = { autostart = false, },
         },
     },
     diagnostics = {

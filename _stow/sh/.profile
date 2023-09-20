@@ -41,7 +41,13 @@ export FZF_DEFAULT_COMMAND="$GRONSKY_PROFILE_GET_PROJECT_FILES_COMMAND"
 # export GRONSKY_PROFILE_GET_PROJECT_FILES_COMMAND='rg --files'
 # export FZF_DEFAULT_COMMAND="$GRONSKY_PROFILE_GET_PROJECT_FILES_COMMAND"
 
-alias tma="tmux list-sessions &>/dev/null && tmux attach || tmux"
+tma() {
+    if tmux list-sessions &>/dev/null ; then
+        tmux attach
+    else
+        tmux
+    fi
+}
 
 source ~/bin/gitutils
 export GIT_SRC_ROOT=$HOME/src
@@ -55,7 +61,6 @@ alias 3p="__git_switch_repos ~/src/github.com"
 alias om="__git_switch_repos ~/src/python_course_2022"
 alias aim="__git_switch_repos ~/src/158.160.16.51"
 
-
 alias k-prod-ds="kubectl --context=o-prod --namespace ds"
 alias k="kubectl --context=o-prod --namespace ds"
 alias k-dev-ds="kubectl --context=o-dev --namespace ds"
@@ -66,6 +71,8 @@ alias k9x='k9s --context=o-$(echo -e "prod\nstg\ndev" | fzf) --namespace ds --co
 
 alias por="poetry run"
 alias pvim="poetry run vim"
+
+alias as="cd /data/a"
 
 nvimconf() {
     ( cd ~/.config/nvim && exec nvim )
