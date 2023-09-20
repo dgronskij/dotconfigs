@@ -3,7 +3,6 @@ config = {
     -- colorscheme = "gruvbox",
     colorscheme = "rose-pine",
     options = require('dgronskiy_nvim.sets').export_astronvim(),
-
     lsp = {
         servers = {},
         formatting = {
@@ -18,13 +17,18 @@ config = {
             astronvim_defaults.n['K'] = nil
             return astronvim_defaults
         end,
-        ["server-settings"] = {},
+        ["server-settings"] = {
+            pyright = {
+                autostart = false,
+            },
+            gopls = {
+                autostart = false,
+            },
+        },
     },
-
     diagnostics = {
         virtual_text = false,
     },
-
     mappings = require("dgronskiy_nvim.astronvim.mappings").astronvim_mappings_callback,
     plugins = {
         --
@@ -62,7 +66,6 @@ config = {
             -- ['https://github.com/iautom8things/gitlink-vim'] = {},
 
             ['https://github.com/dgronskij/gitlink-vim'] = {},
-
             -- ['https://github.com/ruifm/gitlinker.nvim'] = {
             --     requires = 'nvim-lua/plenary.nvim',
             --     config = function() require("gitlinker").setup() end,
@@ -118,17 +121,15 @@ config = {
             }
 
             return defaults
-
         end,
-
         telescope = {
             defaults = {
                 extensions = {
                     fzf = {
-                        fuzzy = true, -- false will only do exact matching
+                        fuzzy = true,                   -- false will only do exact matching
                         override_generic_sorter = true, -- override the generic sorter
-                        override_file_sorter = true, -- override the file sorter
-                        case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+                        override_file_sorter = true,    -- override the file sorter
+                        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
                     },
                 },
             },
@@ -187,7 +188,6 @@ config = {
         --     vnoremap <Leader>/ "vy :BLines '<C-R>v<CR>
         -- ]]
     end,
-
 }
 
 return config
