@@ -1,4 +1,4 @@
-echo "this is .profie"
+echo "this is .profile"
 # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
 # exists.
@@ -41,7 +41,7 @@ export FZF_DEFAULT_COMMAND="$GRONSKY_PROFILE_GET_PROJECT_FILES_COMMAND"
 # export GRONSKY_PROFILE_GET_PROJECT_FILES_COMMAND='rg --files'
 # export FZF_DEFAULT_COMMAND="$GRONSKY_PROFILE_GET_PROJECT_FILES_COMMAND"
 
-alias tma="tmux attach"
+alias tma="tmux list-sessions &>/dev/null && tmux attach || tmux"
 
 source ~/bin/gitutils
 export GIT_SRC_ROOT=$HOME/src

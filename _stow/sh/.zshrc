@@ -3,7 +3,7 @@ echo "this is zshrc"
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/d.gronsky/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -63,12 +63,14 @@ ZSH_THEME="af-magic"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git conda-zsh-completion asdf
+  git conda-zsh-completion
 )
 
 source $ZSH/oh-my-zsh.sh
 
-eval "$(zoxide init zsh)"
+if type zoxide >/dev/null 2>/dev/null; then
+  eval "$(zoxide init zsh)"
+fi
 
 # https://gist.github.com/ctechols/ca1035271ad134841284
 #
@@ -110,8 +112,8 @@ autoload -U compinit && compinit
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-if [ -f "/home/d.gronsky/miniconda3/etc/profile.d/conda.sh" ]; then
-    . "/home/d.gronsky/miniconda3/etc/profile.d/conda.sh"
+if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+    . "$HOME/miniconda3/etc/profile.d/conda.sh"
 fi
 # <<< conda initialize <<<
 
