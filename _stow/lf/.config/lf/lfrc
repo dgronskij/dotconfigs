@@ -1,0 +1,6 @@
+set hidden
+set icons
+set number
+set previewer ~/bin/lf-previewer
+set relativenumber
+set shell zsh

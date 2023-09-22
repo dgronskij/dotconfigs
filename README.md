@@ -7,3 +7,20 @@
 # .profile vs .zprofile vs .bashrc vs etc.
 - https://unix.stackexchange.com/questions/324359/why-a-login-shell-over-a-non-login-shell
 - https://unix.stackexchange.com/questions/38175/difference-between-login-shell-and-non-login-shell
+
+
+$ TODOS
+
+- [ ] move away from stow
+- components
+  - [ ] pipx
+  - [ ] pre-commit
+    - [ ] automatically set template directory
+  - [ ] lf terminal file manager
+
+
+# Terminal emulator configuration
+
+- Install NerdFonts
+   - https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip
+

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+
+set -x
+set -o pipefail
+
+to_install=(
+  # Shell related stuff
+  fzf
+  ripgrep
+  bat
+  lf
+
+  # Development tooling
+  pipx
+  stylua
+)
+
+HOMEBREW_NO_INSTALL_UPGRADE=yes brew install "${to_install[@]}"
+
+[ -f ~/.fzf.bash ] && [ -f ~/.fzf.zsh ] || {
+  echo "!!!!  installing fzf shell integration"
+  $(brew --prefix)/opt/fzf/install
+}
+
+type pre-commit &>/dev/null || pipx install pre-commit
+[ -d ~/.git-template ] || pre-commit init-templatedir ~/.git-template

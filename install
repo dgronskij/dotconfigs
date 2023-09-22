@@ -13,5 +13,5 @@ set -o pipefail
 #_)
 
 cd _stow
-stow -n -v -t ~ bin
+# stow -v -t ~ bin -n
 # stow -v -t ~ tmux

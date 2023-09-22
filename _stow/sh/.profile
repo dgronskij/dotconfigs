@@ -52,6 +52,8 @@ tma() {
 source ~/bin/gitutils
 export GIT_SRC_ROOT=$HOME/src
 
+alias ll="ls -la"
+
 alias g="git"
 alias lg="lazygit"
 
@@ -71,6 +73,8 @@ alias k9x='k9s --context=o-$(echo -e "prod\nstg\ndev" | fzf) --namespace ds --co
 
 alias por="poetry run"
 alias pvim="poetry run vim"
+alias lvim="NVIM_APPNAME=lazynvim nvim"
+alias kvim="NVIM_APPNAME=kickstartnvim nvim"
 
 alias as="cd /data/a"
 
