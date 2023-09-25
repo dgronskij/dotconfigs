@@ -123,6 +123,10 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 export PATH="$HOME/.poetry/bin:$PATH"
 
+if type zoxide &>/dev/null ; then
+    eval "$(zoxide init zsh)"
+fi
+
 if type starship &>/dev/null ; then
     eval "$(starship init zsh)"
 fi

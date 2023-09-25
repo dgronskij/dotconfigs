@@ -1,0 +1,7 @@
+#!/bin/bash
+
+config=$( cd ~/.config && ls -d *nvim* | fzf )
+if ! [ -z "$config" ] ; then
+    export NVIM_APPNAME="$config"
+    exec nvim "$@"
+fi

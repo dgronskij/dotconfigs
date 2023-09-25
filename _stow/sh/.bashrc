@@ -118,3 +118,7 @@ if ! shopt -oq posix; then
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+if type zoxide &>/dev/null ; then
+    eval "$(zoxide init bash)"
+fi

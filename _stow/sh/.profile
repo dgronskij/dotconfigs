@@ -76,7 +76,15 @@ alias pvim="poetry run vim"
 alias lvim="NVIM_APPNAME=lazynvim nvim"
 alias kvim="NVIM_APPNAME=kickstartnvim nvim"
 
+# xvim() {
+#     config=$( cd ~/.config && ls -d *nvim* | fzf )
+#     ! [ -z "$config" ] && NVIM_APPNAME=$config nvim "$@"
+# }
+
 alias as="cd /data/a"
+
+[ -e ~/.localrc ] && source ~/.localrc
+
 
 nvimconf() {
     ( cd ~/.config/nvim && exec nvim )

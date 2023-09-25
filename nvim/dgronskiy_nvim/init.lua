@@ -1,1 +1,3 @@
-return require("dgronskiy_nvim.astronvim")
+if _G.astronvim then
+    return require("dgronskiy_nvim.astronvim")
+end

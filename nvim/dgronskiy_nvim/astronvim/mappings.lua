@@ -28,10 +28,14 @@ mapping["n"] = {
     ["<leader>/"] = { ":BLines<CR>", desc = "FZF: Buffer lines" },
 
     -- jump to the tab by its number
-    ["<leader>1"] = { "1gt" },
-    ["<leader>2"] = { "2gt" },
-    ["<leader>3"] = { "3gt" },
-    ["<leader>4"] = { "4gt" },
+    ["<leader>1"] = { "1gt", desc = "[g]o to [t]ab 1" },
+    ["<leader>2"] = { "2gt", desc = "[g]o to [t]ab 2"},
+    ["<leader>3"] = { "3gt", desc = "[g]o to [t]ab 3"},
+    ["<leader>4"] = { "4gt", desc = "[g]o to [t]ab 4"},
+
+    -- buffer navigation
+    ["<S-L>"] = {"<Cmd>bnext<CR>", desc = "Next buffer" },
+    ["<S-H>"] = {"<Cmd>bnext<CR>", desc = "Previous buffer" },
 }
 
 -- VISUAL mode

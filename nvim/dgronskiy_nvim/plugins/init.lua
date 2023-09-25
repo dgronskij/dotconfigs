@@ -26,8 +26,8 @@ return {
             -- ["ray-x/lsp_signature.nvim"] = {
             --     config = function() require "lsp_signature".setup() end,
             -- },
-            {'https://github.com/junegunn/fzf'},
-            {'https://github.com/junegunn/fzf.vim'},
+            {'https://github.com/junegunn/fzf', lazy = false},
+            {'https://github.com/junegunn/fzf.vim', lazy = false},
             -- ['https://github.com/iautom8things/gitlink-vim'] = {},
 
             -- ['https://github.com/dgronskij/gitlink-vim'] = {},
@@ -74,15 +74,15 @@ return {
                     null_ls.builtins.code_actions.shellcheck,
                     null_ls.builtins.diagnostics.shellcheck,
 
-                    -- python
-                    null_ls.builtins.diagnostics.flake8,
-                    -- null_ls.builtins.diagnostics.pyproject_flake8,
-                    null_ls.builtins.diagnostics.mypy,
-                    -- null_ls.builtins.diagnostics.pycodestyle,
-                    -- null_ls.builtins.diagnostics.pydocstyle,
-                    -- null_ls.builtins.diagnostics.pylint,
-                    null_ls.builtins.formatting.black,
-                    null_ls.builtins.formatting.isort,
+                    -- -- python
+                    -- null_ls.builtins.diagnostics.flake8,
+                    -- -- null_ls.builtins.diagnostics.pyproject_flake8,
+                    -- null_ls.builtins.diagnostics.mypy,
+                    -- -- null_ls.builtins.diagnostics.pycodestyle,
+                    -- -- null_ls.builtins.diagnostics.pydocstyle,
+                    -- -- null_ls.builtins.diagnostics.pylint,
+                    -- null_ls.builtins.formatting.black,
+                    -- null_ls.builtins.formatting.isort,
                 }
 
                 return defaults
