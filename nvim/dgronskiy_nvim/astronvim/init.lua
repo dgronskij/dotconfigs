@@ -5,6 +5,31 @@ config = {
     options = require('dgronskiy_nvim.sets').export_astronvim(),
     lsp = {
         servers = {},
+
+
+        -- formatting = {
+        --     -- control auto formatting on save
+        --     format_on_save = {
+        --         enabled = true, -- enable or disable format on save globally
+        --         allow_filetypes = { -- enable format on save for specified filetypes only
+        --         -- "go",
+        --     },
+        --     ignore_filetypes = { -- disable format on save for specified filetypes
+        --     -- "python",
+        --     },
+        -- },
+        -- disabled = { -- disable formatting capabilities for the listed language servers
+        --             -- disable lua_ls formatting capability if you want to use StyLua to format your lua code
+        --             -- "lua_ls",
+        -- },
+        -- timeout_ms = 1000, -- default format timeout
+        -- -- filter = function(client) -- fully override the default formatting function
+        -- --   return true
+        -- -- end
+        -- },
+
+
+
         formatting = {
             format_on_save = {
                 enable = false,
@@ -17,128 +42,128 @@ config = {
             astronvim_defaults.n['K'] = nil
             return astronvim_defaults
         end,
-        ["server-settings"] = {
+        config = {
             pyright = { autostart = false, },
             gopls = { autostart = false, },
         },
     },
     diagnostics = {
         virtual_text = false,
+        underline = false,
     },
     mappings = require("dgronskiy_nvim.astronvim.mappings").astronvim_mappings_callback,
-    plugins = {
-        --
-        -- https://github.com/wbthomason/packer.nvim#specifying-plugins
-        --
-        init = {
-            -- configuratino of plugins shipped with Astronvim
-            ["goolord/alpha-nvim"] = { disable = true },
-            -- ["Darazaki/indent-o-matic"] = { disable = true },
-
-            -- my plugins
-
-            -- this is installed by astronvim itself
-            -- {
-            --     -- this requires setup in `polish`
-            --     "nvim-telescope/telescope-fzf-native.nvim",
-            --     requires = { "nvim-telescope/telescope.nvim" },
-            --     run = "make",
-            -- },
-            ["folke/trouble.nvim"] = {
-                requires = "kyazdani42/nvim-web-devicons",
-                config = function()
-                    require("trouble").setup {
-                        -- your configuration comes here
-                        -- or leave it empty to use the default settings
-                        -- refer to the configuration section below
-                    }
-                end
-            },
-            -- ["ray-x/lsp_signature.nvim"] = {
-            --     config = function() require "lsp_signature".setup() end,
-            -- },
-            ['https://github.com/junegunn/fzf'] = {},
-            ['https://github.com/junegunn/fzf.vim'] = {},
-            -- ['https://github.com/iautom8things/gitlink-vim'] = {},
-
-            ['https://github.com/dgronskij/gitlink-vim'] = {},
-            -- ['https://github.com/ruifm/gitlinker.nvim'] = {
-            --     requires = 'nvim-lua/plenary.nvim',
-            --     config = function() require("gitlinker").setup() end,
-            -- },
-
-
-
-            ['gruvbox-community/gruvbox'] = {},
-            ['rose-pine/neovim'] = {
-                as = 'rose-pine',
-                -- config = function()
-                --     vim.cmd('colorscheme rose-pine')
-                -- end
-            },
-            ['https://github.com/ggandor/leap.nvim'] = {
-                config = function()
-                    require('leap').add_default_mappings()
-                end,
-            },
-            -- do not enable until https://github.com/elihunter173/dirbuf.nvim#notes is resolved
-            -- ["https://github.com/elihunter173/dirbuf.nvim"] = {}
-            ['https://github.com/tpope/vim-fugitive'] = {},
-            ['https://github.com/ThePrimeagen/harpoon'] = {
-                config = function()
-                    require("harpoon").setup({})
-                end
-            },
-            ['https://github.com/editorconfig/editorconfig-vim'] = {},
-            ['ojroques/nvim-osc52'] = {},
-        },
-        ["mason-lspconfig"] = {
-            ensure_installed = { "pyright", "sumneko_lua", "bashls", "gopls", },
-            automatic_installation = true,
-        },
-        ["null-ls"] = function(defaults)
-            local null_ls = require("null-ls")
-            defaults.sources = {
-
-                -- bash
-                null_ls.builtins.code_actions.shellcheck,
-                null_ls.builtins.diagnostics.shellcheck,
-
-                -- python
-                null_ls.builtins.diagnostics.flake8,
-                -- null_ls.builtins.diagnostics.pyproject_flake8,
-                null_ls.builtins.diagnostics.mypy,
-                -- null_ls.builtins.diagnostics.pycodestyle,
-                -- null_ls.builtins.diagnostics.pydocstyle,
-                -- null_ls.builtins.diagnostics.pylint,
-                null_ls.builtins.formatting.black,
-                null_ls.builtins.formatting.isort,
-
-            }
-
-            return defaults
-        end,
-        telescope = {
-            defaults = {
-                extensions = {
-                    fzf = {
-                        fuzzy = true,                   -- false will only do exact matching
-                        override_generic_sorter = true, -- override the generic sorter
-                        override_file_sorter = true,    -- override the file sorter
-                        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
-                    },
-                },
-            },
-        },
-        notify = {
-            -- https://github.com/rcarriga/nvim-notify/blob/master/lua/notify/config/init.lua#L22
-            -- default is 5000ms, which is TOO long
-            -- for some reason, 1000ms waits longer than expected, so I just put the smallest possible value here
-            timeout = 1,
-        },
-    },
+    -- plugins = {
+    --     --
+    --     -- https://github.com/wbthomason/packer.nvim#specifying-plugins
+    --     --
+    --     init = {
+    --         -- configuratino of plugins shipped with Astronvim
+    --         ["goolord/alpha-nvim"] = { disable = true },
+    --         -- ["Darazaki/indent-o-matic"] = { disable = true },
+    -- 
+    --         -- my plugins
+    -- 
+    --         -- this is installed by astronvim itself
+    --         -- {
+    --         --     -- this requires setup in `polish`
+    --         --     "nvim-telescope/telescope-fzf-native.nvim",
+    --         --     requires = { "nvim-telescope/telescope.nvim" },
+    --         --     run = "make",
+    --         -- },
+    --         ["folke/trouble.nvim"] = {
+    --             requires = "kyazdani42/nvim-web-devicons",
+    --             config = function()
+    --                 require("trouble").setup {
+    --                     -- your configuration comes here
+    --                     -- or leave it empty to use the default settings
+    --                     -- refer to the configuration section below
+    --                 }
+    --             end
+    --         },
+    --         -- ["ray-x/lsp_signature.nvim"] = {
+    --         --     config = function() require "lsp_signature".setup() end,
+    --         -- },
+    --         ['https://github.com/junegunn/fzf'] = {},
+    --         ['https://github.com/junegunn/fzf.vim'] = {},
+    --         -- ['https://github.com/iautom8things/gitlink-vim'] = {},
+    -- 
+    --         ['https://github.com/dgronskij/gitlink-vim'] = {},
+    --         -- ['https://github.com/ruifm/gitlinker.nvim'] = {
+    --         --     requires = 'nvim-lua/plenary.nvim',
+    --         --     config = function() require("gitlinker").setup() end,
+    --         -- },
+    -- 
+    -- 
+    -- 
+    --         ['gruvbox-community/gruvbox'] = {},
+    --         ['rose-pine/neovim'] = {
+    --             as = 'rose-pine',
+    --             -- config = function()
+    --             --     vim.cmd('colorscheme rose-pine')
+    --             -- end
+    --         },
+    --         ['https://github.com/ggandor/leap.nvim'] = {
+    --             config = function()
+    --                 require('leap').add_default_mappings()
+    --             end,
+    --         },
+    --         -- do not enable until https://github.com/elihunter173/dirbuf.nvim#notes is resolved
+    --         -- ["https://github.com/elihunter173/dirbuf.nvim"] = {}
+    --         ['https://github.com/tpope/vim-fugitive'] = {},
+    --         ['https://github.com/ThePrimeagen/harpoon'] = {
+    --             config = function()
+    --                 require("harpoon").setup({})
+    --             end
+    --         },
+    --         ['https://github.com/editorconfig/editorconfig-vim'] = {},
+    --         ['ojroques/nvim-osc52'] = {},
+    --     },
+    --     -- ["mason-lspconfig"] = {
+    --     --     ensure_installed = { "pyright", "sumneko_lua", "bashls", "gopls", },
+    --     --     automatic_installation = true,
+    --     -- },
+    --     ["null-ls"] = function(defaults)
+    --         local null_ls = require("null-ls")
+    --         defaults.sources = {
+    -- 
+    --             -- bash
+    --             null_ls.builtins.code_actions.shellcheck,
+    --             null_ls.builtins.diagnostics.shellcheck,
+    -- 
+    --             -- python
+    --             null_ls.builtins.diagnostics.flake8,
+    --             -- null_ls.builtins.diagnostics.pyproject_flake8,
+    --             null_ls.builtins.diagnostics.mypy,
+    --             -- null_ls.builtins.diagnostics.pycodestyle,
+    --             -- null_ls.builtins.diagnostics.pydocstyle,
+    --             -- null_ls.builtins.diagnostics.pylint,
+    --             null_ls.builtins.formatting.black,
+    --             null_ls.builtins.formatting.isort,
+    -- 
+    --         }
+    -- 
+    --         return defaults
+    --     end,
+    --     telescope = {
+    --         defaults = {
+    --             extensions = {
+    --                 fzf = {
+    --                     fuzzy = true,                   -- false will only do exact matching
+    --                     override_generic_sorter = true, -- override the generic sorter
+    --                     override_file_sorter = true,    -- override the file sorter
+    --                     case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+    --                 },
+    --             },
+    --         },
+    --     },
+    --     notify = {
+    --         -- https://github.com/rcarriga/nvim-notify/blob/master/lua/notify/config/init.lua#L22
+    --         -- default is 5000ms, which is TOO long
+    --         -- for some reason, 1000ms waits longer than expected, so I just put the smallest possible value here
+    --         timeout = 1,
+    --     },
+    -- },
     polish = function()
-        require("telescope").load_extension('harpoon')
 
 
 
@@ -187,7 +212,10 @@ config = {
         -- vim.cmd [[ vnoremap <Leader>cp  :'<,'>w !~/.iterm2/it2copy<CR> ]]
         -- vim.keymap.set('n', '<leader>c', require('osc52').copy_operator, {expr = true})
         -- vim.keymap.set('n', '<leader>cc', '<leader>c_', {remap = true})
-        vim.keymap.set('v', '<leader>cp', require('osc52').copy_visual)
+        
+
+        -- TODO: move to key = .. in the plugin spec
+        -- vim.keymap.set('v', '<leader>cp', require('osc52').copy_visual)
     end,
 }
 
