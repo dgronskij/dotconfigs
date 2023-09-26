@@ -111,6 +111,5 @@ return {
         --     timeout = 1,
         -- },
 
-
-
-    }
+    {"nvim-zh/whitespace.nvim", lazy = false, }
+}
