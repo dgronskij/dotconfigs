@@ -17,8 +17,12 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-source ~/bin/sshutils.incl.sh
-source ~/bin/makeenv.incl.sh
+if [ -d ~/bin/source.d ] ; then
+    for f in ~/bin/source.d/* ; do
+        echo "-- found $f, sourcing"
+        source "$f"
+    done
+fi
 _sshutils_relink_ssh_auth
 
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
@@ -49,7 +53,6 @@ tma() {
     fi
 }
 
-source ~/bin/gitutils
 export GIT_SRC_ROOT=$HOME/src
 
 alias ll="ls -la"
