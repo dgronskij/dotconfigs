@@ -16,7 +16,9 @@ c() {
                 --exit-0 \
                 --scheme=history  \
                 --history=$HOME/.c.fzf.history \
-                --preview="$tree_cmd"
+                --preview="$tree_cmd" \
+                --no-sort \
+                --layout=reverse
             )"
         if [[ -z "$bn" ]] ; then
             break
