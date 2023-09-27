@@ -4,8 +4,8 @@ config = {
         -- pin_plugins = false,
     },
     -- colorscheme = "default_theme",
-    -- colorscheme = "gruvbox",
-    colorscheme = "rose-pine",
+    colorscheme = "gruvbox",
+    -- colorscheme = "rose-pine",
     options = require('dgronskiy_nvim.sets').export_astronvim(),
     lsp = {
         servers = {},
@@ -203,6 +203,12 @@ config = {
 
         vim.cmd [[ nnoremap <Leader>find :Find  ]]
         vim.cmd [[ nnoremap <Leader>fd :Find  ]]
+
+
+        vim.cmd[[
+          map <Leader>dark :set background=dark<CR>
+          map <Leader>light :set background=light<CR>
+        ]]
 
         -- vim.cmd [[ nnoremap K :FindExact <C-R><C-W><CR> ]]
 
