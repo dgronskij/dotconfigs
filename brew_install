@@ -15,6 +15,9 @@ to_install=(
   # Development tooling
   pipx
   stylua
+
+  # tools
+  jq
 )
 
 HOMEBREW_NO_INSTALL_UPGRADE=yes brew install "${to_install[@]}"
