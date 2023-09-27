@@ -1,4 +1,8 @@
 config = {
+    updater = {
+        -- couldn't update nvim-lspconfig because of default behaviour
+        -- pin_plugins = false,
+    },
     -- colorscheme = "default_theme",
     -- colorscheme = "gruvbox",
     colorscheme = "rose-pine",

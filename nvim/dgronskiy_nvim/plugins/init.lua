@@ -1,7 +1,4 @@
 return {
-    -- configuratino of plugins shipped with Astronvim
-    {"goolord/alpha-nvim", enabled = false },
-    -- ["Darazaki/indent-o-matic"] = { disable = true },
 
     -- my plugins
 
@@ -36,15 +33,6 @@ return {
             --     config = function() require("gitlinker").setup() end,
             -- },
 
-
-
-            -- ['gruvbox-community/gruvbox'] = {},
-            {'rose-pine/neovim', 
-                name = 'rose-pine',
-                -- config = function()
-                --     vim.cmd('colorscheme rose-pine')
-                -- end
-            },
             -- ['https://github.com/ggandor/leap.nvim'] = {
             --     config = function()
             --         require('leap').add_default_mappings()
