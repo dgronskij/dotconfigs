@@ -23,16 +23,36 @@ return {
     -- ["ray-x/lsp_signature.nvim"] = {
     --     config = function() require "lsp_signature".setup() end,
     -- },
-    { 'https://github.com/junegunn/fzf',     lazy = false },
-    { 'https://github.com/junegunn/fzf.vim', lazy = false },
-    -- ['https://github.com/iautom8things/gitlink-vim'] = {},
+    {
+        'https://github.com/junegunn/fzf',
+        event = "VeryLazy",
+    },
+    {
+        'https://github.com/junegunn/fzf.vim',
+        event = "VeryLazy",
+    },
+    {
+        'https://github.com/iautom8things/gitlink-vim',
+        event = "VeryLazy",
+    },
+    {
+        'ojroques/nvim-osc52',
+        event = "VeryLazy",
+        keys = {
+            {
+                "<leader>cp",
+                function() require("osc52").copy_visual() end,
+                mode = "v",
+                desc = "OSC52: [c]o[p] to cliboard",
+            }
+        },
 
-    -- ['https://github.com/dgronskij/gitlink-vim'] = {},
-    -- ['https://github.com/ruifm/gitlinker.nvim'] = {
-    --     requires = 'nvim-lua/plenary.nvim',
-    --     config = function() require("gitlinker").setup() end,
-    -- },
 
+    },
+    {
+        'https://github.com/editorconfig/editorconfig-vim',
+        event = "VeryLazy",
+    },
     -- ['https://github.com/ggandor/leap.nvim'] = {
     --     config = function()
     --         require('leap').add_default_mappings()
@@ -46,8 +66,6 @@ return {
     --         require("harpoon").setup({})
     --     end
     -- },
-    -- ['https://github.com/editorconfig/editorconfig-vim'] = {},
-    -- ['ojroques/nvim-osc52'] = {},
     -- ["mason-lspconfig"] = {
     --     ensure_installed = { "pyright", "sumneko_lua", "bashls", "gopls", },
     --     automatic_installation = true,
@@ -61,6 +79,9 @@ return {
                 -- bash
                 null_ls.builtins.code_actions.shellcheck,
                 null_ls.builtins.diagnostics.shellcheck,
+
+                -- lua
+                null_ls.builtins.formatting.stylua,
 
                 -- -- python
                 -- null_ls.builtins.diagnostics.flake8,
@@ -83,10 +104,10 @@ return {
             defaults = {
                 extensions = {
                     fzf = {
-                        fuzzy = true,                       -- false will only do exact matching
-                        override_generic_sorter = true,     -- override the generic sorter
-                        override_file_sorter = true,        -- override the file sorter
-                        case_mode = "smart_case",           -- or "ignore_case" or "respect_case"
+                        fuzzy = true,                   -- false will only do exact matching
+                        override_generic_sorter = true, -- override the generic sorter
+                        override_file_sorter = true,    -- override the file sorter
+                        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
                     },
                 },
             },
