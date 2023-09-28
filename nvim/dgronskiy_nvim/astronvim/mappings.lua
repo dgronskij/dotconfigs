@@ -7,7 +7,11 @@ mapping["n"] = {
         require("dgronskiy_nvim.telescope_custom").find_all_files,
         desc = "Open file",
     },
-    ["<ESC>"] = { function() vim.cmd [[ :noh ]] end, },
+    ["<ESC>"] = {
+        function()
+            vim.cmd([[ :noh ]])
+        end,
+    },
     -- ["S-k"] = { function() vim.cmd [[ FindExact <C-R><C-W><CR> ]] end },
     -- ["S-k"] = { function()
     --     print "hahahaha"
@@ -29,13 +33,13 @@ mapping["n"] = {
 
     -- jump to the tab by its number
     ["<leader>1"] = { "1gt", desc = "[g]o to [t]ab 1" },
-    ["<leader>2"] = { "2gt", desc = "[g]o to [t]ab 2"},
-    ["<leader>3"] = { "3gt", desc = "[g]o to [t]ab 3"},
-    ["<leader>4"] = { "4gt", desc = "[g]o to [t]ab 4"},
+    ["<leader>2"] = { "2gt", desc = "[g]o to [t]ab 2" },
+    ["<leader>3"] = { "3gt", desc = "[g]o to [t]ab 3" },
+    ["<leader>4"] = { "4gt", desc = "[g]o to [t]ab 4" },
 
     -- buffer navigation
-    ["<S-L>"] = {"<Cmd>bnext<CR>", desc = "Next buffer" },
-    ["<S-H>"] = {"<Cmd>bnext<CR>", desc = "Previous buffer" },
+    ["<S-L>"] = { "<Cmd>bnext<CR>", desc = "Next buffer" },
+    ["<S-H>"] = { "<Cmd>bnext<CR>", desc = "Previous buffer" },
 }
 
 -- VISUAL mode
@@ -60,13 +64,13 @@ M_keymap.nnoremap("n", "nzzzv")
 M_keymap.nnoremap("N", "Nzzzv")
 
 function M.astronvim_mappings_callback(_)
-  astronvim_defaults = M.saner_astronvim_defaults()
-  merged = vim.tbl_deep_extend("force", astronvim_defaults, mapping)
-  return merged
+    astronvim_defaults = M.saner_astronvim_defaults()
+    merged = vim.tbl_deep_extend("force", astronvim_defaults, mapping)
+    return merged
 end
 
 function M.saner_astronvim_defaults()
-  return require("dgronskiy_nvim.astronvim.saner_defaults")
+    return require("dgronskiy_nvim.astronvim.saner_defaults")
 end
 
 return M

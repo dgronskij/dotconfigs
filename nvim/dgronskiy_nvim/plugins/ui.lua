@@ -1,14 +1,14 @@
 return {
-    { 'gruvbox-community/gruvbox' },
+    { "gruvbox-community/gruvbox" },
     {
-        'rose-pine/neovim',
-        name = 'rose-pine',
+        "rose-pine/neovim",
+        name = "rose-pine",
     },
     {
         "famiu/bufdelete.nvim",
         cmd = { "Bdelete" },
         keys = {
-            { "<leader>q", "<cmd>Bdelete<cr>", desc = "Close current buffer (:Bdelete)" }
+            { "<leader>q", "<cmd>Bdelete<cr>", desc = "Close current buffer (:Bdelete)" },
         },
-    }
+    },
 }

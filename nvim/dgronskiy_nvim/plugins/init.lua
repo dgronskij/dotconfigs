@@ -24,33 +24,33 @@ return {
     --     config = function() require "lsp_signature".setup() end,
     -- },
     {
-        'https://github.com/junegunn/fzf',
+        "https://github.com/junegunn/fzf",
         event = "VeryLazy",
     },
     {
-        'https://github.com/junegunn/fzf.vim',
+        "https://github.com/junegunn/fzf.vim",
         event = "VeryLazy",
     },
     {
-        'https://github.com/iautom8things/gitlink-vim',
+        "https://github.com/iautom8things/gitlink-vim",
         event = "VeryLazy",
     },
     {
-        'ojroques/nvim-osc52',
+        "ojroques/nvim-osc52",
         event = "VeryLazy",
         keys = {
             {
                 "<leader>cp",
-                function() require("osc52").copy_visual() end,
+                function()
+                    require("osc52").copy_visual()
+                end,
                 mode = "v",
                 desc = "OSC52: [c]o[p] to cliboard",
-            }
+            },
         },
-
-
     },
     {
-        'https://github.com/editorconfig/editorconfig-vim',
+        "https://github.com/editorconfig/editorconfig-vim",
         event = "VeryLazy",
     },
     -- ['https://github.com/ggandor/leap.nvim'] = {
@@ -104,10 +104,10 @@ return {
             defaults = {
                 extensions = {
                     fzf = {
-                        fuzzy = true,                   -- false will only do exact matching
+                        fuzzy = true, -- false will only do exact matching
                         override_generic_sorter = true, -- override the generic sorter
-                        override_file_sorter = true,    -- override the file sorter
-                        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+                        override_file_sorter = true, -- override the file sorter
+                        case_mode = "smart_case", -- or "ignore_case" or "respect_case"
                     },
                 },
             },
@@ -120,5 +120,5 @@ return {
     --     timeout = 1,
     -- },
 
-    { "nvim-zh/whitespace.nvim", lazy = false, }
+    { "nvim-zh/whitespace.nvim", lazy = false },
 }

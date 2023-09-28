@@ -3,7 +3,7 @@ local M = {}
 function M.find_all_files()
     local ok, t_builtin = pcall(require, "telescope.builtin")
     if not ok then
-        error ("no telescope found!")
+        error("no telescope found!")
         return
     end
 

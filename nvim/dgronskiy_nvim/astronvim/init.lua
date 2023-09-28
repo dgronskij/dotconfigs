@@ -6,10 +6,9 @@ config = {
     -- colorscheme = "default_theme",
     colorscheme = "gruvbox",
     -- colorscheme = "rose-pine",
-    options = require('dgronskiy_nvim.sets').export_astronvim(),
+    options = require("dgronskiy_nvim.sets").export_astronvim(),
     lsp = {
         servers = {},
-
 
         -- formatting = {
         --     -- control auto formatting on save
@@ -32,8 +31,6 @@ config = {
         -- -- end
         -- },
 
-
-
         formatting = {
             format_on_save = {
                 enable = false,
@@ -43,12 +40,12 @@ config = {
         mappings = function(astronvim_defaults)
             -- see  lua/core/utils/lsp.lua
 
-            astronvim_defaults.n['K'] = nil
+            astronvim_defaults.n["K"] = nil
             return astronvim_defaults
         end,
         config = {
-            pyright = { autostart = false, },
-            gopls = { autostart = false, },
+            pyright = { autostart = false },
+            gopls = { autostart = false },
         },
     },
     diagnostics = {
@@ -64,9 +61,9 @@ config = {
     --         -- configuratino of plugins shipped with Astronvim
     --         ["goolord/alpha-nvim"] = { disable = true },
     --         -- ["Darazaki/indent-o-matic"] = { disable = true },
-    -- 
+    --
     --         -- my plugins
-    -- 
+    --
     --         -- this is installed by astronvim itself
     --         -- {
     --         --     -- this requires setup in `polish`
@@ -90,7 +87,7 @@ config = {
     --         ['https://github.com/junegunn/fzf'] = {},
     --         ['https://github.com/junegunn/fzf.vim'] = {},
     --         -- ['https://github.com/iautom8things/gitlink-vim'] = {},
-    -- 
+    --
     --         ['https://github.com/dgronskij/gitlink-vim'] = {},
     --         -- ['https://github.com/ruifm/gitlinker.nvim'] = {
     --         --     requires = 'nvim-lua/plenary.nvim',
@@ -119,11 +116,11 @@ config = {
     --     ["null-ls"] = function(defaults)
     --         local null_ls = require("null-ls")
     --         defaults.sources = {
-    -- 
+    --
     --             -- bash
     --             null_ls.builtins.code_actions.shellcheck,
     --             null_ls.builtins.diagnostics.shellcheck,
-    -- 
+    --
     --             -- python
     --             null_ls.builtins.diagnostics.flake8,
     --             -- null_ls.builtins.diagnostics.pyproject_flake8,
@@ -133,9 +130,9 @@ config = {
     --             -- null_ls.builtins.diagnostics.pylint,
     --             null_ls.builtins.formatting.black,
     --             null_ls.builtins.formatting.isort,
-    -- 
+    --
     --         }
-    -- 
+    --
     --         return defaults
     --     end,
     --     telescope = {
@@ -158,14 +155,7 @@ config = {
     --     },
     -- },
     polish = function()
-
-
-
-
-        vim.cmd [[ set wildmode=longest:full,full ]] -- https://vi.stackexchange.com/a/11424/7248
-
-
-
+        vim.cmd([[ set wildmode=longest:full,full ]]) -- https://vi.stackexchange.com/a/11424/7248
 
         -- vim.cmd [[ autocmd FileType * nnoremap <nowait> <buffer> <leader>f :lua print("another one")<CR> ]]
         -- vim.cmd [[ autocmd FileType * nnoremap <nowait> <buffer> <leader>f :lua print("another one") ]]
@@ -182,37 +172,34 @@ config = {
         -- })
 
         -- vim.keymap.set("n", "<leader>f", function() print("here we go") end, {nowait = true, buffer = true})
-        vim.cmd [[ nnoremap * :keepjumps normal! mi*`i<CR>zz """ * ]]
+        vim.cmd([[ nnoremap * :keepjumps normal! mi*`i<CR>zz """ * ]])
         -- vim.cmd [[ nnoremap / normal! zz/]]
-        vim.cmd [[ command GitLink :echo gitlink#GitLink() ]]
+        vim.cmd([[ command GitLink :echo gitlink#GitLink() ]])
 
-        vim.cmd [[ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]]
-        vim.cmd [[ command! -bang -nargs=* FindExact call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]]
+        vim.cmd([[ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]])
+        vim.cmd([[ command! -bang -nargs=* FindExact call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]])
 
-        vim.cmd [[ vnoremap <Leader>cat :'<,'>w !tee<CR> ]]
+        vim.cmd([[ vnoremap <Leader>cat :'<,'>w !tee<CR> ]])
 
-        vim.cmd [[ nnoremap <Leader>find :Find  ]]
-        vim.cmd [[ nnoremap <Leader>fd :Find  ]]
+        vim.cmd([[ nnoremap <Leader>find :Find  ]])
+        vim.cmd([[ nnoremap <Leader>fd :Find  ]])
 
-
-        vim.cmd[[
+        vim.cmd([[
           map <Leader>dark :set background=dark<CR>
           map <Leader>light :set background=light<CR>
-        ]]
+        ]])
 
         -- vim.cmd [[ nnoremap K :FindExact <C-R><C-W><CR> ]]
-
 
         --     vnoremap K "vy :FindExact <C-R>v<CR>
         --     nnoremap <Leader>find :Find
         --     nnoremap <Leader>/ :BLines<CR>
         --     vnoremap <Leader>/ "vy :BLines '<C-R>v<CR>
         -- ]]
-        
+
         -- vim.cmd [[ vnoremap <Leader>cp  :'<,'>w !~/.iterm2/it2copy<CR> ]]
         -- vim.keymap.set('n', '<leader>c', require('osc52').copy_operator, {expr = true})
         -- vim.keymap.set('n', '<leader>cc', '<leader>c_', {remap = true})
-        
 
         -- TODO: move to key = .. in the plugin spec
         -- vim.keymap.set('v', '<leader>cp', require('osc52').copy_visual)
