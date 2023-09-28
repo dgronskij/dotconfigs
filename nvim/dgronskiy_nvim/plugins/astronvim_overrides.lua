@@ -6,4 +6,8 @@ return {
         event = "VeryLazy",
         commit = "origin/HEAD", -- astronvim machinery prevents this from updates
     },
+    {
+        "nvim-treesitter/nvim-treesitter",
+        commit = "origin/HEAD", -- astronvim machinery prevents this from updates
+    },
 }
