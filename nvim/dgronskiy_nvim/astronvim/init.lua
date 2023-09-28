@@ -1,3 +1,7 @@
+if vim.fn.has("nvim-0.9") == 0 then
+    error("Please install nvim >= 0.9")
+end
+
 config = {
     updater = {
         -- couldn't update nvim-lspconfig because of default behaviour
