@@ -3,6 +3,13 @@ if vim.fn.has("nvim-0.9") == 0 then
 end
 
 config = {
+    lazy = {
+        -- by default, lazy.nvim keeps lock file in stdpath("config"),
+        -- which is usually a git repo (works for lazyvim, kickstart.nvim)
+        -- Astronvim, on the other hand, keeps its own files in stdpath("config")
+        -- and all hooking takes place in the /lua/user/ subdirectory
+        lockfile = vim.fn.stdpath("config") .. "/lua/user/lazy-lock.json",
+    },
     updater = {
         -- couldn't update nvim-lspconfig because of default behaviour
         -- pin_plugins = false,
