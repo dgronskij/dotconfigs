@@ -40,6 +40,25 @@ mapping["n"] = {
     -- buffer navigation
     ["<S-L>"] = { "<Cmd>bnext<CR>", desc = "Next buffer" },
     ["<S-H>"] = { "<Cmd>bnext<CR>", desc = "Previous buffer" },
+
+    -- override astronvim defaults
+
+    -- NOTE: this is an adoption of https://github.com/AstroNvim/AstroNvim/blob/567c01bc6a446da8150f9904d11ee9530e47e82f/lua/astronvim/mappings.lua#L168-L178
+    -- All I want is a toggle functionality with position=current (i.e. occupy all buffer, not side one)
+    -- toggle position=current does not reveal current file
+    -- toggle position=current reveal_file=% does not work with directories
+    -- focus position=current works for opening, but doesn't close
+    -- original wincmd p does not jump back to empty unnamed buffer
+    ["<leader>e"] = {
+        function()
+            if vim.bo.filetype == "neo-tree" then
+                vim.cmd[[Neotree close]]
+            else
+                vim.cmd([[Neotree focus position=current]])
+            end
+        end,
+        desc = "Toggle Explorer",
+    },
 }
 
 -- VISUAL mode
