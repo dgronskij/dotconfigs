@@ -191,8 +191,12 @@ config = {
         -- vim.cmd([[ nnoremap <silent> / normal! /]])
         vim.cmd([[ command GitLink :echo gitlink#GitLink() ]])
 
-        vim.cmd([[ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]])
-        vim.cmd([[ command! -bang -nargs=* FindExact call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]])
+        vim.cmd(
+            [[ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]]
+        )
+        vim.cmd(
+            [[ command! -bang -nargs=* FindExact call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]]
+        )
 
         vim.cmd([[ vnoremap <Leader>cat :'<,'>w !tee<CR> ]])
 

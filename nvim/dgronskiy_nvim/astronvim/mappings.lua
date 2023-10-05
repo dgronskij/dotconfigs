@@ -52,7 +52,7 @@ mapping["n"] = {
     ["<leader>e"] = {
         function()
             if vim.bo.filetype == "neo-tree" then
-                vim.cmd[[Neotree close]]
+                vim.cmd([[Neotree close]])
             else
                 vim.cmd([[Neotree focus position=current]])
             end
