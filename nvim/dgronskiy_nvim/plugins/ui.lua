@@ -1,5 +1,10 @@
 return {
-    { "gruvbox-community/gruvbox" },
+    {
+        -- https://github.com/ellisonleao/gruvbox.nvim#configuration
+        "ellisonleao/gruvbox.nvim",
+        lazy = false,
+        priority = 1000,
+    },
     {
         "rose-pine/neovim",
         name = "rose-pine",
