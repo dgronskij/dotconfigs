@@ -183,8 +183,12 @@ config = {
         -- })
 
         -- vim.keymap.set("n", "<leader>f", function() print("here we go") end, {nowait = true, buffer = true})
-        vim.cmd([[ nnoremap * :keepjumps normal! mi*`i<CR>zz """ * ]])
-        -- vim.cmd [[ nnoremap / normal! zz/]]
+
+        -- on * key pressed, hightlight cword, but do not immediately jump
+        -- https://stackoverflow.com/a/49944815/539570
+        vim.cmd([[nnoremap <silent> * :let @/= '\<' . expand('<cword>') . '\>' <bar> set hls <cr>]])
+        -- vim.cmd([[ nnoremap <silent> / normal! zz/]])
+        -- vim.cmd([[ nnoremap <silent> / normal! /]])
         vim.cmd([[ command GitLink :echo gitlink#GitLink() ]])
 
         vim.cmd([[ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]])
