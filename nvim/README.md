@@ -1,6 +1,6 @@
 TODO: autosymlinking
 
-How to install:
+# Installation
 
 ```bash
 # install Astronvim
@@ -17,3 +17,8 @@ EOF
 rm $NVIM_CONF_ROOT/lua/dgronskiy_nvim
 ln -s ~/.dotfiles/nvim/dgronskiy_nvim $NVIM_CONF_ROOT/lua/dgronskiy_nvim
 ```
+
+# Troubleshooting
+- `:Lazy` -- check if module is loaded
+- `:Nullls{Info, ...}` commands
+- `:Lsp{Info, ...}` commands
