@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+ARC_ROOT="$(arc root)" || exit
+exec "${ARC_ROOT}/ya" "$@"
+
