@@ -19,7 +19,9 @@ config = {
     -- colorscheme = "rose-pine",
     options = require("dgronskiy_nvim.sets").export_astronvim(),
     lsp = {
-        servers = {},
+        servers = {
+            "pyright",
+        },
 
         -- formatting = {
         --     -- control auto formatting on save
@@ -55,7 +57,21 @@ config = {
             return astronvim_defaults
         end,
         config = {
-            pyright = { autostart = false },
+            -- https://github.com/microsoft/pyright/blob/main/docs/settings.md
+            pyright = {
+                autostart = true,
+                -- autostart = (function ()
+                --     local val = os.getenv("NVIM_ENABLE_LSP_PYRIGHT")
+                --     return val ~= nil and #val ~= 0
+                -- end)(),
+                root_dir = require("dgronskiy_nvim.ytils").guarded_pyright_root_directory,
+                -- root_ir = function()
+                --     return "/home/dgronskiy" -- for some reason large workspace hangs everything
+                -- end,
+                -- analysis = {
+                --     logLevel = "Trace",
+                -- },
+            },
             gopls = { autostart = false },
         },
     },
@@ -198,10 +214,19 @@ config = {
             [[ command! -bang -nargs=* FindExact call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]]
         )
 
+        vim.cmd(
+            -- + case-insensitive
+            [[ command! -bang -nargs=* ArcFind call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max all  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]]
+        )
+        vim.cmd(
+            [[ command! -bang -nargs=* ArcFindExact call fzf#vim#grep('ya tool cs --current-folder --no-contrib --no-junk --max all -F --color "always" '.shellescape(<q-args>), 1, <bang>0) ]]
+        )
+
         vim.cmd([[ vnoremap <Leader>cat :'<,'>w !tee<CR> ]])
 
         vim.cmd([[ nnoremap <Leader>find :Find  ]])
         vim.cmd([[ nnoremap <Leader>fd :Find  ]])
+        vim.cmd([[ nnoremap <Leader>cs :ArcFind  ]])
 
         vim.cmd([[
           map <Leader>dark :set background=dark<CR>
@@ -222,6 +247,8 @@ config = {
 
         -- TODO: move to key = .. in the plugin spec
         -- vim.keymap.set('v', '<leader>cp', require('osc52').copy_visual)
+
+        vim.lsp.set_log_level("info")
     end,
 }
 

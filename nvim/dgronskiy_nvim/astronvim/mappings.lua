@@ -29,6 +29,7 @@ mapping["n"] = {
     -- end },
     --
     ["<S-K>"] = { ":FindExact <C-R><C-W><CR>", desc = "FZF: find the word under cursor" },
+    ["<leader><S-K>"] = { ":ArcFindExact <C-R><C-W><CR>", desc = "Arc: find the word under cursor" },
     ["<leader>/"] = { ":BLines<CR>", desc = "FZF: Buffer lines" },
 
     -- jump to the tab by its number
@@ -54,16 +55,20 @@ mapping["n"] = {
             if vim.bo.filetype == "neo-tree" then
                 vim.cmd([[Neotree close]])
             else
-                vim.cmd([[Neotree focus position=current]])
+                -- vim.cmd([[Neotree focus position=current]])
+                vim.cmd([[Neotree source=filesystem reveal=true position=current]])
             end
         end,
+        noremap = true,
         desc = "Toggle Explorer",
     },
+    ["<C-q>"] = { "<C-w>q", desc = "Close window" },
 }
 
 -- VISUAL mode
 mapping["v"] = {
     ["<S-K>"] = { '"vy :FindExact <C-R>v<CR>', desc = "FZF: find the selection" },
+    ["<leader>cs"] = { '"vy :ArcFind <C-R>v<CR>', desc = "Arc: find the selection" },
     ["<leader>/"] = { '"vy :BLines <C-R>v<CR>', desc = "FZF: buffer lines" },
     -- ["<C-j>"] = { function()
     --     -- vim.cmd [[ "vy ]] -- this doesn' work
