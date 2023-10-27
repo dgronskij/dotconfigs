@@ -7,7 +7,7 @@ M._arc_repo_roots = {
     "/data/a",
 }
 
-M.ARC_REPO_ROOT_ENV = "ARC_REPO_ROOT"
+M.ARC_REPO_ROOT_ENV = "ARC_ROOT"
 
 if os.getenv(M.ARC_REPO_ROOT_ENV) then
     table.insert(M._arc_repo_roots, 1, os.getenv(M.ARC_REPO_ROOT_ENV))
