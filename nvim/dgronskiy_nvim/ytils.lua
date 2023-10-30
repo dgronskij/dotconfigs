@@ -2,12 +2,12 @@ local M = {}
 
 local unpack = table.unpack or unpack
 
+M.ARC_REPO_ROOT_ENV = "ARC_ROOT"
+
 M._arc_repo_roots = {
-    "/a",
+    "/a", -- this is symlink to /data/a
     "/data/a",
 }
-
-M.ARC_REPO_ROOT_ENV = "ARC_ROOT"
 
 if os.getenv(M.ARC_REPO_ROOT_ENV) then
     table.insert(M._arc_repo_roots, 1, os.getenv(M.ARC_REPO_ROOT_ENV))
@@ -23,23 +23,36 @@ function M.is_inside_arc(path)
     return false
 end
 
-M._pyright_bad_root_dirs = { unpack(M._arc_repo_roots) } -- shallow copy
-table.insert(M._pyright_bad_root_dirs, os.getenv("HOME"))
+function M.is_ok_root_dir(path)
+    local util = require("dgronskiy_nvim.util")
+
+    if util.path.is_fs_root(path) then
+        return false
+    end
+
+    if path == os.getenv("HOME") then
+        return false
+    end
+
+    -- No-Go's:
+    -- * /data/a/trunk
+    -- * /data/a/dev
+    -- * /data/a/MLDWH-XXX
+    local dirname = util.path.dirname(path)
+    for check_against in ipairs(M._arc_repo_roots) do
+        if check_against == path or check_against == dirname then
+            return false
+        end
+    end
+
+    return true
+end
 
 -- TODO: move ok_root_dirs into global config file
 
 -- root_dir function in terms of `lspconfig`. Get inspiration here:
 -- https://github.com/neovim/nvim-lspconfig/tree/bfdf2e91e7297a54bcc09d3e092a12bff69a1cf4/lua/lspconfig/util.lua#L268
 function M.guarded_pyright_root_directory(startpath)
-    local function _is_ok_root_dir(path)
-        for _, check_against in ipairs(M._pyright_bad_root_dirs) do
-            if check_against == path then
-                return false
-            end
-        end
-        return true
-    end
-
     local is_inside_arc = M.is_inside_arc(startpath)
     local root_dir = ""
 
@@ -52,9 +65,16 @@ function M.guarded_pyright_root_directory(startpath)
         root_dir = require("lspconfig.server_configurations.pyright").default_config.root_dir(startpath)
     end
 
-    -- vim.notify("Inside Arc=" .. tostring(is_inside_arc) .. "\nFile= " .. startpath .. "\nRoot dir= " .. tostring(root_dir))
+    -- vim.notify(
+    --     "Inside Arc="
+    --     .. tostring(is_inside_arc)
+    --     .. "\nFile= "
+    --     .. startpath
+    --     .. "\nRoot dir= "
+    --     .. tostring(root_dir)
+    -- )
 
-    if not _is_ok_root_dir(root_dir) then
+    if not M.is_ok_root_dir(root_dir) then
         vim.notify(
             "Inside Arc="
             .. tostring(is_inside_arc)
