@@ -121,5 +121,5 @@ return {
     -- },
 
     { "nvim-zh/whitespace.nvim", lazy = false },
-    { "Tastyep/structlog.nvim",  lazy = false },
+    { "Tastyep/structlog.nvim", lazy = false },
 }

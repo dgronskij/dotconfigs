@@ -234,8 +234,9 @@ config = {
         ]])
 
         -- open dgronskiy_nvim.log ; go to end
-        vim.cmd([[ command DGronskiyNvimLog :execute "e " .. expand(stdpath("log")) .. "/dgronskiy_nvim.log | normal \<S-G>" ]])
-
+        vim.cmd(
+            [[ command DGronskiyNvimLog :execute "e " .. expand(stdpath("log")) .. "/dgronskiy_nvim.log | normal \<S-G>" ]]
+        )
 
         -- vim.cmd [[ nnoremap K :FindExact <C-R><C-W><CR> ]]
 
