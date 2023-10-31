@@ -1,4 +1,11 @@
 local M = {}
+local NIL = "<NIL>"
+local function or_NIL(value)
+    if value == nil then
+        return NIL
+    end
+    return value
+end
 
 local unpack = table.unpack or unpack
 
@@ -25,6 +32,7 @@ end
 
 function M.is_ok_root_dir(path)
     local util = require("dgronskiy_nvim.util")
+    local logger = require("dgronskiy_nvim.logger")
 
     if util.path.is_fs_root(path) then
         return false
@@ -38,9 +46,9 @@ function M.is_ok_root_dir(path)
     -- * /data/a/trunk
     -- * /data/a/dev
     -- * /data/a/MLDWH-XXX
-    local dirname = util.path.dirname(path)
-    for check_against in ipairs(M._arc_repo_roots) do
-        if check_against == path or check_against == dirname then
+    local path_and_parent = { path, util.path.dirname(path) }
+    for _, check_against in ipairs(M._arc_repo_roots) do
+        if util.table.find(path_and_parent, check_against) then
             return false
         end
     end
@@ -53,8 +61,11 @@ end
 -- root_dir function in terms of `lspconfig`. Get inspiration here:
 -- https://github.com/neovim/nvim-lspconfig/tree/bfdf2e91e7297a54bcc09d3e092a12bff69a1cf4/lua/lspconfig/util.lua#L268
 function M.guarded_pyright_root_directory(startpath)
+    local logger = require("dgronskiy_nvim.logger")
+    local log_events = {}
+
     local is_inside_arc = M.is_inside_arc(startpath)
-    local root_dir = ""
+    local root_dir = nil
 
     if is_inside_arc then
         local util = require("lspconfig.util")
@@ -64,29 +75,32 @@ function M.guarded_pyright_root_directory(startpath)
         -- https://github.com/neovim/nvim-lspconfig/tree/bfdf2e91e7297a54bcc09d3e092a12bff69a1cf4/lua/lspconfig/server_configurations/pyright.lua#L36
         root_dir = require("lspconfig.server_configurations.pyright").default_config.root_dir(startpath)
     end
+    log_events.root_dir_inferred = or_NIL(root_dir)
 
-    -- vim.notify(
-    --     "Inside Arc="
-    --     .. tostring(is_inside_arc)
-    --     .. "\nFile= "
-    --     .. startpath
-    --     .. "\nRoot dir= "
-    --     .. tostring(root_dir)
-    -- )
+    local is_ok_root_dir = M.is_ok_root_dir(root_dir)
+    root_dir = is_ok_root_dir and root_dir or nil
 
-    if not M.is_ok_root_dir(root_dir) then
-        vim.notify(
-            "Inside Arc="
-            .. tostring(is_inside_arc)
-            .. "\nFile= "
-            .. startpath
-            .. "\nRoot dir= "
-            .. root_dir
-            .. "\n\nPatching root_dir to nil"
-        )
-        root_dir = nil
-    end
+    logger:debug("guarded_pyright_root_directory", {
+        unpack(log_events),
+        startpath = or_NIL(startpath),
+        is_inside_arc = or_NIL(is_inside_arc),
+        is_ok_root_dir = or_NIL(is_ok_root_dir),
+        root_dir_final = or_NIL(root_dir),
+    })
 
+    -- if not M.is_ok_root_dir(root_dir) then
+    --     logger:warn("patching
+    --     vim.notify(
+    --         "Inside Arc="
+    --         .. tostring(is_inside_arc)
+    --         .. "\nFile= "
+    --         .. startpath
+    --         .. "\nRoot dir= "
+    --         .. root_dir
+    --         .. "\n\nPatching root_dir to nil"
+    --     )
+    --     root_dir = nil
+    -- end
     return root_dir
 end
 
