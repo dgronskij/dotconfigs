@@ -80,13 +80,13 @@ function M.guarded_pyright_root_directory(startpath)
     local is_ok_root_dir = M.is_ok_root_dir(root_dir)
     root_dir = is_ok_root_dir and root_dir or nil
 
-    logger:debug("guarded_pyright_root_directory", {
-        unpack(log_events),
+    log_events = vim.tbl_extend("force", log_events, {
         startpath = or_NIL(startpath),
         is_inside_arc = or_NIL(is_inside_arc),
         is_ok_root_dir = or_NIL(is_ok_root_dir),
         root_dir_final = or_NIL(root_dir),
     })
+    logger:debug("guarded_pyright_root_directory", log_events)
 
     -- if not M.is_ok_root_dir(root_dir) then
     --     logger:warn("patching

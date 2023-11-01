@@ -233,6 +233,8 @@ config = {
           map <Leader>light :set background=light<CR>
         ]])
 
+        vim.cmd([[nnoremap <Leader>b :Buffers<CR>]])
+
         -- open dgronskiy_nvim.log ; go to end
         vim.cmd(
             [[ command DGronskiyNvimLog :execute "e " .. expand(stdpath("log")) .. "/dgronskiy_nvim.log | normal \<S-G>" ]]
