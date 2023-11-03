@@ -216,10 +216,21 @@ config = {
 
         vim.cmd(
             -- + case-insensitive
-            [[ command! -bang -nargs=* ArcFind call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max all  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]]
+            [[ command! -bang -nargs=* ArcFind call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max all  --color "always" -- '.shellescape(<q-args>), 1, <bang>0) ]]
         )
         vim.cmd(
-            [[ command! -bang -nargs=* ArcFindExact call fzf#vim#grep('ya tool cs --current-folder --no-contrib --no-junk --max all -F --color "always" '.shellescape(<q-args>), 1, <bang>0) ]]
+            [[ command! -bang -nargs=* ArcFindExact call fzf#vim#grep('ya tool cs --current-folder --no-contrib --no-junk --max all -F --color "always" -- '.shellescape(<q-args>), 1, <bang>0) ]]
+        )
+
+        -- FIXME: this uses grep format (see that period symbol before --file) and corresponding fzf command
+        -- Unfortunately, fzf#vim#file is not dynamically configurable
+        -- fzf-lua does
+        -- edially, this is the case for telescope live-grep fuctionality where on each input update the request to `cs` tool is made (since its pretty fast)
+        -- TODO: remove `.` search pattern
+        --       remove -g1 (max match per file)
+        vim.cmd(
+            -- + case-insensitive
+            [[ command! -bang -nargs=* ArcFiles call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max 1000 --color "always" . -g1 --file '.shellescape(<q-args>), 1, <bang>0) ]]
         )
 
         vim.cmd([[ vnoremap <Leader>cat :'<,'>w !tee<CR> ]])
@@ -234,6 +245,7 @@ config = {
         ]])
 
         vim.cmd([[nnoremap <Leader>b :Buffers<CR>]])
+        vim.cmd([[nnoremap <Leader>h :History<CR>]])
 
         -- open dgronskiy_nvim.log ; go to end
         vim.cmd(

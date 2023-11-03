@@ -42,6 +42,8 @@ mapping["n"] = {
     ["<S-L>"] = { "<Cmd>bnext<CR>", desc = "Next buffer" },
     ["<S-H>"] = { "<Cmd>bnext<CR>", desc = "Previous buffer" },
 
+    ["<C-W><C-T>"] = { "<Cmd>tab split<CR>", desc = "open current buffer in new tab" },
+
     -- override astronvim defaults
 
     -- NOTE: this is an adoption of https://github.com/AstroNvim/AstroNvim/blob/567c01bc6a446da8150f9904d11ee9530e47e82f/lua/astronvim/mappings.lua#L168-L178
