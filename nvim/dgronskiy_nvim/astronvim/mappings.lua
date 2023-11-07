@@ -84,11 +84,18 @@ mapping["v"] = {
 -- FIXME: uncomment after fixing search higlight disappearing
 -- -- ThePrimeagen: center viewport for up/down motions
 -- -- https://youtu.be/KfENDDEpCsI?t=337
--- local M_keymap = require("dgronskiy_nvim.keymap")
+local M_keymap = require("dgronskiy_nvim.keymap")
 -- M_keymap.nnoremap("<C-d>", "<C-d>zz")
 -- M_keymap.nnoremap("<C-u>", "<C-u>zz")
 -- M_keymap.nnoremap("n", "nzzzv", { silent = true })
 -- M_keymap.nnoremap("N", "Nzzzv", { silent = true })
+
+-- greatest remap ever
+-- vim.keymap.set("x", "<leader>p", [["_dP]])
+
+-- next greatest remap ever : asbjornHaland
+-- vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+-- vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 function M.astronvim_mappings_callback(_)
     astronvim_defaults = M.saner_astronvim_defaults()

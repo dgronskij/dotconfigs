@@ -47,6 +47,14 @@ return {
                 mode = "v",
                 desc = "OSC52: [c]o[p] to cliboard",
             },
+            {
+                "<leader>y",
+                function()
+                    require("osc52").copy_visual()
+                end,
+                mode = "v",
+                desc = "OSC52: [y]ank to cliboard",
+            },
         },
     },
     {
