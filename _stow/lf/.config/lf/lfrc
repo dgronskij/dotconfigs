@@ -1,6 +1,12 @@
+# DOCS: https://github.com/gokcehan/lf/blob/master/doc.md
+# EXAMPLE: https://github.com/gokcehan/lf/blob/master/etc/lfrc.example
+
 set hidden
 set icons
 set number
 set previewer ~/bin/lf-previewer
 set relativenumber
 set shell zsh
+set incsearch
+set smartcase
+set wrapscan false
