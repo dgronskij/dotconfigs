@@ -10,3 +10,6 @@ set shell zsh
 set incsearch
 set smartcase
 set wrapscan false
+
+# use smart previewer for files instead of `less`
+map i $~/bin/lf-previewer "$f"

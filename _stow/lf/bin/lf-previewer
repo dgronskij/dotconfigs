@@ -5,5 +5,9 @@
 case "$1" in
     *.tar*) tar tf "$1" ;;
     *.zip) unzip -l "$1" ;;
-    *) bat --force-colorization --paging=never --style=numbers --terminal-width $(($2 - 5)) -f "$1" ;;
+
+    # in original snippet, --paging is set to never
+    # BUT I use lf-previewer also for `view` command and --paging=never breaks there
+    # --paging=always seems to work as a side previewer thought
+    *) bat --force-colorization --paging=always --style=numbers --terminal-width $(($2 - 5)) -f "$1" ;;
 esac
