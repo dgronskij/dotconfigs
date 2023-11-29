@@ -61,6 +61,13 @@ return {
         "https://github.com/editorconfig/editorconfig-vim",
         event = "VeryLazy",
     },
+    {
+        "https://github.com/ggandor/leap.nvim",
+        event = "VeryLazy",
+        config = function()
+            require('leap').add_default_mappings()
+        end,
+    },
     -- ['https://github.com/ggandor/leap.nvim'] = {
     --     config = function()
     --         require('leap').add_default_mappings()
