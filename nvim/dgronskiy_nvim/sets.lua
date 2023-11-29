@@ -54,6 +54,9 @@ options.opt = {
     -- langmap = "йЙцЦуУкКеЕнНгГшШщЩзЗхХъЪфФыЫвВаАпПрРоОлЛдДжЖэЭяЯчЧсСмМиИтТьЬбБюЮ.\\,;qQwWeErRtTyYuUiIoOpP[{]}aAsSdDfFgGhHjJkKlL;:'\"zZxXcCvVbBnNmM\\,<.>/?"
 
     -- langmap = "1!2\"3№4;5%6:7?8*9(0)-_=+йЙцЦуУкКеЕнНгГшШщЩзЗхХъЪфФыЫвВаАпПрРоОлЛдДжЖэЭ\\/яЯчЧсСмМиИтТьЬбБюЮ.,;1!2@3#4$5%6^7&8*9(0)-_=+aAsSdDfFgGhHjJkKlL;:'\"\\|zZxXcCvVbBnNmM,<.>/?"
+
+
+    shada="!,'300,<50,s10,h", -- default is shada=!,'100,<50,s10,h
 }
 
 options.g = {
