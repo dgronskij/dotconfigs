@@ -252,6 +252,21 @@ config = {
             [[ command DGronskiyNvimLog :execute "e " .. expand(stdpath("log")) .. "/dgronskiy_nvim.log | normal \<S-G>" ]]
         )
 
+        vim.api.nvim_create_user_command(
+            "Cd",
+            function(args)
+                vim.cmd.cd(vim.fn.expand("%:p:h"))
+            end,
+            { desc = "[C]hange [D]irectory to currently opened file" }
+        )
+        vim.api.nvim_create_user_command(
+            "Lcd",
+            function(args)
+                vim.cmd.lcd(vim.fn.expand("%:p:h"))
+            end,
+            { desc = "[L]ocal [C]hange [D]irectory to currently opened file" }
+        )
+
         -- vim.cmd [[ nnoremap K :FindExact <C-R><C-W><CR> ]]
 
         --     vnoremap K "vy :FindExact <C-R>v<CR>
