@@ -84,14 +84,14 @@ alias kvim="NVIM_APPNAME=kickstartnvim nvim"
 #     ! [ -z "$config" ] && NVIM_APPNAME=$config nvim "$@"
 # }
 
-alias as="cd /data/a"
+if [ -e ~/.localrc ] ; then
+    echo "-- found ~/.localrc, sourcing"
+    source ~/.localrc
+fi
 
-[ -e ~/.localrc ] && source ~/.localrc
-
-
-nvimconf() {
-    ( cd ~/.config/nvim && exec nvim )
-}
+# nvimconf() {
+#     ( cd ~/.config/nvim && exec nvim )
+# }
 
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"

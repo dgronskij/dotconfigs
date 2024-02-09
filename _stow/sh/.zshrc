@@ -1,4 +1,5 @@
-echo "this is zshrc"
+echo "this is .zshrc"
+# fpath+=~/.zfunc
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -73,12 +74,15 @@ if type zoxide >/dev/null 2>/dev/null; then
   eval "$(zoxide init zsh)"
 fi
 
+fpath+=~/.zfunc  # custom competions go here
+
 # https://gist.github.com/ctechols/ca1035271ad134841284
 #
 # well, this is slow as hell
 # unfortunately, oh-my-zsh itself runs compinit
 # have to do something with that
 autoload -U compinit && compinit
+
 
 # User configuration
 

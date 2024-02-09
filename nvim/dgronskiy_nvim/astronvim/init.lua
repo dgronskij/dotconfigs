@@ -60,6 +60,7 @@ config = {
             -- https://github.com/microsoft/pyright/blob/main/docs/settings.md
             pyright = {
                 autostart = true,
+                -- autostart = false,
                 -- autostart = (function ()
                 --     local val = os.getenv("NVIM_ENABLE_LSP_PYRIGHT")
                 --     return val ~= nil and #val ~= 0
@@ -155,7 +156,7 @@ config = {
     --             -- null_ls.builtins.diagnostics.pycodestyle,
     --             -- null_ls.builtins.diagnostics.pydocstyle,
     --             -- null_ls.builtins.diagnostics.pylint,
-    --             null_ls.builtins.formatting.black,
+    -- null_ls.builtins.formatting.black,
     --             null_ls.builtins.formatting.isort,
     --
     --         }
@@ -215,7 +216,7 @@ config = {
         )
 
         vim.cmd(
-            -- + case-insensitive
+        -- + case-insensitive
             [[ command! -bang -nargs=* ArcFind call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max all  --color "always" -- '.shellescape(<q-args>), 1, <bang>0) ]]
         )
         vim.cmd(
@@ -229,9 +230,13 @@ config = {
         -- TODO: remove `.` search pattern
         --       remove -g1 (max match per file)
         vim.cmd(
-            -- + case-insensitive
+        -- + case-insensitive
             [[ command! -bang -nargs=* ArcFiles call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max 1000 --color "always" . -g1 --file '.shellescape(<q-args>), 1, <bang>0) ]]
         )
+        -- vim.cmd(
+        -- -- + case-insensitive
+        --     [[ command! -bang -nargs=* ProjectFiles call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]]
+        -- )
 
         vim.cmd([[ vnoremap <Leader>cat :'<,'>w !tee<CR> ]])
 
@@ -266,6 +271,11 @@ config = {
             end,
             { desc = "[L]ocal [C]hange [D]irectory to currently opened file" }
         )
+
+        vim.cmd([[ vnoremap > >gv ]])
+        vim.cmd([[ vnoremap < <gv ]])
+        -- ["<S-Tab>"] = { "<gv", desc = "Unindent line" },
+        -- ["<Tab>"] = { ">gv", desc = "Indent line" },
 
         -- vim.cmd [[ nnoremap K :FindExact <C-R><C-W><CR> ]]
 

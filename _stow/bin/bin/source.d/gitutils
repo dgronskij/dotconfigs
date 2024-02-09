@@ -45,7 +45,7 @@ END
 }
 
 function __git_switch_repos() {
-    cd $1
+    cd "$1"
     cd "$1/$(__git_list_repos . | sort | fzf)"
 }
 

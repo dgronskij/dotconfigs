@@ -87,6 +87,7 @@ return {
     -- },
     {
         "jose-elias-alvarez/null-ls.nvim",
+        event = "VeryLazy",
         opts = function(_, defaults)
             local null_ls = require("null-ls")
             defaults.sources = {
@@ -105,7 +106,7 @@ return {
                 -- -- null_ls.builtins.diagnostics.pycodestyle,
                 -- -- null_ls.builtins.diagnostics.pydocstyle,
                 -- -- null_ls.builtins.diagnostics.pylint,
-                -- null_ls.builtins.formatting.black,
+                null_ls.builtins.formatting.black,
                 -- null_ls.builtins.formatting.isort,
             }
 

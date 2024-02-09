@@ -40,9 +40,10 @@ mapping["n"] = {
 
     -- buffer navigation
     ["<S-L>"] = { "<Cmd>bnext<CR>", desc = "Next buffer" },
-    ["<S-H>"] = { "<Cmd>bnext<CR>", desc = "Previous buffer" },
+    ["<S-H>"] = { "<Cmd>bprev<CR>", desc = "Previous buffer" },
 
     ["<C-W><C-T>"] = { "<Cmd>tab split<CR>", desc = "open current buffer in new tab" },
+    ["<leader>fa"] = { ":ArcFiles ", desc = "Search [F]ile in [A]rc" },
 
     -- override astronvim defaults
 
@@ -70,7 +71,7 @@ mapping["n"] = {
 -- VISUAL mode
 mapping["v"] = {
     ["<S-K>"] = { '"vy :FindExact <C-R>v<CR>', desc = "FZF: find the selection" },
-    ["<leader>cs"] = { '"vy :ArcFind <C-R>v<CR>', desc = "Arc: find the selection" },
+    ["<leader><S-K>"] = { '"vy :ArcFind <C-R>v<CR>', desc = "Arc: find the selection" },
     ["<leader>/"] = { '"vy :BLines <C-R>v<CR>', desc = "FZF: buffer lines" },
     -- ["<C-j>"] = { function()
     --     -- vim.cmd [[ "vy ]] -- this doesn' work
@@ -79,6 +80,7 @@ mapping["v"] = {
     --     vim.cmd [[ execute 'normal!' '"vy' ]]
     --     vim.cmd [[ execute 'echo "start:" @v ":end" '  ]]
     -- end },
+    -- Stay in indent mode
 }
 
 -- FIXME: uncomment after fixing search higlight disappearing
