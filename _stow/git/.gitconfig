@@ -5,6 +5,9 @@
 [includeIf "gitdir:~/src/gitlab.ozon.ru/"]
     path = ~/.dotfiles/git/gitconfig_user.ozon
 
+[includeIf "gitdir:~/src/84.201.166.216//"]
+    path = ~/.dotfiles/git/gitconfig_user.aim2024
+
 [push]
     default = current
 [core]
