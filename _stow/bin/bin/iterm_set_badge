@@ -1,0 +1,8 @@
+#!/bin/bash
+function iterm_set_badge() {
+    local text="$1"
+    local text64="$( echo "$text" | base64 )"
+    printf "\\e]1337;SetBadgeFormat=${text64}\\a" > /dev/tty
+}
+
+iterm_set_badge "$@"
