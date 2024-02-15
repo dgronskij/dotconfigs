@@ -134,3 +134,20 @@ fi
 if type starship &>/dev/null ; then
     eval "$(starship init zsh)"
 fi
+
+if [ -f ~/bin/iterm_set_badge ] ; then
+    # it turned out to be hard to set up ssh LocalCommand in ~/.ssh/config and finilizer here
+    # we should change the badge only for interactive shells but should not for scipts:
+    # like `ssh vagrant ls -la`
+    # LocalCommand seems to not be able to differentiate one from another
+    # Thus, all logic is kept here: we are setting  badges only in cases where we 100% want to
+    ssh() {
+        if [[ $# == 1 ]] ; then
+            ~/bin/iterm_set_badge "$1"
+            command ssh "$@"
+            ~/bin/iterm_set_badge ""
+        else
+            command ssh "$@"
+        fi
+    }
+fi
