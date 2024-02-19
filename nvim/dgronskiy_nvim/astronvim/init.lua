@@ -1,5 +1,5 @@
-if vim.fn.has("nvim-0.9") == 0 then
-    error("Please install nvim >= 0.9")
+if vim.fn.has("nvim-0.10") == 0 then
+    error("Please install nvim >= 0.10")
 end
 
 config = {
@@ -274,6 +274,11 @@ config = {
 
         vim.cmd([[ vnoremap > >gv ]])
         vim.cmd([[ vnoremap < <gv ]])
+
+
+        vim.cmd([[nnoremap  <leader>t<CR>  :Tags '<C-R><C-W> <CR>]])
+        vim.cmd([[vnoremap  <leader>t<CR> "vy :Tags '<C-R>v <CR>]])
+
         -- ["<S-Tab>"] = { "<gv", desc = "Unindent line" },
         -- ["<Tab>"] = { ">gv", desc = "Indent line" },
 
