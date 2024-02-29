@@ -7,14 +7,21 @@
 c() {
     # -C for always colorize
     local tree_cmd="tree -C -L 1 --dirsfirst {}"
+
+    local scheme=history
+    # local scheme=path
+    # local scheme=default
+
     while true ; do
         bn="$(
-            find . -maxdepth 1 -mindepth 1 -type d \
+            cat \
+                <(find . -maxdepth 1 -mindepth 1 -type d) \
+                <(echo "../") `#this goes last so that it doesn't become default` \
             | fzf \
                 --height=20 \
                 --header="$PWD" \
                 --exit-0 \
-                --scheme=history  \
+                --scheme=$scheme  \
                 --history=$HOME/.c.fzf.history \
                 --preview="$tree_cmd" \
                 --no-sort \
