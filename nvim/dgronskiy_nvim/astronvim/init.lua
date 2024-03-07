@@ -264,6 +264,8 @@ config = {
             end,
             { desc = "[C]hange [D]irectory to currently opened file" }
         )
+        vim.cmd([[nnoremap  <leader>cd    :Cd<CR>]])
+
         vim.api.nvim_create_user_command(
             "Lcd",
             function(args)
@@ -271,6 +273,7 @@ config = {
             end,
             { desc = "[L]ocal [C]hange [D]irectory to currently opened file" }
         )
+        vim.cmd([[nnoremap  <leader>lcd  :Lcd<CR>]])
 
         vim.cmd([[ vnoremap > >gv ]])
         vim.cmd([[ vnoremap < <gv ]])
