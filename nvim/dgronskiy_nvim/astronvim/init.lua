@@ -300,6 +300,18 @@ config = {
         -- TODO: move to key = .. in the plugin spec
         -- vim.keymap.set('v', '<leader>cp', require('osc52').copy_visual)
 
+        -- https://stackoverflow.com/questions/12315612/move-forward-backwards-one-word-in-command-mode
+        vim.cmd([[
+            cnoremap <C-a> <Home>
+            cnoremap <C-e> <End>
+            "cnoremap <C-p> <Up>
+            "cnoremap <C-n> <Down>
+            "cnoremap <C-b> <Left>
+            "cnoremap <C-f> <Right>
+            "cnoremap <M-b> <S-Left>
+            "cnoremap <M-f> <S-Right>
+        ]])
+
         vim.lsp.set_log_level("info")
     end,
 }
