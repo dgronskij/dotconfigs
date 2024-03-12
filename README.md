@@ -7,6 +7,8 @@
 # .profile vs .zprofile vs .bashrc vs etc.
 - https://unix.stackexchange.com/questions/324359/why-a-login-shell-over-a-non-login-shell
 - https://unix.stackexchange.com/questions/38175/difference-between-login-shell-and-non-login-shell
+- https://askubuntu.com/questions/1411833/what-goes-in-profile-and-bashrc
+  - a good table with cases of running ssh and/or bash in different modes
 
 
 $ TODOS
