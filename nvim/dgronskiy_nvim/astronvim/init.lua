@@ -216,7 +216,7 @@ config = {
         )
 
         vim.cmd(
-        -- + case-insensitive
+            -- + case-insensitive
             [[ command! -bang -nargs=* ArcFind call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max all  --color "always" -- '.shellescape(<q-args>), 1, <bang>0) ]]
         )
         vim.cmd(
@@ -230,7 +230,7 @@ config = {
         -- TODO: remove `.` search pattern
         --       remove -g1 (max match per file)
         vim.cmd(
-        -- + case-insensitive
+            -- + case-insensitive
             [[ command! -bang -nargs=* ArcFiles call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max 1000 --color "always" . -g1 --file '.shellescape(<q-args>), 1, <bang>0) ]]
         )
         -- vim.cmd(
@@ -257,27 +257,22 @@ config = {
             [[ command DGronskiyNvimLog :execute "e " .. expand(stdpath("log")) .. "/dgronskiy_nvim.log | normal \<S-G>" ]]
         )
 
-        vim.api.nvim_create_user_command(
-            "Cd",
-            function(args)
-                vim.cmd.cd(vim.fn.expand("%:p:h"))
-            end,
-            { desc = "[C]hange [D]irectory to currently opened file" }
-        )
+        vim.api.nvim_create_user_command("Cd", function(args)
+            local target_dir = vim.fn.expand("%:p:h")
+            vim.cmd.cd(target_dir)
+            vim.print(":cd " .. target_dir)
+        end, { desc = "[C]hange [D]irectory to currently opened file" })
         vim.cmd([[nnoremap  <leader>cd    :Cd<CR>]])
 
-        vim.api.nvim_create_user_command(
-            "Lcd",
-            function(args)
-                vim.cmd.lcd(vim.fn.expand("%:p:h"))
-            end,
-            { desc = "[L]ocal [C]hange [D]irectory to currently opened file" }
-        )
+        vim.api.nvim_create_user_command("Lcd", function(args)
+            local target_dir = vim.fn.expand("%:p:h")
+            vim.cmd.lcd(target_dir)
+            vim.print(":lcd " .. target_dir)
+        end, { desc = "[L]ocal [C]hange [D]irectory to currently opened file" })
         vim.cmd([[nnoremap  <leader>lcd  :Lcd<CR>]])
 
         vim.cmd([[ vnoremap > >gv ]])
         vim.cmd([[ vnoremap < <gv ]])
-
 
         vim.cmd([[nnoremap  <leader>t<CR>  :Tags '<C-R><C-W> <CR>]])
         vim.cmd([[vnoremap  <leader>t<CR> "vy :Tags '<C-R>v <CR>]])
