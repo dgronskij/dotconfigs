@@ -216,7 +216,7 @@ config = {
         )
 
         vim.cmd(
-            -- + case-insensitive
+        -- + case-insensitive
             [[ command! -bang -nargs=* ArcFind call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max all  --color "always" -- '.shellescape(<q-args>), 1, <bang>0) ]]
         )
         vim.cmd(
@@ -230,7 +230,7 @@ config = {
         -- TODO: remove `.` search pattern
         --       remove -g1 (max match per file)
         vim.cmd(
-            -- + case-insensitive
+        -- + case-insensitive
             [[ command! -bang -nargs=* ArcFiles call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max 1000 --color "always" . -g1 --file '.shellescape(<q-args>), 1, <bang>0) ]]
         )
         -- vim.cmd(
@@ -307,31 +307,36 @@ config = {
             "cnoremap <M-f> <S-Right>
         ]])
 
-        ; (function()
-            -- https://github.com/Wansmer/langmapper.nvim
-            local function escape(str)
-                -- You need to escape these characters to work correctly
-                local escape_chars = [[;,."|\]]
-                local escape_chars = [[;,"|\]]
-                return vim.fn.escape(str, escape_chars)
-            end
+        if true then
+            (function()
+                -- https://github.com/Wansmer/langmapper.nvim
+                local function escape(str)
+                    -- You need to escape these characters to work correctly
+                    local escape_chars = [[;,."|\]]
+                    local escape_chars = [[;,"|\]]
+                    return vim.fn.escape(str, escape_chars)
+                end
 
-            -- Recommended to use lua template string
-	    -- IMPORTANT:
-	    -- this is still a hack without knowing actual active keyboard layout;
-	    -- one cannot map e.g. `.` (russian layout) into `/` (corresponding character in english layout)
-	    -- since that mapping would "work" (= break everything) with english layout too
-            local en = [[qwertyuiop[]asdfghjkl;'zxcvbnm,.]]
-            local ru = [[йцукенгшщзхъфывапролджэячсмитьбю]]
-            local en_shift = [[QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
-            local ru_shift = [[ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
+                -- Recommended to use lua template string
+                -- IMPORTANT:
+                -- this is still a hack without knowing actual active keyboard layout;
+                -- one cannot map e.g. `.` (russian layout) into `/` (corresponding character in english layout)
+                -- since that mapping would "work" (= break everything) with english layout too
+                local en = [[qwertyuiop[]asdfghjkl;'zxcvbnm,.]]
+                local ru = [[йцукенгшщзхъфывапролджэячсмитьбю]]
+                local en_shift = [[QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
+                local ru_shift = [[ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
 
-            vim.opt.langmap = vim.fn.join({
-                -- | `to` should be first     | `from` should be second
-                escape(ru_shift) .. ';' .. escape(en_shift),
-                escape(ru) .. ';' .. escape(en),
-            }, ',')
-        end)();
+                vim.opt.langmap = vim.fn.join({
+                    -- | `to` should be first     | `from` should be second
+                    escape(ru_shift) .. ';' .. escape(en_shift),
+                    escape(ru) .. ';' .. escape(en),
+                }, ',')
+
+                vim.opt.keymap="russian-jcukenwin" -- https://neovim.io/doc/user/russian.html
+                vim.opt.iminsert=0 -- english by default
+            end)()
+        end
 
         vim.lsp.set_log_level("info")
     end,
