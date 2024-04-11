@@ -38,23 +38,43 @@ return {
     {
         "ojroques/nvim-osc52",
         event = "VeryLazy",
+        config = function()
+            vim.cmd([[nnoremap  <leader>y "+y]]);
+
+            (function()
+                local function copy(lines, _)
+                    require("osc52").copy(table.concat(lines, "\n"))
+                end
+
+                local function paste()
+                    return { vim.fn.split(vim.fn.getreg(""), "\n"), vim.fn.getregtype("") }
+                end
+
+                vim.g.clipboard = {
+                    name = "osc52",
+                    copy = { ["+"] = copy, ["*"] = copy },
+                    paste = { ["+"] = paste, ["*"] = paste },
+                }
+            end)();
+
+        end,
         keys = {
-            {
-                "<leader>cp",
-                function()
-                    require("osc52").copy_visual()
-                end,
-                mode = "v",
-                desc = "OSC52: [c]o[p] to cliboard",
-            },
-            {
-                "<leader>y",
-                function()
-                    require("osc52").copy_visual()
-                end,
-                mode = "v",
-                desc = "OSC52: [y]ank to cliboard",
-            },
+            -- {
+            --     "<leader>cp",
+            --     function()
+            --         require("osc52").copy_visual()
+            --     end,
+            --     mode = "v",
+            --     desc = "OSC52: [c]o[p] to cliboard",
+            -- },
+            -- {
+            --     "<leader>y",
+            --     function()
+            --         require("osc52").copy_visual()
+            --     end,
+            --     mode = "v",
+            --     desc = "OSC52: [y]ank to cliboard",
+            -- },
         },
     },
     {

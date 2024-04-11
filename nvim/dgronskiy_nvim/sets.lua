@@ -13,8 +13,8 @@ options.opt = {
 
     mouse = "a",
 
-    -- clipboard = "",
-    clipboard = "unnamedplus",
+    clipboard = "",
+    -- clipboard = "unnamedplus",
 
     errorbells = false,
 

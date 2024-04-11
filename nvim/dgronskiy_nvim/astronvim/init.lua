@@ -338,26 +338,10 @@ config = {
                     escape(ru) .. ';' .. escape(en),
                 }, ',')
 
-                vim.opt.keymap="russian-jcukenwin" -- https://neovim.io/doc/user/russian.html
-                vim.opt.iminsert=0 -- english by default
-            end)()
+                vim.opt.keymap = "russian-jcukenwin" -- https://neovim.io/doc/user/russian.html
+                vim.opt.iminsert = 0                 -- english by default
+            end)();
         end
-
-        (function()
-            local function copy(lines, _)
-                require("osc52").copy(table.concat(lines, "\n"))
-            end
-
-            local function paste()
-                return { vim.fn.split(vim.fn.getreg(""), "\n"), vim.fn.getregtype("") }
-            end
-
-            vim.g.clipboard = {
-                name = "osc52",
-                copy = { ["+"] = copy, ["*"] = copy },
-                paste = { ["+"] = paste, ["*"] = paste },
-            }
-        end)()
 
         vim.lsp.set_log_level("info")
     end,
