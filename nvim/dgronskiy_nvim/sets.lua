@@ -12,7 +12,10 @@ options.opt = {
     relativenumber = true,
 
     mouse = "a",
-    clipboard = "",
+
+    -- clipboard = "",
+    clipboard = "unnamedplus",
+
     errorbells = false,
 
     tabstop = 4,
