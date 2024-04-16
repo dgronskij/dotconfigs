@@ -40,6 +40,7 @@ return {
         event = "VeryLazy",
         config = function()
             vim.cmd([[nnoremap  <leader>y "+y]]);
+            vim.cmd([[vnoremap  <leader>y "+y]]);
 
             (function()
                 local function copy(lines, _)
