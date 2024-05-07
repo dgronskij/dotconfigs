@@ -69,6 +69,10 @@ options.g = {
     -- https://github.com/AstroNvim/AstroNvim/tree/893665a969129eb528e54b7e4bee1e6c952d6d25/lua/core/options.lua#L60
     autopairs_enabled = false,
     autoformat_enabled = false,
+
+    -- dgronskiy: Astronvim sets up Aerial.nvim with these options, increased thresholds
+    -- AstroNvim specific global options
+    max_file = { size = 1024 * 1024 * 4, lines = 10000 }, -- set global limits for large files
 }
 
 function M.export_astronvim()
