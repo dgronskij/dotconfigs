@@ -29,14 +29,14 @@ return {
     },
     {
         "https://github.com/junegunn/fzf.vim",
-        -- dependencies = {
-        --     "https://github.com/junegunn/fzf",
-        -- },
-        -- event = "VeryLazy",
-        -- config = function()
-        --     vim.g.fzf_vim = {}
-        --     vim.g.fzf_vim.preview_window = { "right,50%", "ctrl-/" }
-        -- end,
+        dependencies = {
+            "https://github.com/junegunn/fzf",
+        },
+        event = "VeryLazy",
+        config = function()
+            vim.g.fzf_vim = {}
+            vim.g.fzf_vim.preview_window = { "right,50%", "ctrl-/" }
+        end,
     },
     {
         "https://github.com/iautom8things/gitlink-vim",
