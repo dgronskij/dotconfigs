@@ -147,10 +147,10 @@ return {
             defaults = {
                 extensions = {
                     fzf = {
-                        fuzzy = true,                   -- false will only do exact matching
+                        fuzzy = true, -- false will only do exact matching
                         override_generic_sorter = true, -- override the generic sorter
-                        override_file_sorter = true,    -- override the file sorter
-                        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+                        override_file_sorter = true, -- override the file sorter
+                        case_mode = "smart_case", -- or "ignore_case" or "respect_case"
                     },
                 },
             },
@@ -164,7 +164,7 @@ return {
     -- },
 
     { "nvim-zh/whitespace.nvim", lazy = false },
-    { "Tastyep/structlog.nvim",  lazy = false },
+    { "Tastyep/structlog.nvim", lazy = false },
     {
         "zapling/mason-lock.nvim",
         event = "VeryLazy",
