@@ -176,4 +176,14 @@ return {
             })
         end,
     },
+    { -- https://github.com/nvim-treesitter/nvim-treesitter-context?tab=readme-ov-file#configuration
+        "nvim-treesitter/nvim-treesitter-context",
+        event = "VeryLazy",
+        opts = {
+            min_window_height = 10,
+            max_lines = 5,
+            multiline_threshold = 1,
+            mode = "topline",
+        },
+    },
 }
