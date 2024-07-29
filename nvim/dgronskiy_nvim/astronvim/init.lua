@@ -2,7 +2,12 @@ if vim.fn.has("nvim-0.10") == 0 then
     error("Please install nvim >= 0.10")
 end
 
-config = {
+-- vim.g.max_file = {  -- this is read by Aerial.nvim astronvim configuration
+--     lines = 10000,
+--     size = 3 * 1000 * 1000,
+-- }
+
+local config = {
     lazy = {
         -- by default, lazy.nvim keeps lock file in stdpath("config"),
         -- which is usually a git repo (works for lazyvim, kickstart.nvim)
@@ -225,7 +230,14 @@ config = {
             [[ command! -bang -nargs=* ArcFind call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max all  --color "always" -- '.shellescape(<q-args>), 1, <bang>0) ]]
         )
         vim.cmd(
+        -- + case-insensitive
+            [[ command! -bang -nargs=* ArcFindAll call fzf#vim#grep('ya tool cs -i --current-folder --max all  --color "always" -- '.shellescape(<q-args>), 1, <bang>0) ]]
+        )
+        vim.cmd(
             [[ command! -bang -nargs=* ArcFindExact call fzf#vim#grep('ya tool cs --current-folder --no-contrib --no-junk --max all -F --color "always" -- '.shellescape(<q-args>), 1, <bang>0) ]]
+        )
+        vim.cmd(
+            [[ command! -bang -nargs=* ArcFindExactAll call fzf#vim#grep('ya tool cs --current-folder --max all -F --color "always" -- '.shellescape(<q-args>), 1, <bang>0) ]]
         )
 
         -- FIXME: this uses grep format (see that period symbol before --file) and corresponding fzf command
@@ -261,6 +273,8 @@ config = {
         vim.cmd(
             [[ command DGronskiyNvimLog :execute "e " .. expand(stdpath("log")) .. "/dgronskiy_nvim.log | normal \<S-G>" ]]
         )
+
+        vim.cmd([[nnoremap <silent> z. :<C-u>normal! zszH<CR>]]) -- https://unix.stackexchange.com/a/585098
 
         vim.api.nvim_create_user_command("Cd", function(args)
             local target_dir = vim.fn.expand("%:p:h")

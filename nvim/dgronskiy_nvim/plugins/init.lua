@@ -29,7 +29,14 @@ return {
     },
     {
         "https://github.com/junegunn/fzf.vim",
-        event = "VeryLazy",
+        -- dependencies = {
+        --     "https://github.com/junegunn/fzf",
+        -- },
+        -- event = "VeryLazy",
+        -- config = function()
+        --     vim.g.fzf_vim = {}
+        --     vim.g.fzf_vim.preview_window = { "right,50%", "ctrl-/" }
+        -- end,
     },
     {
         "https://github.com/iautom8things/gitlink-vim",
@@ -39,7 +46,7 @@ return {
         "ojroques/nvim-osc52",
         event = "VeryLazy",
         config = function()
-            vim.cmd([[nnoremap  <leader>y "+y]]);
+            vim.cmd([[nnoremap  <leader>y "+y]])
             vim.cmd([[vnoremap  <leader>y "+y]]);
 
             (function()
@@ -56,8 +63,7 @@ return {
                     copy = { ["+"] = copy, ["*"] = copy },
                     paste = { ["+"] = paste, ["*"] = paste },
                 }
-            end)();
-
+            end)()
         end,
         keys = {
             -- {
@@ -86,7 +92,7 @@ return {
         "https://github.com/ggandor/leap.nvim",
         event = "VeryLazy",
         config = function()
-            require('leap').add_default_mappings()
+            require("leap").add_default_mappings()
         end,
     },
     -- ['https://github.com/ggandor/leap.nvim'] = {
@@ -141,10 +147,10 @@ return {
             defaults = {
                 extensions = {
                     fzf = {
-                        fuzzy = true, -- false will only do exact matching
+                        fuzzy = true,                   -- false will only do exact matching
                         override_generic_sorter = true, -- override the generic sorter
-                        override_file_sorter = true, -- override the file sorter
-                        case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+                        override_file_sorter = true,    -- override the file sorter
+                        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
                     },
                 },
             },
