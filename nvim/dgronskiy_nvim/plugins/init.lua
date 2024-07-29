@@ -158,5 +158,16 @@ return {
     -- },
 
     { "nvim-zh/whitespace.nvim", lazy = false },
-    { "Tastyep/structlog.nvim", lazy = false },
+    { "Tastyep/structlog.nvim",  lazy = false },
+    {
+        "zapling/mason-lock.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("mason-lock").setup({
+                -- keep this in sync with lazy lockfile setup!
+                -- lockfile_path = vim.fn.stdpath("config") .. "/mason-lock.json" -- (default)
+                lockfile_path = vim.fn.stdpath("config") .. "/lua/user/mason-lock.json",
+            })
+        end,
+    },
 }

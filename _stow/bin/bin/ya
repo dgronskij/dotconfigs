@@ -2,6 +2,6 @@
 
 set -e
 
-ARC_ROOT="$(arc root >&2)" || { ARC_ROOT=/a/trunk; echo "using ARC_ROOT=${ARC_ROOT}" ; }
+ARC_ROOT="$(arc root 2>/dev/null)" || { ARC_ROOT=/a/trunk; echo "using ARC_ROOT=${ARC_ROOT}" >&2; }
 exec "${ARC_ROOT}/ya" "$@"
 
