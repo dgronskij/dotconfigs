@@ -1,0 +1,7 @@
+{
+  "debugpy": "1.8.1",
+  "json-lsp": "4.10.0",
+  "lua-language-server": "3.9.3",
+  "pyright": "1.1.333",
+  "yaml-language-server": "1.14.0"
+}
