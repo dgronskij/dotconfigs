@@ -261,6 +261,9 @@ local config = {
         vim.cmd([[ nnoremap <Leader>fd :Find  ]])
         vim.cmd([[ nnoremap <Leader>cs :ArcFind  ]])
 
+        vim.cmd([[ nnoremap <Leader>al :ArcLink<CR> ]])
+        vim.cmd([[ vnoremap <Leader>al :ArcLink<CR> ]])
+
         vim.cmd([[
           map <Leader>dark :set background=dark<CR>
           map <Leader>light :set background=light<CR>
