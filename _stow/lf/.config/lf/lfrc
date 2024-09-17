@@ -14,3 +14,6 @@ set mouse false
 
 # use smart previewer for files instead of `less`
 map i $~/bin/lf-previewer "$f"
+
+# conformant to my vim config
+map <c-q> quit
