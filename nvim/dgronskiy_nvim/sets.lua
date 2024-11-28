@@ -59,7 +59,7 @@ options.opt = {
     -- langmap = "1!2\"3№4;5%6:7?8*9(0)-_=+йЙцЦуУкКеЕнНгГшШщЩзЗхХъЪфФыЫвВаАпПрРоОлЛдДжЖэЭ\\/яЯчЧсСмМиИтТьЬбБюЮ.,;1!2@3#4$5%6^7&8*9(0)-_=+aAsSdDfFgGhHjJkKlL;:'\"\\|zZxXcCvVbBnNmM,<.>/?"
 
 
-    shada="!,'3000,<50,s10,h", -- default is shada=!,'100,<50,s10,h
+    shada="!,'10000,<50,s10,h", -- default is shada=!,'100,<50,s10,h
 }
 
 options.g = {
