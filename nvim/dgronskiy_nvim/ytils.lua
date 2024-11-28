@@ -104,8 +104,6 @@ function M.guarded_pyright_root_directory(startpath)
     return root_dir
 end
 
-
-
 -- func! GetArcanumLink(mode)
 --     let l:root = system("arc root")
 --     let l:link = "https://a.yandex-team.ru/arc_vcs/" . expand("%:p")[len(l:root):]
@@ -118,16 +116,15 @@ end
 --     endif
 -- endf
 
-
 ---comment
 ---@return string? # nil in case of an error
 function M.GetArcRoot()
-	local stdout = vim.fn.system("arc root 2>/dev/null")
-	if vim.api.nvim_get_vvar("shell_error") ~= 0 then
-		print(stdout)
-		return
-	end
-	return stdout:gsub("\n", "")
+    local stdout = vim.fn.system("arc root 2>/dev/null")
+    if vim.api.nvim_get_vvar("shell_error") ~= 0 then
+        print(stdout)
+        return
+    end
+    return stdout:gsub("\n", "")
 end
 
 ---
@@ -135,114 +132,141 @@ end
 ---@param arc_root string
 ---@return string? # nil in case of en error
 function M.GetArcRelativePath(file_path, arc_root)
-	if string.sub(arc_root, -1, -1) ~= "/" then
-		arc_root = arc_root .. "/"
-	end
+    if string.sub(arc_root, -1, -1) ~= "/" then
+        arc_root = arc_root .. "/"
+    end
 
-	if string.sub(file_path, 1, string.len(arc_root)) ~= arc_root then
-		print(string.format("file_path [%s] is not in the repo [%s]", file_path, arc_root))
-		return
-	end
+    if string.sub(file_path, 1, string.len(arc_root)) ~= arc_root then
+        print(string.format("file_path [%s] is not in the repo [%s]", file_path, arc_root))
+        return
+    end
 
-	local file_relative_path = string.sub(file_path, string.len(arc_root) + 1)
-	return file_relative_path
+    local file_relative_path = string.sub(file_path, string.len(arc_root) + 1)
+    return file_relative_path
 end
 
 ---
 ---@return string? # nil in case of an error
 function M.GetArcHeadCommit()
-	local stdout = vim.fn.system("arc rev-parse HEAD 2>/dev/null")
-	if vim.api.nvim_get_vvar("shell_error") ~= 0 then
-		print(stdout)
-		return
-	end
+    local stdout = vim.fn.system("arc rev-parse HEAD 2>/dev/null")
+    if vim.api.nvim_get_vvar("shell_error") ~= 0 then
+        print(stdout)
+        return
+    end
 
-	return stdout:gsub("\n", "")
+    return stdout:gsub("\n", "")
 end
 
 ---comment
 ---@return string?  # nil in case of an error
 function M.GetArcanumLink(opts)
-	local url_lines_requester = (function(opts)
-		local line1, line2
-		if opts and opts.linerange then
-			line1, line2 = unpack(opts.linerange)
-		else
-			line1 = vim.api.nvim_win_get_cursor(0)[1]
-			line2 = line1
-		end
+    local url_lines_requester = (function(opts)
+        local line1, line2
+        if opts and opts.linerange then
+            line1, line2 = unpack(opts.linerange)
+        else
+            line1 = vim.api.nvim_win_get_cursor(0)[1]
+            line2 = line1
+        end
 
-		-- print(vim.inspect(line1))
+        -- print(vim.inspect(line1))
 
-		line1, line2 = math.min(line1, line2), math.max(line1, line2)
-		if line1 == line2 then
-			return "#L" .. tostring(line1)
-		else
-			return "#L" .. tostring(line1) .. "-" .. tostring(line2)
-		end
-	end)(opts)
+        line1, line2 = math.min(line1, line2), math.max(line1, line2)
+        if line1 == line2 then
+            return "#L" .. tostring(line1)
+        else
+            return "#L" .. tostring(line1) .. "-" .. tostring(line2)
+        end
+    end)(opts)
 
-	local arc_root = M.GetArcRoot()
-	if not arc_root then
-		return
-	end
+    local arc_root = M.GetArcRoot()
+    if not arc_root then
+        return
+    end
 
-	local file_path = vim.fn.expand("%:p") ---@type string
-	local file_relative_path = M.GetArcRelativePath(file_path, arc_root)
-	if not file_relative_path then
-		return
-	end
+    local file_path = vim.fn.expand("%:p") ---@type string
+    local file_relative_path = M.GetArcRelativePath(file_path, arc_root)
+    if not file_relative_path then
+        return
+    end
 
-	local revision = M.GetArcHeadCommit()
-	revision = revision and ("?rev=" .. revision) or ""
+    local revision = M.GetArcHeadCommit()
+    revision = revision and ("?rev=" .. revision) or ""
 
-	local url = "https://a.yandex-team.ru/arcadia/" .. file_relative_path .. revision .. url_lines_requester
-	return url
+    local url = "https://a.yandex-team.ru/arcadia/" .. file_relative_path .. revision .. url_lines_requester
+    return url
 
-	-- return "https://a.yandex-team.ru/arcadia/" ..  .. "#L"
-	--?rev=r14586396#L10
+    -- return "https://a.yandex-team.ru/arcadia/" ..  .. "#L"
+    --?rev=r14586396#L10
+end
+
+---@param link string
+---@return nil
+function M.ArcLinkOpen(link)
+    -- https://a.yandex-team.ru/arcadia/ads/libs/py_rearrange/__init__.py#L96
+    local prefix = "https://a.yandex-team.ru/arcadia"
 end
 
 vim.api.nvim_create_user_command("DGronskiyDebugRanges", function(opts)
-	-- tldr:
-	--  - opts.line1, opts.line2 keep last selection, not *active* one
-	--  - nvim_get_mode() always returns "n" on my tests
-	--  - range
+    -- tldr:
+    --  - opts.line1, opts.line2 keep last selection, not *active* one
+    --  - nvim_get_mode() always returns "n" on my tests
+    --  - range
 
-	-- https://github.com/neovim/neovim/discussions/26092#discussioncomment-7604883
-	-- https://tui.ninja/neovim/customizing/user_commands/creating/
-	local selection_start = vim.fn.getpos("'<")
-	local selection_end = vim.fn.getpos("'>")
-	local curpos = vim.fn.getcurpos()
+    -- https://github.com/neovim/neovim/discussions/26092#discussioncomment-7604883
+    -- https://tui.ninja/neovim/customizing/user_commands/creating/
+    local selection_start = vim.fn.getpos("'<")
+    local selection_end = vim.fn.getpos("'>")
+    local curpos = vim.fn.getcurpos()
 
-	print(vim.inspect({
-		opts = opts,
-		selection_start = selection_start,
-		selection_end = selection_end,
-		curpos = curpos,
-		mode = vim.api.nvim_get_mode(),
-	}))
+    print(vim.inspect({
+        opts = opts,
+        selection_start = selection_start,
+        selection_end = selection_end,
+        curpos = curpos,
+        mode = vim.api.nvim_get_mode(),
+    }))
 end, { force = true, range = true })
 
 vim.api.nvim_create_user_command("ArcLink", function(opts)
-	local url ---@type string?
-	local arclinkopts = {}
-	if opts.range ~= 0 then -- 0 -> no rnage, 1 -> single line, 2 -> multiline
-		arclinkopts.linerange = { opts.line1, opts.line2 }
-	end
+    local url ---@type string?
+    local arclinkopts = {}
+    if opts.range ~= 0 then -- 0 -> no rnage, 1 -> single line, 2 -> multiline
+        arclinkopts.linerange = { opts.line1, opts.line2 }
+    end
 
-	url = M.GetArcanumLink(arclinkopts)
+    url = M.GetArcanumLink(arclinkopts)
 
-	if opts.range ~= 0 then
-		vim.cmd([[norm! gv]]) -- restore visual selection
-	end
-	vim.fn.setreg("+", url)  -- copy to system clipboard
-	print(url)
+    if opts.range ~= 0 then
+        vim.cmd([[norm! gv]]) -- restore visual selection
+    end
+    vim.fn.setreg("+", url) -- copy to system clipboard
+    print(url)
 end, { force = true, range = true })
+
+vim.cmd([[au BufNewFile,BufRead,BufReadPost a.yaml set lisp]])
 
 -- vim.cmd([[nnoremap <leader>r :luafile ~/wow.lua<CR>]])
 -- -- vim.cmd([[vnoremap <leader>r :luafile ~/wow.lua<CR>]])
 -- -- vim.cmd([[vnoremap <leader>r :lua =vim.api.nvim_get_mode()<CR>]])
 -- vim.cmd([[vnoremap <leader>r :norm echo mode()<CR>]])
+
+M.arc_find_find_all = false
+
+vim.api.nvim_create_user_command("ArcFindToggleAll", function(_)
+    M.arc_find_find_all= not M.arc_find_find_all
+    print("arc_find_find_all: ", M.arc_find_find_all)
+end, { force = true, range = false })
+
+-- vim.api.nvim_create_user_command("ArcFind2", function(opts)
+-- 	local
+-- 	vim.cmd([[
+--
+-- fzf#vim#grep('ya tool cs --current-folder --no-contrib --no-junk --max all -F --color "always" -- '.shellescape(<q-args>), 1, <bang>0)
+--
+--
+--
+-- 	]])
+-- end, { force = true, range = false })
 
 return M
