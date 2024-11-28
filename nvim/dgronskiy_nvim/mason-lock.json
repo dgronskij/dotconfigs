@@ -1,4 +1,5 @@
 {
+  "clangd": "19.1.0",
   "debugpy": "1.8.1",
   "json-lsp": "4.10.0",
   "lua-language-server": "3.9.3",
