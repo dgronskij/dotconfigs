@@ -16,4 +16,13 @@ return {
             { "<leader>q", "<cmd>Bdelete<cr>", desc = "Close current buffer (:Bdelete)" },
         },
     },
+    -- {   -- misbehaves
+    --     -- https://github.com/camspiers/lens.vim
+    --     "camspiers/lens.vim",
+    --     config = function(_, _)
+    --         vim.cmd([[let g:lens#disabled = 0]])
+    --         vim.cmd([[let g:lens#animate = 0]])
+    --     end,
+    --     event = "VeryLazy",
+    -- },
 }

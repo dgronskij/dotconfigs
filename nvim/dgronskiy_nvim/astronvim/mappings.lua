@@ -72,6 +72,7 @@ mapping["n"] = {
 mapping["v"] = {
     ["<S-K>"] = { '"vy :FindExact <C-R>v<CR>', desc = "FZF: find the selection" },
     ["<leader><S-K>"] = { '"vy :ArcFind <C-R>v<CR>', desc = "Arc: find the selection" },
+    ["<leader>fa"] = { '"vy :ArcFiles <C-R>v<CR>', desc = "Search selected [F]ile in [A]rc" },
     ["<leader>/"] = { '"vy :BLines <C-R>v<CR>', desc = "FZF: buffer lines" },
     -- ["<C-j>"] = { function()
     --     -- vim.cmd [[ "vy ]] -- this doesn' work
@@ -94,6 +95,7 @@ local M_keymap = require("dgronskiy_nvim.keymap")
 
 -- greatest remap ever
 -- vim.keymap.set("x", "<leader>p", [["_dP]])
+-- vim.cmd([[vnoremap <leader>p "_dP]])
 
 -- next greatest remap ever : asbjornHaland
 -- vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])

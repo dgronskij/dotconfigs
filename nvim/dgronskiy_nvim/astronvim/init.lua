@@ -26,6 +26,8 @@ local config = {
     lsp = {
         servers = {
             "pyright",
+            "gopls",
+            "clangd",
         },
 
         -- formatting = {
@@ -193,6 +195,9 @@ local config = {
     --     },
     -- },
     polish = function()
+        vim.cmd([[ set path+=/a/trunk ]])
+
+
         vim.cmd([[ set wildmode=longest:full,full ]]) -- https://vi.stackexchange.com/a/11424/7248
 
         -- vim.cmd [[ autocmd FileType * nnoremap <nowait> <buffer> <leader>f :lua print("another one")<CR> ]]
@@ -248,7 +253,7 @@ local config = {
         --       remove -g1 (max match per file)
         vim.cmd(
         -- + case-insensitive
-            [[ command! -bang -nargs=* ArcFiles call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max 1000 --color "always" . -g1 --file '.shellescape(<q-args>), 1, <bang>0) ]]
+            [[ command! -bang -nargs=* ArcFiles call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max 5000 --color "always" . -g1 --file '.shellescape(<q-args>), 1, <bang>0) ]]
         )
         -- vim.cmd(
         -- -- + case-insensitive
@@ -293,11 +298,17 @@ local config = {
         end, { desc = "[L]ocal [C]hange [D]irectory to currently opened file" })
         vim.cmd([[nnoremap  <leader>lcd  :Lcd<CR>]])
 
+        vim.cmd([[nnoremap  <leader>cda :cd $A \| :pwd<CR>]])
+
         vim.cmd([[ vnoremap > >gv ]])
         vim.cmd([[ vnoremap < <gv ]])
 
         vim.cmd([[nnoremap  <leader>t<CR>  :Tags '<C-R><C-W> <CR>]])
         vim.cmd([[vnoremap  <leader>t<CR> "vy :Tags '<C-R>v <CR>]])
+
+        -- greatest remap ever
+        -- -- vim.keymap.set("x", "<leader>p", [["_dP]])
+        vim.cmd([[vnoremap <leader>p "_dP]])
 
         -- ["<S-Tab>"] = { "<gv", desc = "Unindent line" },
         -- ["<Tab>"] = { ">gv", desc = "Indent line" },
@@ -351,13 +362,15 @@ local config = {
 
                 vim.opt.langmap = vim.fn.join({
                     -- | `to` should be first     | `from` should be second
-                    escape(ru_shift) .. ';' .. escape(en_shift),
-                    escape(ru) .. ';' .. escape(en),
-                }, ',')
+                    escape(ru_shift)
+                    .. ";"
+                    .. escape(en_shift),
+                    escape(ru) .. ";" .. escape(en),
+                }, ",")
 
                 vim.opt.keymap = "russian-jcukenwin" -- https://neovim.io/doc/user/russian.html
                 vim.opt.iminsert = 0                 -- english by default
-            end)();
+            end)()
         end
 
         vim.lsp.set_log_level("info")
