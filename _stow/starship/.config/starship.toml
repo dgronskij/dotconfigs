@@ -1,0 +1,5 @@
+# https://starship.rs/config/
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+scan_timeout = 10  # otherwise in /a/trunk
