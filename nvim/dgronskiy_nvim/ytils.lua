@@ -258,15 +258,96 @@ vim.api.nvim_create_user_command("ArcFindToggleAll", function(_)
     print("arc_find_find_all: ", M.arc_find_find_all)
 end, { force = true, range = false })
 
--- vim.api.nvim_create_user_command("ArcFind2", function(opts)
--- 	local
--- 	vim.cmd([[
+
+-- TODO refactor, this is 100% AI generated
 --
--- fzf#vim#grep('ya tool cs --current-folder --no-contrib --no-junk --max all -F --color "always" -- '.shellescape(<q-args>), 1, <bang>0)
+-- Write a code in lua that given a https link, parses out
+-- - scheme
+-- - hostname
+-- - path
+-- - query string parameters as a table
+-- - anchor after optional hash symbol
 --
+-- both query parameters and anchor are optional
 --
---
--- 	]])
--- end, { force = true, range = false })
+-- your code gives wrong result when query parameters are empty and anchor is present in the url
+local function parseUrl(url)
+	local parsedUrl = {
+		scheme = nil,
+		hostname = nil,
+		path = nil,
+		queryParameters = {},
+		anchor = nil,
+	}
+
+	-- Extract scheme
+	parsedUrl.scheme, url = url:match("^(https?)://(.+)$")
+
+	-- Extract hostname
+	parsedUrl.hostname, url = url:match("^([^/]+)(.*)$")
+
+	-- Extract path before query string or anchor
+	parsedUrl.path, url = url:match("^([^?#]*)(.*)$")
+
+	-- Attempt to separate query string and anchor
+	local queryString, anchorStart = url:match("^%?(.*)$")
+	if queryString then
+		-- Check for the presence of an anchor within the query string
+		local anchorIndex = queryString:find("#")
+		if anchorIndex then
+			anchorStart = queryString:sub(anchorIndex + 1)
+			queryString = queryString:sub(1, anchorIndex - 1)
+		else
+			anchorStart = nil
+		end
+	else
+		-- No query string, check for anchor directly in the remaining URL
+		anchorStart = url:match("^#(.*)$")
+	end
+
+	-- Parse query string into a table, if it exists
+	if queryString then
+		for key, value in queryString:gmatch("([^&=?]+)=([^&=?]*)") do
+			parsedUrl.queryParameters[key] = value
+		end
+	end
+
+	-- Assign the anchor if it exists
+	parsedUrl.anchor = anchorStart ~= "" and anchorStart or nil
+
+	return parsedUrl
+end
+
+vim.api.nvim_create_user_command("ArcE", function(opts)
+	local url = opts.args -- # https://a.yandex-team.ru/arcadia/ads/emily/storage/client/py/cli.py?rev=r15240293#L15
+
+	local parsed_url = parseUrl(url)
+	local path_with_prefix = parsed_url.path
+	local line_anchor = parsed_url.anchor
+
+    local prefix = "/arcadia/"
+	local prefix_length = #prefix
+
+	local final_path = nil
+
+	if path_with_prefix:sub(1, prefix_length) == prefix then
+		-- Remove the prefix by returning the substring starting after the prefix
+		final_path = path_with_prefix:sub(prefix_length + 1)
+	else
+	    print("Error")
+	    return
+	end
+
+    local cmd_goto_line_part = ""
+	if line_anchor ~= nil then
+	    cmd_goto_line_part = "+" .. line_anchor:sub(2)
+	end
+
+	local cmd = ":e " .. cmd_goto_line_part .. "  " .. "$A/" .. final_path
+
+    vim.cmd(cmd)
+
+	-- print(vim.inspect(parsed_url))
+end, { force = true, nargs = 1, range = false })
 
 return M

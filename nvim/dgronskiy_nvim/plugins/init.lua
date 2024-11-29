@@ -34,8 +34,10 @@ return {
         },
         event = "VeryLazy",
         config = function()
+            -- https://thevaluable.dev/fzf-vim-integration/
             vim.g.fzf_vim = {}
-            vim.g.fzf_vim.preview_window = { "right,50%", "ctrl-/" }
+            vim.g.fzf_vim.preview_window = { "right,10%", "ctrl-/" }
+            vim.g.fzf_layout = { window = { width = 0.95, height = 0.95 } }
         end,
     },
     {
@@ -48,7 +50,6 @@ return {
         config = function()
             vim.cmd([[nnoremap  <leader>y "+y]])
             vim.cmd([[vnoremap  <leader>y "+y]]);
-
             (function()
                 local function copy(lines, _)
                     require("osc52").copy(table.concat(lines, "\n"))
