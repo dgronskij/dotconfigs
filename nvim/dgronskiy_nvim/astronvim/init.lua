@@ -310,6 +310,24 @@ local config = {
         -- -- vim.keymap.set("x", "<leader>p", [["_dP]])
         vim.cmd([[vnoremap <leader>p "_dP]])
 
+        vim.api.nvim_create_user_command("CopyFileName", function(opts)
+            local file_path = vim.fn.expand("%") ---@type string
+            vim.fn.setreg("+", file_path) -- copy to system clipboard
+            print("Copied filename: ", file_path)
+        end, { force = true, range = true })
+        vim.cmd([[nnoremap <leader>cfn <cmd>CopyFileName<CR>]])
+
+        vim.api.nvim_create_user_command("CopyFQN", function(opts)
+            local word_under_cursor = vim.fn.expand("<cword>")
+            local module_path = vim.fn.expand("%:r") ---@type string
+            local module_path = require("textcase").api.to_dot_case(module_path)
+
+            local res = module_path .. "." .. word_under_cursor
+            vim.fn.setreg("+", res) -- copy to system clipboard
+            print("Copied FQN: ", res)
+        end, { force = true, range = true })
+        vim.cmd([[nnoremap <leader>cfqn <cmd>CopyFQN<CR>]])
+
         -- ["<S-Tab>"] = { "<gv", desc = "Unindent line" },
         -- ["<Tab>"] = { ">gv", desc = "Indent line" },
 
