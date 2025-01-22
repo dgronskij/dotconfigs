@@ -1,8 +1,7 @@
 {
-  "clangd": "19.1.0",
-  "debugpy": "1.8.1",
+  "clangd": "19.1.2",
   "json-lsp": "4.10.0",
-  "lua-language-server": "3.9.3",
-  "pyright": "1.1.333",
-  "yaml-language-server": "1.14.0"
+  "lua-language-server": "3.13.5",
+  "pyright": "1.1.392",
+  "yaml-language-server": "1.15.0"
 }
