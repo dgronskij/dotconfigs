@@ -72,8 +72,8 @@ function M.guarded_pyright_root_directory(startpath)
         root_dir = util.root_pattern("pyrightconfig.json")(startpath)
     else
         -- use default from here
-        -- https://github.com/neovim/nvim-lspconfig/tree/bfdf2e91e7297a54bcc09d3e092a12bff69a1cf4/lua/lspconfig/server_configurations/pyright.lua#L36
-        root_dir = require("lspconfig.server_configurations.pyright").default_config.root_dir(startpath)
+        -- https://github.com/neovim/nvim-lspconfig/blob/d1871c84b218931cc758dbbde1fec8e90c6d465c/lua/lspconfig/configs/pyright.lua#L47
+        root_dir = require("lspconfig.configs.pyright").default_config.root_dir(startpath)
     end
     log_events.root_dir_inferred = or_NIL(root_dir)
 
@@ -349,5 +349,9 @@ vim.api.nvim_create_user_command("ArcE", function(opts)
 
 	-- print(vim.inspect(parsed_url))
 end, { force = true, nargs = 1, range = false })
+
+vim.api.nvim_create_user_command("Yab", function(opts)
+    vim.cmd([[!ya tool black --config /a/trunk/build/config/tests/py_style/config.toml expand(%)]])
+end, { force = true, nargs = 0, range = false})
 
 return M
