@@ -24,6 +24,43 @@ return {
     --     config = function() require "lsp_signature".setup() end,
     -- },
     {
+        "folke/trouble.nvim",
+        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        cmd = "Trouble",
+        keys = {
+            {
+                "<leader>xx",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Diagnostics (Trouble)",
+            },
+            {
+                "<leader>xX",
+                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+                desc = "Buffer Diagnostics (Trouble)",
+            },
+            {
+                "<leader>cs",
+                "<cmd>Trouble symbols toggle focus=false<cr>",
+                desc = "Symbols (Trouble)",
+            },
+            {
+                "<leader>cl",
+                "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+                desc = "LSP Definitions / references / ... (Trouble)",
+            },
+            {
+                "<leader>xL",
+                "<cmd>Trouble loclist toggle<cr>",
+                desc = "Location List (Trouble)",
+            },
+            {
+                "<leader>xQ",
+                "<cmd>Trouble qflist toggle<cr>",
+                desc = "Quickfix List (Trouble)",
+            },
+        },
+    },
+    {
         "https://github.com/junegunn/fzf",
         event = "VeryLazy",
     },
@@ -36,7 +73,15 @@ return {
         config = function()
             -- https://thevaluable.dev/fzf-vim-integration/
             vim.g.fzf_vim = {}
-            vim.g.fzf_vim.preview_window = { "right,10%", "ctrl-/" }
+            vim.g.fzf_vim.preview_window = {'hidden,right,50%,<70(up,40%)', 'ctrl-p'}
+            vim.g.fzf_preview_window = {'hidden,right,50%,<70(up,40%)', 'ctrl-p'}
+            vim.g.fzf_dgronskiy_dict = {
+                options = '--bind "ctrl-j:down,ctrl-k:up"',
+            }
+
+            -- vim.g.fzf_vim.preview_window = { "right,10%", "ctrl-/" }
+            -- vim.g.fzf_vim.preview_window = { "right,10%", "ctrl-?" }
+            -- vim.g.fzf_preview_window = { "right,10%", "ctrl-?" }
             vim.g.fzf_layout = { window = { width = 0.95, height = 0.95 } }
         end,
     },
@@ -186,17 +231,17 @@ return {
             multiline_threshold = 1,
             mode = "topline",
         },
-        keys = {
-            {
-                "[c",
-                function()
-                    require("treesitter-context").go_to_context(vim.v.count1)
-                end,
-                mode = "n",
-                desc = "treesitter-context: jump to context (upwards)",
-                silent = true,
-            },
-        },
+        -- keys = {
+        --     { -- conflicts with :cprev mapping
+        --         "[c",
+        --         function()
+        --             require("treesitter-context").go_to_context(vim.v.count1)
+        --         end,
+        --         mode = "n",
+        --         desc = "treesitter-context: jump to context (upwards)",
+        --         silent = true,
+        --     },
+        -- },
     },
     { -- https://github.com/theHamsta/crazy-node-movement
         "theHamsta/crazy-node-movement",
