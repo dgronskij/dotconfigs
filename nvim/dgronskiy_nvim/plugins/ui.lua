@@ -6,6 +6,12 @@ return {
         priority = 1000,
     },
     {
+        -- https://github.com/pustota-theme/pustota.nvim
+        "pustota-theme/pustota.nvim",
+        lazy = false,
+        priority = 1000,
+    },
+    {
         "rose-pine/neovim",
         name = "rose-pine",
     },
