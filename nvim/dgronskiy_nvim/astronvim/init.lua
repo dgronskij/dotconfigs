@@ -56,7 +56,9 @@ local config = {
 			format_on_save = {
 				enable = false,
 			},
-			disabled = {},
+			disabled = {
+				"lua_ls", -- prefer stylua
+			},
 		},
 		mappings = function(astronvim_defaults)
 			-- see  lua/core/utils/lsp.lua
@@ -86,7 +88,16 @@ local config = {
 					return capabilities
 				end)(),
 			},
-			gopls = { autostart = false },
+			gopls = {
+				autostart = true,
+				cmd = { "ya", "tool", "gopls" },
+				settings = {
+					gopls = {
+						-- directoryFilters = { "-", "+[ваша папка]" },
+						expandWorkspaceToModule = false,
+					},
+				},
+			},
 		},
 	},
 	diagnostics = {
@@ -166,7 +177,7 @@ local config = {
 	--             null_ls.builtins.diagnostics.flake8,
 	--             -- null_ls.builtins.diagnostics.pyproject_flake8,
 	--             null_ls.builtins.diagnostics.mypy,
-	--             -- null_ls.builtins.diagnostics.pycodestyle,
+	-- null_ls.builtins.diagnostics.pycodestyle,
 	--             -- null_ls.builtins.diagnostics.pydocstyle,
 	--             -- null_ls.builtins.diagnostics.pylint,
 	-- null_ls.builtins.formatting.black,
@@ -231,11 +242,11 @@ local config = {
 		)
 
 		vim.cmd(
-		-- + case-insensitive
+			-- + case-insensitive
 			[[ command! -bang -nargs=* ArcFind call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max all  --color "always" -- '.shellescape(<q-args>), 1, <bang>0) ]]
 		)
 		vim.cmd(
-		-- + case-insensitive
+			-- + case-insensitive
 			[[ command! -bang -nargs=* ArcFindAll call fzf#vim#grep('ya tool cs -i --current-folder --max all  --color "always" -- '.shellescape(<q-args>), 1, <bang>0) ]]
 		)
 		vim.cmd(
@@ -252,7 +263,7 @@ local config = {
 		-- TODO: remove `.` search pattern
 		--       remove -g1 (max match per file)
 		vim.cmd(
-		-- + case-insensitive
+			-- + case-insensitive
 			[[ command! -bang -nargs=* ArcFiles call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max 5000 --color "always" . -g1 --file '.shellescape(<q-args>), 1, <bang>0) ]]
 		)
 		-- vim.cmd(
@@ -381,46 +392,46 @@ local config = {
 				vim.opt.langmap = vim.fn.join({
 					-- | `to` should be first     | `from` should be second
 					escape(ru_shift)
-					.. ";"
-					.. escape(en_shift),
+						.. ";"
+						.. escape(en_shift),
 					escape(ru) .. ";" .. escape(en),
 				}, ",")
 
 				vim.opt.keymap = "russian-jcukenwin" -- https://neovim.io/doc/user/russian.html
-				vim.opt.iminsert = 0                 -- english by default
+				vim.opt.iminsert = 0 -- english by default
 			end)()
 		end
 
 		if true then
 			(function()
-				local lasso = require("lasso")
-				lasso.setup({
-					marks_tracker_path = "/home/dgronskiy/vims/.lasso-marks",
-				})
-
-				-- Mark current file
-				vim.keymap.set("n", vim.g.mapleader .. "m", function()
-					lasso.mark_file()
-				end)
-
-				-- Go to marks tracker (editable, use `gf` to go to file under cursor)
-				vim.keymap.set("n", vim.g.mapleader .. "M", function()
-					lasso.open_marks_tracker()
-				end)
-
-				-- Jump to n-th marked file (n-th line of marks tracker)
-				vim.keymap.set("n", vim.g.mapleader .. "1", function()
-					lasso.open_marked_file(1)
-				end)
-				vim.keymap.set("n", vim.g.mapleader .. "2", function()
-					lasso.open_marked_file(2)
-				end)
-				vim.keymap.set("n", vim.g.mapleader .. "3", function()
-					lasso.open_marked_file(3)
-				end)
-				vim.keymap.set("n", vim.g.mapleader .. "4", function()
-					lasso.open_marked_file(4)
-				end)
+				-- local lasso = require("lasso")
+				-- lasso.setup({
+				-- 	marks_tracker_path = "/home/dgronskiy/vims/.lasso-marks",
+				-- })
+				--
+				-- -- Mark current file
+				-- vim.keymap.set("n", vim.g.mapleader .. "m", function()
+				-- 	lasso.mark_file()
+				-- end)
+				--
+				-- -- Go to marks tracker (editable, use `gf` to go to file under cursor)
+				-- vim.keymap.set("n", vim.g.mapleader .. "M", function()
+				-- 	lasso.open_marks_tracker()
+				-- end)
+				--
+				-- -- Jump to n-th marked file (n-th line of marks tracker)
+				-- vim.keymap.set("n", vim.g.mapleader .. "1", function()
+				-- 	lasso.open_marked_file(1)
+				-- end)
+				-- vim.keymap.set("n", vim.g.mapleader .. "2", function()
+				-- 	lasso.open_marked_file(2)
+				-- end)
+				-- vim.keymap.set("n", vim.g.mapleader .. "3", function()
+				-- 	lasso.open_marked_file(3)
+				-- end)
+				-- vim.keymap.set("n", vim.g.mapleader .. "4", function()
+				-- 	lasso.open_marked_file(4)
+				-- end)
 			end)()
 		end
 
