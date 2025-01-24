@@ -51,7 +51,7 @@ options.opt = {
     -- Don't pass messages to |ins-completion-menu|.
     -- vim.opt.shortmess:append("c"),
 
-    colorcolumn = "80",
+    colorcolumn = "120",
 
     -- https://dracoater.github.io/2020/03/vim-langmap
     -- langmap = "йЙцЦуУкКеЕнНгГшШщЩзЗхХъЪфФыЫвВаАпПрРоОлЛдДжЖэЭяЯчЧсСмМиИтТьЬбБюЮ.\\,;qQwWeErRtTyYuUiIoOpP[{]}aAsSdDfFgGhHjJkKlL;:'\"zZxXcCvVbBnNmM\\,<.>/?"
