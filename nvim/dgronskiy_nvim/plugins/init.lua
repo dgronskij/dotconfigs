@@ -73,8 +73,8 @@ return {
         config = function()
             -- https://thevaluable.dev/fzf-vim-integration/
             vim.g.fzf_vim = {}
-            vim.g.fzf_vim.preview_window = {'hidden,right,50%,<70(up,40%)', 'ctrl-p'}
-            vim.g.fzf_preview_window = {'hidden,right,50%,<70(up,40%)', 'ctrl-p'}
+            vim.g.fzf_vim.preview_window = { "hidden,right,50%,<70(up,40%)", "ctrl-p" }
+            vim.g.fzf_preview_window = { "hidden,right,50%,<70(up,40%)", "ctrl-p" }
             vim.g.fzf_dgronskiy_dict = {
                 options = '--bind "ctrl-j:down,ctrl-k:up"',
             }
@@ -141,6 +141,10 @@ return {
             require("leap").add_default_mappings()
         end,
     },
+    {
+        "https://github.com/niqodea/lasso.nvim",
+        event = "VeryLazy",
+    },
     -- ['https://github.com/ggandor/leap.nvim'] = {
     --     config = function()
     --         require('leap').add_default_mappings()
@@ -193,10 +197,10 @@ return {
             defaults = {
                 extensions = {
                     fzf = {
-                        fuzzy = true, -- false will only do exact matching
+                        fuzzy = true,                   -- false will only do exact matching
                         override_generic_sorter = true, -- override the generic sorter
-                        override_file_sorter = true, -- override the file sorter
-                        case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+                        override_file_sorter = true,    -- override the file sorter
+                        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
                     },
                 },
             },
@@ -210,7 +214,7 @@ return {
     -- },
 
     { "nvim-zh/whitespace.nvim", lazy = false },
-    { "Tastyep/structlog.nvim", lazy = false },
+    { "Tastyep/structlog.nvim",  lazy = false },
     {
         "zapling/mason-lock.nvim",
         event = "VeryLazy",
@@ -261,7 +265,7 @@ return {
                     },
                     swappable_textobjects = { "@function.outer", "@parameter.inner", "@statement.outer" },
                     allow_switch_parents = true, -- more craziness by switching parents while staying on the same level, false prevents you from accidentally jumping out of a function
-                    allow_next_parent = true, -- more craziness by going up one level if next node does not have children
+                    allow_next_parent = true,    -- more craziness by going up one level if next node does not have children
                 },
             })
         end,
@@ -269,6 +273,9 @@ return {
     {
         "mogelbrod/vim-jsonpath",
         event = "VeryLazy",
+        opts = {
+            marks_tracker_path = "/a/trunk/.lasso-marks-tracker",
+        },
     },
     { -- https://github.com/johmsalas/text-case.nvim?tab=readme-ov-file#example-for-lazyvim
         "johmsalas/text-case.nvim",

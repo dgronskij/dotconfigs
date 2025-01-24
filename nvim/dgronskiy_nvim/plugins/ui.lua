@@ -19,8 +19,12 @@ return {
         "famiu/bufdelete.nvim",
         cmd = { "Bdelete" },
         keys = {
-            { "<leader>q", "<cmd>Bdelete<cr>", desc = "Close current buffer (:Bdelete)" },
+            { "<leader>q", "<cmd>bdelete<cr>", desc = "close current buffer (:bdelete)" },
         },
+    },
+    {
+        "norcalli/nvim-colorizer.lua",
+        event = "VeryLazy",
     },
     -- {   -- misbehaves
     --     -- https://github.com/camspiers/lens.vim
