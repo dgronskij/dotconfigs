@@ -254,10 +254,9 @@ vim.cmd([[au BufNewFile,BufRead,BufReadPost a.yaml set lisp]])
 M.arc_find_find_all = false
 
 vim.api.nvim_create_user_command("ArcFindToggleAll", function(_)
-    M.arc_find_find_all= not M.arc_find_find_all
+    M.arc_find_find_all = not M.arc_find_find_all
     print("arc_find_find_all: ", M.arc_find_find_all)
 end, { force = true, range = false })
-
 
 -- TODO refactor, this is 100% AI generated
 --
@@ -272,86 +271,91 @@ end, { force = true, range = false })
 --
 -- your code gives wrong result when query parameters are empty and anchor is present in the url
 local function parseUrl(url)
-	local parsedUrl = {
-		scheme = nil,
-		hostname = nil,
-		path = nil,
-		queryParameters = {},
-		anchor = nil,
-	}
+    local parsedUrl = {
+        scheme = nil,
+        hostname = nil,
+        path = nil,
+        queryParameters = {},
+        anchor = nil,
+    }
 
-	-- Extract scheme
-	parsedUrl.scheme, url = url:match("^(https?)://(.+)$")
+    -- Extract scheme
+    parsedUrl.scheme, url = url:match("^(https?)://(.+)$")
 
-	-- Extract hostname
-	parsedUrl.hostname, url = url:match("^([^/]+)(.*)$")
+    -- Extract hostname
+    parsedUrl.hostname, url = url:match("^([^/]+)(.*)$")
 
-	-- Extract path before query string or anchor
-	parsedUrl.path, url = url:match("^([^?#]*)(.*)$")
+    -- Extract path before query string or anchor
+    parsedUrl.path, url = url:match("^([^?#]*)(.*)$")
 
-	-- Attempt to separate query string and anchor
-	local queryString, anchorStart = url:match("^%?(.*)$")
-	if queryString then
-		-- Check for the presence of an anchor within the query string
-		local anchorIndex = queryString:find("#")
-		if anchorIndex then
-			anchorStart = queryString:sub(anchorIndex + 1)
-			queryString = queryString:sub(1, anchorIndex - 1)
-		else
-			anchorStart = nil
-		end
-	else
-		-- No query string, check for anchor directly in the remaining URL
-		anchorStart = url:match("^#(.*)$")
-	end
+    -- Attempt to separate query string and anchor
+    local queryString, anchorStart = url:match("^%?(.*)$")
+    if queryString then
+        -- Check for the presence of an anchor within the query string
+        local anchorIndex = queryString:find("#")
+        if anchorIndex then
+            anchorStart = queryString:sub(anchorIndex + 1)
+            queryString = queryString:sub(1, anchorIndex - 1)
+        else
+            anchorStart = nil
+        end
+    else
+        -- No query string, check for anchor directly in the remaining URL
+        anchorStart = url:match("^#(.*)$")
+    end
 
-	-- Parse query string into a table, if it exists
-	if queryString then
-		for key, value in queryString:gmatch("([^&=?]+)=([^&=?]*)") do
-			parsedUrl.queryParameters[key] = value
-		end
-	end
+    -- Parse query string into a table, if it exists
+    if queryString then
+        for key, value in queryString:gmatch("([^&=?]+)=([^&=?]*)") do
+            parsedUrl.queryParameters[key] = value
+        end
+    end
 
-	-- Assign the anchor if it exists
-	parsedUrl.anchor = anchorStart ~= "" and anchorStart or nil
+    -- Assign the anchor if it exists
+    parsedUrl.anchor = anchorStart ~= "" and anchorStart or nil
 
-	return parsedUrl
+    return parsedUrl
 end
 
 vim.api.nvim_create_user_command("ArcE", function(opts)
-	local url = opts.args -- # https://a.yandex-team.ru/arcadia/ads/emily/storage/client/py/cli.py?rev=r15240293#L15
+    local url = opts.args -- # https://a.yandex-team.ru/arcadia/ads/emily/storage/client/py/cli.py?rev=r15240293#L15
 
-	local parsed_url = parseUrl(url)
-	local path_with_prefix = parsed_url.path
-	local line_anchor = parsed_url.anchor
+    local parsed_url = parseUrl(url)
+    local path_with_prefix = parsed_url.path
+    local line_anchor = parsed_url.anchor
 
     local prefix = "/arcadia/"
-	local prefix_length = #prefix
+    local prefix_length = #prefix
 
-	local final_path = nil
+    local final_path = nil
 
-	if path_with_prefix:sub(1, prefix_length) == prefix then
-		-- Remove the prefix by returning the substring starting after the prefix
-		final_path = path_with_prefix:sub(prefix_length + 1)
-	else
-	    print("Error")
-	    return
-	end
+    if path_with_prefix:sub(1, prefix_length) == prefix then
+        -- Remove the prefix by returning the substring starting after the prefix
+        final_path = path_with_prefix:sub(prefix_length + 1)
+    else
+        print("Error")
+        return
+    end
 
     local cmd_goto_line_part = ""
-	if line_anchor ~= nil then
-	    cmd_goto_line_part = "+" .. line_anchor:sub(2)
-	end
+    if line_anchor ~= nil then
+        cmd_goto_line_part = "+" .. line_anchor:sub(2)
+    end
 
-	local cmd = ":e " .. cmd_goto_line_part .. "  " .. "$A/" .. final_path
+    local cmd = ":e " .. cmd_goto_line_part .. "  " .. "$A/" .. final_path
 
     vim.cmd(cmd)
 
-	-- print(vim.inspect(parsed_url))
+    -- print(vim.inspect(parsed_url))
 end, { force = true, nargs = 1, range = false })
 
 vim.api.nvim_create_user_command("Yab", function(opts)
     vim.cmd([[!ya tool black --config /a/trunk/build/config/tests/py_style/config.toml expand(%)]])
-end, { force = true, nargs = 0, range = false})
+end, { force = true, nargs = 0, range = false })
+
+-- vim.api.nvim_create_user_command("Ymypy", function(opts)
+--     -- :execute '!rm /a/trunk/mypy.report &>/dev/null ; /data/a/trunk/junk/dgronskiy/by_task/dgronskiy_10_mypy/mypy.sh mypy --hide-error-codes --hide-error-context --no-color-output --show-absolute-path --show-column-numbers --show-error-codes --no-error-summary --no-pretty --follow-imports=silent % > /a/trunk/mypy.report || true' | cfile /a/trunk/mypy.report
+--     vim.cmd()
+-- end, { force = true, nargs = 0, range = false})
 
 return M
