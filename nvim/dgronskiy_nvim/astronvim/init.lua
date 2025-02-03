@@ -139,25 +139,25 @@ local config = {
         vim.cmd([[ command GitLink :echo gitlink#GitLink() ]])
 
         vim.cmd(
-            [[ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]]
+            [[ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
         )
         vim.cmd(
-            [[ command! -bang -nargs=* FindExact call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]]
+            [[ command! -bang -nargs=* FindExact call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
         )
 
         vim.cmd(
             -- + case-insensitive
-            [[ command! -bang -nargs=* ArcFind call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max all  --color "always" -- '.shellescape(<q-args>), 1, <bang>0) ]]
+            [[ command! -bang -nargs=* ArcFind call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max all  --color "always" -- '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
         )
         vim.cmd(
             -- + case-insensitive
-            [[ command! -bang -nargs=* ArcFindAll call fzf#vim#grep('ya tool cs -i --current-folder --max all  --color "always" -- '.shellescape(<q-args>), 1, <bang>0) ]]
+            [[ command! -bang -nargs=* ArcFindAll call fzf#vim#grep('ya tool cs -i --current-folder --max all  --color "always" -- '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
         )
         vim.cmd(
-            [[ command! -bang -nargs=* ArcFindExact call fzf#vim#grep('ya tool cs --current-folder --no-contrib --no-junk --max all -F --color "always" -- '.shellescape(<q-args>), 1, <bang>0) ]]
+            [[ command! -bang -nargs=* ArcFindExact call fzf#vim#grep('ya tool cs --current-folder --no-contrib --no-junk --max all -F --color "always" -- '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
         )
         vim.cmd(
-            [[ command! -bang -nargs=* ArcFindExactAll call fzf#vim#grep('ya tool cs --current-folder --max all -F --color "always" -- '.shellescape(<q-args>), 1, <bang>0) ]]
+            [[ command! -bang -nargs=* ArcFindExactAll call fzf#vim#grep('ya tool cs --current-folder --max all -F --color "always" -- '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
         )
 
         -- FIXME: this uses grep format (see that period symbol before --file) and corresponding fzf command
@@ -168,11 +168,11 @@ local config = {
         --       remove -g1 (max match per file)
         vim.cmd(
             -- + case-insensitive
-            [[ command! -bang -nargs=* ArcFiles call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max 5000 --color "always" . -g1 --file '.shellescape(<q-args>), 1, <bang>0) ]]
+            [[ command! -bang -nargs=* ArcFiles call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max 5000 --color "always" . -g1 --file '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
         )
         -- vim.cmd(
         -- -- + case-insensitive
-        --     [[ command! -bang -nargs=* ProjectFiles call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, <bang>0) ]]
+        --     [[ command! -bang -nargs=* ProjectFiles call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
         -- )
 
         vim.cmd([[ vnoremap <Leader>cat :'<,'>w !tee<CR> ]])
