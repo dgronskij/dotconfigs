@@ -353,6 +353,14 @@ vim.api.nvim_create_user_command("Yab", function(opts)
     vim.cmd([[!ya tool black --config /a/trunk/build/config/tests/py_style/config.toml expand(%)]])
 end, { force = true, nargs = 0, range = false })
 
+vim.api.nvim_create_user_command("Ymypy", function(opts)
+    local arg = opts.args or vim.fn.expand("%")
+    local cmd=[['!]] .. [[run_arc_mypy ]] .. arg .. [[']]
+    vim.cmd([[execute ]] .. cmd)
+    vim.cmd([[cfile ~/vims/qf.mypy ]])
+    vim.cmd([[copen]])
+end, { force = true, nargs = "*", range = false })
+
 -- vim.api.nvim_create_user_command("Ymypy", function(opts)
 --     -- :execute '!rm /a/trunk/mypy.report &>/dev/null ; /data/a/trunk/junk/dgronskiy/by_task/dgronskiy_10_mypy/mypy.sh mypy --hide-error-codes --hide-error-context --no-color-output --show-absolute-path --show-column-numbers --show-error-codes --no-error-summary --no-pretty --follow-imports=silent % > /a/trunk/mypy.report || true' | cfile /a/trunk/mypy.report
 --     vim.cmd()
