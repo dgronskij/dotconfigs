@@ -8,6 +8,9 @@
 [includeIf "gitdir:~/src/84.201.166.216/"]
     path = ~/.dotfiles/git/gitconfig_user.aim2024
 
+[includeIf "gitdir:~/src/aim-python.ru/"]
+    path = ~/.dotfiles/git/gitconfig_user.aim2024
+
 [push]
     default = current
 [core]
@@ -16,6 +19,7 @@
 	#exludesfile = /home/dgronsky/.git
 [alias]
     w = worktree
+    st = status
     sun = status -uno
     ls = log --graph --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate
     g = grep -n
