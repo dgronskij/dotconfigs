@@ -177,9 +177,9 @@ local config = {
 
         vim.cmd([[ vnoremap <Leader>cat :'<,'>w !tee<CR> ]])
 
-        vim.cmd([[ nnoremap <Leader>find :Find  ]])
-        vim.cmd([[ nnoremap <Leader>fd :Find  ]])
-        vim.cmd([[ nnoremap <Leader>cs :ArcFind  ]])
+        vim.cmd([[ nnoremap <Leader>find :Find ]])
+        vim.cmd([[ nnoremap <Leader>fd :Find ]])
+        vim.cmd([[ nnoremap <Leader>cs :ArcFind ]])
 
         vim.cmd([[ nnoremap <Leader>al :ArcLink<CR> ]])
         vim.cmd([[ vnoremap <Leader>al :ArcLink<CR> ]])

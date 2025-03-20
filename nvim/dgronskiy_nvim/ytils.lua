@@ -355,7 +355,7 @@ end, { force = true, nargs = 0, range = false })
 
 vim.api.nvim_create_user_command("Ymypy", function(opts)
     local arg = opts.args or vim.fn.expand("%")
-    local cmd=[['!]] .. [[run_arc_mypy ]] .. arg .. [[']]
+    local cmd = [['!]] .. [[run_arc_mypy ]] .. arg .. [[']]
     vim.cmd([[execute ]] .. cmd)
     vim.cmd([[cfile ~/vims/qf.mypy ]])
     vim.cmd([[copen]])
@@ -365,5 +365,17 @@ end, { force = true, nargs = "*", range = false })
 --     -- :execute '!rm /a/trunk/mypy.report &>/dev/null ; /data/a/trunk/junk/dgronskiy/by_task/dgronskiy_10_mypy/mypy.sh mypy --hide-error-codes --hide-error-context --no-color-output --show-absolute-path --show-column-numbers --show-error-codes --no-error-summary --no-pretty --follow-imports=silent % > /a/trunk/mypy.report || true' | cfile /a/trunk/mypy.report
 --     vim.cmd()
 -- end, { force = true, nargs = 0, range = false})
+
+vim.api.nvim_create_user_command("ArcFindSb", function(opts)
+    local arg = opts.args
+    -- local arg = vim.fn.expand("<cword>")
+    local dotted_word = require("textcase").api.to_dot_case(arg)
+    print(vim.inspect(dotted_word))
+    -- local dotted_word = string.gsub(dotted_word, "%.", ".*")
+    local dotted_word = string.gsub(dotted_word, "%.", ".?")
+    print(vim.inspect(dotted_word))
+
+    vim.cmd("ArcFind " .. dotted_word)
+end, { force = true, nargs = 1, range = false })
 
 return M
