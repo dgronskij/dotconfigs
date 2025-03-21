@@ -9,7 +9,7 @@
     path = ~/.dotfiles/git/gitconfig_user.aim2024
 
 [includeIf "gitdir:~/src/aim-python.ru/"]
-    path = ~/.dotfiles/git/gitconfig_user.aim2024
+    path = ~/.dotfiles/git/gitconfig_user.aim2025
 
 [push]
     default = current
