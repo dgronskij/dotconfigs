@@ -14,6 +14,7 @@
   "crazy-node-movement": { "branch": "master", "commit": "d5cf01cc44c5715501d3d6fe439af7c8b7fa5df2" },
   "dressing.nvim": { "branch": "master", "commit": "71349f24c6e07b39f33600985843c289ca735308" },
   "editorconfig-vim": { "branch": "master", "commit": "3c2813f2566d9392ff3614248c5db43c3fda9d5f" },
+  "flash.nvim": { "branch": "main", "commit": "3c942666f115e2811e959eabbdd361a025db8b63" },
   "friendly-snippets": { "branch": "main", "commit": "ebf6d6e83494cdd88a54a429340256f4dbb6a052" },
   "fzf": { "branch": "master", "commit": "578108280e081c9996eb7df578aac4e1dd1a6f94" },
   "fzf.vim": { "branch": "master", "commit": "556f45e79ae5e3970054fee4c4373472604a1b4e" },
