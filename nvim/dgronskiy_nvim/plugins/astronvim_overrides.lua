@@ -40,6 +40,7 @@ return {
     },
     {
         "nvim-neo-tree/neo-tree.nvim",
+        enabled = false,
         opts = function(plugin, opts)
             -- vim.deep_tbl_extend does has a side effect of
             -- trmbling vertical navigation: pressing `k`, e.g.

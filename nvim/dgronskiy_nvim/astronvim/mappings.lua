@@ -54,13 +54,16 @@ mapping["n"] = {
     -- focus position=current works for opening, but doesn't close
     -- original wincmd p does not jump back to empty unnamed buffer
     ["<leader>e"] = {
+        -- function()
+        --     if vim.bo.filetype == "neo-tree" then
+        --         vim.cmd([[Neotree close]])
+        --     else
+        --         -- vim.cmd([[Neotree focus position=current]])
+        --         vim.cmd([[Neotree source=filesystem reveal=true position=current]])
+        --     end
+        -- end,
         function()
-            if vim.bo.filetype == "neo-tree" then
-                vim.cmd([[Neotree close]])
-            else
-                -- vim.cmd([[Neotree focus position=current]])
-                vim.cmd([[Neotree source=filesystem reveal=true position=current]])
-            end
+            MiniFiles.open()
         end,
         noremap = true,
         desc = "Toggle Explorer",

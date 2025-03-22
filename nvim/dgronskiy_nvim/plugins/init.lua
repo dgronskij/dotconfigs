@@ -341,4 +341,57 @@ return {
         lazy = false,
         -- event = "VeryLazy",
     },
+    {
+        -- https://github.com/echasnovski/mini.files?tab=readme-ov-file
+        "echasnovski/mini.files",
+        version = "*",
+        event = "VeryLazy",
+        config = function()
+            require('mini.files').setup({
+                windows = {
+                    preview = true,
+                },
+
+            })
+
+            -- this is from :h mini.files
+            local set_cwd = function()
+                local path = (MiniFiles.get_fs_entry() or {}).path
+                if path == nil then return vim.notify('Cursor is not on valid entry') end
+                vim.fn.chdir(vim.fs.dirname(path))
+            end
+
+            -- Yank in register full path of entry under cursor
+            local yank_path = function()
+                local path = (MiniFiles.get_fs_entry() or {}).path
+                if path == nil then return vim.notify('Cursor is not on valid entry') end
+                vim.fn.setreg(vim.v.register, path)
+            end
+
+            local go_in_close = function()
+                MiniFiles.go_in({
+                    close_on_file = true,
+                })
+            end
+
+            vim.api.nvim_create_autocmd('User', {
+                pattern = 'MiniFilesBufferCreate',
+                callback = function(args)
+                    local b = args.data.buf_id
+                    vim.keymap.set('n', 'g.', set_cwd,   { buffer = b, desc = 'Set cwd' })
+                    vim.keymap.set('n', 'gy', yank_path, { buffer = b, desc = 'Yank path' })
+                    vim.keymap.set('n', '<CR>', go_in_close, { buffer = b, desc = 'Go in plus' })
+                end,
+            })
+
+        end,
+        keys = {
+            {
+                "<leader>ef",
+                "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>",
+                desc = "MiniFiles: reveal current file",
+            },
+        }
+        -- lazy = false,
+    },
 }
