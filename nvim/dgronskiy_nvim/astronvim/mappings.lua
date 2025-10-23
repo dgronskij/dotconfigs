@@ -29,7 +29,21 @@ mapping["n"] = {
     -- end },
     --
     ["<S-K>"] = { ":FindExact <C-R><C-W><CR>", desc = "FZF: find the word under cursor" },
-    ["<leader><S-K>"] = { ":ArcFindExact <C-R><C-W><CR>", desc = "Arc: find the word under cursor" },
+    -- ["<leader><S-K>"] = { ":ArcFindExact <C-R><C-W><CR>", desc = "Arc: find the word under cursor" },
+    ["<leader><S-K>"] = {
+        function()
+            local ytils = require("dgronskiy_nvim.ytils")
+            local current_file_path = vim.fn.expand("%:p")
+            local force_find_all = current_file_path:match("junk") ~= nil or current_file_path:match("contrib") ~= nil
+            if ytils.arc_find_find_all or force_find_all then
+                return ":ArcFindExactAll <C-R><C-W><CR>"
+            else
+                return ":ArcFindExact    <C-R><C-W><CR>"
+            end
+        end,
+        desc = "Arc: find the word under cursor",
+        expr = true,
+    },
     ["<leader>/"] = { ":BLines<CR>", desc = "FZF: Buffer lines" },
 
     -- jump to the tab by its number

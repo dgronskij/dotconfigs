@@ -90,7 +90,7 @@ local config = {
             },
             gopls = {
                 autostart = true,
-                cmd = { "ya", "tool", "gopls" },
+                -- cmd = { "ya", "tool", "gopls" },
                 settings = {
                     gopls = {
                         -- directoryFilters = { "-", "+[ваша папка]" },
@@ -144,6 +144,9 @@ local config = {
         vim.cmd(
             [[ command! -bang -nargs=* FindExact call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
         )
+        vim.cmd(
+            [[ command! -bang -nargs=* FindAll call fzf#vim#grep('rg -uuu --column --line-number --no-heading --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
+        )
 
         vim.cmd(
             -- + case-insensitive
@@ -169,6 +172,10 @@ local config = {
         vim.cmd(
             -- + case-insensitive
             [[ command! -bang -nargs=* ArcFiles call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max 5000 --color "always" . -g1 --file '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
+        )
+        vim.cmd(
+            -- + case-insensitive
+            [[ command! -bang -nargs=* ArcFilesAll call fzf#vim#grep('ya tool cs -i --current-folder --max 5000 --color "always" . -g1 --file '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
         )
         -- vim.cmd(
         -- -- + case-insensitive
@@ -356,7 +363,8 @@ local config = {
         vim.cmd([[nnoremap ]c :cnext<CR>]])
         vim.cmd([[nnoremap [c :cprev<CR>]])
 
-        vim.lsp.set_log_level("info")
+        -- vim.lsp.set_log_level("info")
+        vim.lsp.set_log_level("trace")
     end,
 }
 
