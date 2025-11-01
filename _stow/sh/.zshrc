@@ -151,3 +151,10 @@ if [ -f ~/bin/iterm_set_badge ] ; then
         fi
     }
 fi
+
+source /home/dgronskiy/.yql/shell_completion
+export PATH="/home/linuxbrew/.linuxbrew/opt/postgresql@16/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
