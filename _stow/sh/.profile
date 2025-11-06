@@ -1,4 +1,4 @@
-echo "this is .profile"
+echo "this is .profile" >&2
 # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
 # exists.
@@ -19,7 +19,7 @@ fi
 
 if [ -d ~/bin/source.d ] ; then
     for f in ~/bin/source.d/* ; do
-        echo "-- found $f, sourcing"
+        echo "-- found $f, sourcing" >&2
         source "$f"
     done
 fi
@@ -86,7 +86,7 @@ alias kvim="NVIM_APPNAME=kickstartnvim nvim"
 # }
 
 if [ -e ~/.localrc ] ; then
-    echo "-- found ~/.localrc, sourcing"
+    echo "-- found ~/.localrc, sourcing" >&2
     source ~/.localrc
 fi
 

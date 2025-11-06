@@ -1,4 +1,4 @@
-echo "this is .bashrc"
+echo "this is .bashrc" >&2
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -122,3 +122,5 @@ fi
 if type zoxide &>/dev/null ; then
     eval "$(zoxide init bash)"
 fi
+
+source /home/dgronskiy/.yql/shell_completion
