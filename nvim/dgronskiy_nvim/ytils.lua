@@ -184,7 +184,7 @@ function M.GetArcanumLink(opts)
         return
     end
 
-    local file_path = vim.fn.expand("%:p") ---@type string
+    local file_path = vim.fn.resolve(vim.fn.expand("%:p")) ---@type string
     local file_relative_path = M.GetArcRelativePath(file_path, arc_root)
     if not file_relative_path then
         return
