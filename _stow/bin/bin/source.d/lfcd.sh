@@ -21,3 +21,15 @@ lfcd () {
     # `command` is needed in case `lfcd` is aliased to `lf`
     cd "$(command lf -print-last-dir "$@")"
 }
+
+lfcd2() {
+    tmpfile=$(mktemp --suffix .lfcd)
+    # Start lf with an environment variable pointing to the temp file
+    LFCD_FILE="$tmpfile" command lf "$@"
+    if [ -f "$tmpfile" ]; then
+        target=$(cat "$tmpfile")
+        rm -f "$tmpfile"
+        # Only cd if the file is not empty
+        [ -n "$target" ] && cd "$target"
+    fi
+}

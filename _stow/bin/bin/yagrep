@@ -1,0 +1,13 @@
+#!/bin/bash
+
+type arc &>/dev/null && has_arc=true || has_arc= false
+type ya &>/dev/null && has_ya=true || has_ya= false
+type rg &>/dev/null && has_rg=true || has_rg= false
+
+if [[ $has_arc = true ]] ; then
+    inside
+
+if type arc >/dev/null 2>/dev/null; then
+  exec rg
+  eval "$(zoxide init zsh)"
+fi

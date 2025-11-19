@@ -17,3 +17,11 @@ map i $~/bin/lf-previewer "$f"
 
 # conformant to my vim config
 map <c-q> quit
+
+# https://github.com/gokcehan/lf/wiki/Tips#file-operations
+
+# You can name this ":cdhere" or similar
+cmd cdhere %{{
+    echo "$PWD" > "$LFCD_FILE"
+    $quit
+}}

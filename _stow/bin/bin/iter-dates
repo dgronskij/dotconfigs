@@ -28,7 +28,7 @@ shift $(($OPTIND - 1))
 FROM="$1"
 TO="${2-today}"
 
-FMT="%Y-%m-%d"
+FMT="%Y-%m-%dT%H:%M:%S"
 
 if [[ -z "$FROM" || -z "$TO" ]] ; then
     echo "usage: $0  [-f OUTPUT-FORMAT] [-s STEP] FROM_INCL TO_EXCL" >&2
