@@ -244,7 +244,8 @@ vim.api.nvim_create_user_command("ArcLink", function(opts)
     print(url)
 end, { force = true, range = true })
 
-vim.cmd([[au BufNewFile,BufRead,BufReadPost a.yaml set lisp]])
+-- vim.cmd([[au BufNewFile,BufRead,BufReadPost a.yaml set lisp]])
+vim.cmd([[au BufNewFile,BufRead,BufReadPost *.yaml,*.yml set lisp]])
 
 -- vim.cmd([[nnoremap <leader>r :luafile ~/wow.lua<CR>]])
 -- -- vim.cmd([[vnoremap <leader>r :luafile ~/wow.lua<CR>]])
