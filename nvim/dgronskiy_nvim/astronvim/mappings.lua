@@ -88,7 +88,10 @@ mapping["n"] = {
 -- VISUAL mode
 mapping["v"] = {
     ["<S-K>"] = { '"vy :FindExact <C-R>v<CR>', desc = "FZF: find the selection" },
+
     ["<leader><S-K>"] = { '"vy :ArcFind <C-R>v<CR>', desc = "Arc: find the selection" },
+    ["<leader>cs"] = { '"vy :ArcFind <C-R>v<CR>', desc = "Arc: find the selection" },
+
     ["<leader>fa"] = { '"vy :ArcFiles <C-R>v<CR>', desc = "Search selected [F]ile in [A]rc" },
     ["<leader>/"] = { '"vy :BLines <C-R>v<CR>', desc = "FZF: buffer lines" },
     -- ["<C-j>"] = { function()
