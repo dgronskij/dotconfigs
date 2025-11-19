@@ -171,11 +171,11 @@ local config = {
         --       remove -g1 (max match per file)
         vim.cmd(
             -- + case-insensitive
-            [[ command! -bang -nargs=* ArcFiles call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max 5000 --color "always" . -g1 --file '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
+            [[ command! -bang -nargs=* ArcFiles call fzf#vim#grep('ya tool cs -i --current-folder --no-contrib --no-junk --max 50000 --color "always" . -g1 --file '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
         )
         vim.cmd(
             -- + case-insensitive
-            [[ command! -bang -nargs=* ArcFilesAll call fzf#vim#grep('ya tool cs -i --current-folder --max 5000 --color "always" . -g1 --file '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
+            [[ command! -bang -nargs=* ArcFilesAll call fzf#vim#grep('ya tool cs -i --current-folder --max 50000 --color "always" . -g1 --file '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
         )
         -- vim.cmd(
         -- -- + case-insensitive
