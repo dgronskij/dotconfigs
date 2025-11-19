@@ -377,6 +377,26 @@ return {
                 })
             end
 
+            -- https://github.com/nvim-mini/mini.nvim/issues/760
+            -- see: https://github.com/nvim-mini/mini.nvim/blob/a683bfe8e03293e3bb079e24c94e51977756a3ec/doc/mini-files.txt#L433-L448
+            local map_split = function(buf_id, lhs, direction)
+                local rhs = function()
+                    -- Make new window and set it as target
+                    local new_target_window
+                    vim.api.nvim_win_call(MiniFiles.get_target_window(), function()  -- FIXME: get_target_window is a nil value
+                        vim.cmd(direction .. ' split')
+                        new_target_window = vim.api.nvim_get_current_win()
+                    end)
+
+                    MiniFiles.set_target_window(new_target_window)
+                    go_in_close()
+                end
+
+                -- Adding `desc` will result into `show_help` entries
+                local desc = 'Split ' .. direction
+                vim.keymap.set('n', lhs, rhs, { buffer = buf_id, desc = desc })
+            end
+
             vim.api.nvim_create_autocmd('User', {
                 pattern = 'MiniFilesBufferCreate',
                 callback = function(args)
@@ -384,6 +404,9 @@ return {
                     vim.keymap.set('n', 'g.', set_cwd,   { buffer = b, desc = 'Set cwd' })
                     vim.keymap.set('n', 'gy', yank_path, { buffer = b, desc = 'Yank path' })
                     vim.keymap.set('n', '<CR>', go_in_close, { buffer = b, desc = 'Go in plus' })
+
+                    map_split(buf_id, 'gs', 'belowright horizontal')
+                    map_split(buf_id, 'gv', 'belowright vertical')
                 end,
             })
 
