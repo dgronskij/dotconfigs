@@ -47,9 +47,9 @@ export FZF_DEFAULT_COMMAND="$GRONSKY_PROFILE_GET_PROJECT_FILES_COMMAND"
 
 tma() {
     if tmux list-sessions &>/dev/null ; then
-        tmux attach
+        tmux attach "$@"
     else
-        tmux
+        tmux "$@"
     fi
 }
 
