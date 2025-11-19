@@ -158,3 +158,7 @@ export PATH="/home/linuxbrew/.linuxbrew/opt/postgresql@16/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+
+# The next line enables shell completion for TARS utility
+[ -f /home/dgronskiy/.tars/shell/rc_ext.zsh ] && source /home/dgronskiy/.tars/shell/rc_ext.zsh
