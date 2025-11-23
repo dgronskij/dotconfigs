@@ -1,0 +1,5 @@
+#!/bin/bash
+
+input=$(cat)
+printf "\033]52;c;%s\a" "$(printf "%s" "$input" | base64 -w0)"
+printf "%s" "$input"
