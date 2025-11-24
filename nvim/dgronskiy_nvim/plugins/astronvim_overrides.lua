@@ -8,8 +8,8 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter",
-        -- commit = "origin/HEAD", -- astronvim machinery prevents this from updates
-        commit = "origin/main", -- astronvim machinery prevents this from updates
+        commit = "origin/HEAD", -- astronvim machinery prevents this from updates
+        -- commit = "origin/main", -- astronvim machinery prevents this from updates
         build = ":TSUpdate",
         opts = {
             ensure_installed = {
