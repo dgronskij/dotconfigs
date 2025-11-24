@@ -1,5 +1,20 @@
 #!/bin/bash
 
-input=$(cat)
-printf "\033]52;c;%s\a" "$(printf "%s" "$input" | base64 -w0)"
-printf "%s" "$input"
+set -e
+
+tmpfile=$(mktemp)
+exec 3> "$tmpfile"  # write
+exec 4< "$tmpfile"  # read
+exec 5< "$tmpfile"  # read x2
+rm "$tmpfile"
+
+cat >&3
+printf "\033]52;c;%s\a" "$(cat <&4 | base64 -w0)"
+cat <&5
+
+## original code: bash process substitution strips trailing newlines, if any; avoid that
+# input=$(cat)
+# printf "\033]52;c;%s\a" "$(printf "%s" "$input" | base64 -w0)"
+# printf "{"
+# printf "%s" "$input"
+# printf "}"
