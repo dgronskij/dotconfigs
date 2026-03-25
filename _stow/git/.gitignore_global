@@ -32,3 +32,11 @@ node_modules/
 .aider.*
 
 codegen/client/python/**/*.py
+
+
+*.a
+test-results
+
+bin/bin
+junk-dgronskiy-yango_lb
+junk-dgronskiy-yango_lb-tests

@@ -2,6 +2,9 @@
 
 set -e
 
-ARC_ROOT="$(arc root 2>/dev/null)" || { ARC_ROOT=/a/trunk; echo "using ARC_ROOT=${ARC_ROOT}" >&2; }
-exec "${ARC_ROOT}/ya" "$@"
+ARCADIA_ROOT="${ARCADIA_ROOT?ARCADIA_ROOT probably not set in ~/.localrc}"
+echo "using ARCADIA_ROOT=${ARCADIA_ROOT}" >&2
+
+# ARC_ROOT="$(arc root 2>/dev/null)" || { ARC_ROOT=; echo "using ARC_ROOT=${ARC_ROOT}" >&2; }
+exec "${ARCADIA_ROOT}/ya" "$@"
 

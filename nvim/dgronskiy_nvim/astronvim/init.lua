@@ -142,6 +142,9 @@ local config = {
             [[ command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
         )
         vim.cmd(
+            [[ command! -bang -nargs=* FindWithLocationList call fzf#vim#grep('dimonrg '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
+        )
+        vim.cmd(
             [[ command! -bang -nargs=* FindExact call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --smart-case  --hidden --follow  --color "always" '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0) ]]
         )
         vim.cmd(
@@ -186,6 +189,7 @@ local config = {
 
         vim.cmd([[ nnoremap <Leader>find :Find ]])
         vim.cmd([[ nnoremap <Leader>fd :Find ]])
+        vim.cmd([[ nnoremap <Leader>floc :FindWithLocationList ]])
         vim.cmd([[ nnoremap <Leader>cs :ArcFind ]])
 
         vim.cmd([[ nnoremap <Leader>al :ArcLink<CR> ]])

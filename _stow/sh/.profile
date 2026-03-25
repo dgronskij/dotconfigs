@@ -57,6 +57,9 @@ export GIT_SRC_ROOT=$HOME/src
 
 alias ll="ls -la"
 
+alias oc="opencode"
+alias os="openspec"
+
 alias g="git"
 alias lg="lazygit"
 
@@ -112,3 +115,6 @@ if [ -d "$HOME/.pyenv" ] ; then
     eval "$(pyenv init -)"
 fi
 
+if [ -d "$HOME/go" ] ; then
+    export PATH="$PATH:$HOME/go/bin"
+fi
