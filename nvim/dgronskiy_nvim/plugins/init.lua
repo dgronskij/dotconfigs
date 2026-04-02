@@ -377,6 +377,10 @@ return {
                 })
             end
 
+            local go_cwd = function()
+                MiniFiles.open()
+            end
+
             -- https://github.com/nvim-mini/mini.nvim/issues/760
             -- see: https://github.com/nvim-mini/mini.nvim/blob/a683bfe8e03293e3bb079e24c94e51977756a3ec/doc/mini-files.txt#L433-L448
             local map_split = function(buf_id, lhs, direction)
@@ -402,6 +406,7 @@ return {
                 callback = function(args)
                     local b = args.data.buf_id
                     vim.keymap.set('n', 'g.', set_cwd,   { buffer = b, desc = 'Set cwd' })
+                    vim.keymap.set('n', 'g@', go_cwd,   { buffer = b, desc = 'Open cwd' })
                     vim.keymap.set('n', 'gy', yank_path, { buffer = b, desc = 'Yank path' })
                     vim.keymap.set('n', '<CR>', go_in_close, { buffer = b, desc = 'Go in plus' })
 
