@@ -386,13 +386,16 @@ return {
             local map_split = function(buf_id, lhs, direction)
                 local rhs = function()
                     -- Make new window and set it as target
-                    local new_target_window
-                    vim.api.nvim_win_call(MiniFiles.get_target_window(), function()  -- FIXME: get_target_window is a nil value
-                        vim.cmd(direction .. ' split')
-                        new_target_window = vim.api.nvim_get_current_win()
-                    end)
+                    local state = MiniFiles.get_explorer_state()
+                    if state and state.target_window then
+                        local new_target_window
+                        vim.api.nvim_win_call(state.target_window, function()
+                            vim.cmd(direction .. ' split')
+                            new_target_window = vim.api.nvim_get_current_win()
+                        end)
 
-                    MiniFiles.set_target_window(new_target_window)
+                        MiniFiles.set_target_window(new_target_window)
+                    end
                     go_in_close()
                 end
 
