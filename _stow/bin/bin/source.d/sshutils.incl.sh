@@ -9,7 +9,7 @@ function _sshutils_relink_ssh_auth() {
 
     # 1. if relinked by OUR machinery, do nothing
     #     - is it equivalent to checking SSH_AUTH_SOCK value itself? I think yes
-    if [[ "$SSH_AUTH_SOCK" = "$ssh_auth_sock_should_be ]] ; then
+    if [[ "$SSH_AUTH_SOCK" = "$ssh_auth_sock_should_be" ]] ; then
         return;
     fi
 
