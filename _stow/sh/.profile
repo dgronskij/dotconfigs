@@ -118,3 +118,5 @@ fi
 if [ -d "$HOME/go" ] ; then
     export PATH="$PATH:$HOME/go/bin"
 fi
+
+if [ -e /home/dgronskiy/.nix-profile/etc/profile.d/nix.sh ]; then . /home/dgronskiy/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

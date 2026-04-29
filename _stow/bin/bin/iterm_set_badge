@@ -1,8 +1,26 @@
 #!/bin/bash
-function iterm_set_badge() {
-    local text="$1"
-    local text64="$( echo "$text" | base64 )"
-    printf "\\e]1337;SetBadgeFormat=${text64}\\a" > /dev/tty
+function tmux_wrap() {
+    local code="$1"
+    local ESC=$'\e'
+    # tmux intercepts escape sequences and needs passthrough sequences to forward
+    # them to the terminal. The format is: \eP tmux; <payload> \e\\
+    # Inside the payload, every literal ESC byte must be doubled (\e -> \e\e)
+    # so tmux doesn't mistake them for the end of the passthrough block.
+    # We use a variable ($ESC) holding a real 0x1b byte for the substitution,
+    # because bash pattern substitution matches literal bytes, not \e notation.
+    local escaped="${code//${ESC}/${ESC}${ESC}}"
+    printf "\ePtmux;%s\e\\" "$escaped"
 }
 
-iterm_set_badge "$@"
+function iterm_set_badge_seq() {
+    local text="$1"
+    local text64="$( echo -n "$text" | base64 )"
+    printf "\\e]1337;SetBadgeFormat=${text64}\\a"
+}
+
+SEQ=$(iterm_set_badge_seq "$1")
+
+if [[ -n "$TMUX" ]]; then
+    SEQ=$(tmux_wrap "$SEQ")
+fi
+printf "%s" "$SEQ" > /dev/tty

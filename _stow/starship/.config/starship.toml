@@ -2,4 +2,22 @@
 
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# https://starship.rs/config/#default-prompt-format
+format = """
+$username\
+$hostname\
+${custom.arc}\
+$directory\
+$all\
+"""
+
+# https://starship.rs/config/#options
 scan_timeout = 10  # otherwise in /a/trunk
+
+[custom.arc]
+# https://starship.rs/config/#custom-commands
+command = "echo $ARCADIA_ROOT"
+when = "test -n \"$ARCADIA_ROOT\""
+format = "\\$A=[$symbol$output]($style) "
+# symbol = "🌳 "
+style = "bold green"
