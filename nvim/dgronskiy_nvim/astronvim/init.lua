@@ -111,7 +111,8 @@ local config = {
     },
     mappings = require("dgronskiy_nvim.astronvim.mappings").astronvim_mappings_callback,
     polish = function()
-        vim.cmd([[ set path+=/a/trunk ]])
+        -- vim.cmd([[ set path+=/a/trunk ]])
+        vim.cmd([[ set path+=$ARCADIA_ROOT ]])  -- set this in ~/.localrc !
 
         vim.cmd([[ set wildmode=longest:full,full ]]) -- https://vi.stackexchange.com/a/11424/7248
 
@@ -225,6 +226,7 @@ local config = {
         vim.cmd([[nnoremap  <leader>lcd  :Lcd<CR>]])
 
         vim.cmd([[nnoremap  <leader>cda :cd $A \| :pwd<CR>]])
+        vim.cmd([[nnoremap  <leader>lcda :lcd $A \| :pwd<CR>]])
 
         vim.cmd([[ vnoremap > >gv ]])
         vim.cmd([[ vnoremap < <gv ]])
