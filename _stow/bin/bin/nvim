@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# export NVIM_APPNAME="${NVIM_APPNAME:-astronvim3}"
+export NVIM_APPNAME="${NVIM_APPNAME:-nvim_kickstart}"
+# exec nvim-0.9 "$@"
+# exec nvim-0.10 "$@"
+
+if [[ $NVIM_APPNAME = "astronvim3" ]] ; then
+    exec nvim-0.10.1 "$@"
+else
+    exec nvim-0.12.2 "$@"
+fi
