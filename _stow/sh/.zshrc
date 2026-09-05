@@ -68,11 +68,13 @@ plugins=(
   git conda-zsh-completion
 )
 
-source $ZSH/oh-my-zsh.sh
-
-if type zoxide >/dev/null 2>/dev/null; then
-  eval "$(zoxide init zsh)"
+if [[ -r "$ZSH/oh-my-zsh.sh" ]]; then
+  source "$ZSH/oh-my-zsh.sh"
 fi
+
+# Keep shell editing behavior identical on every machine, regardless of
+# $EDITOR or whether Oh My Zsh is installed.
+bindkey -e
 
 fpath+=~/.zfunc  # custom competions go here
 
@@ -113,7 +115,9 @@ autoload -U compinit && compinit
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if (( $+commands[fzf] )); then
+    source <(fzf --zsh)
+fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -152,13 +156,27 @@ if [ -f ~/bin/iterm_set_badge ] ; then
     }
 fi
 
-source /home/dgronskiy/.yql/shell_completion
-export PATH="/home/linuxbrew/.linuxbrew/opt/postgresql@16/bin:$PATH"
+[[ -r "$HOME/.yql/shell_completion" ]] && source "$HOME/.yql/shell_completion"
+
+# Homebrew lives in different prefixes on Linux, Apple Silicon, and Intel Macs.
+for brew_prefix in /home/linuxbrew/.linuxbrew /opt/homebrew /usr/local; do
+    [[ -d "$brew_prefix/opt/postgresql@16/bin" ]] && path=("$brew_prefix/opt/postgresql@16/bin" $path)
+done
+unset brew_prefix
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+for nvm_script in \
+    "$NVM_DIR/nvm.sh" \
+    /home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh \
+    /opt/homebrew/opt/nvm/nvm.sh \
+    /usr/local/opt/nvm/nvm.sh; do
+    if [[ -s "$nvm_script" ]]; then
+        source "$nvm_script"
+        break
+    fi
+done
+unset nvm_script
 
 
 # The next line enables shell completion for TARS utility
-[ -f /home/dgronskiy/.tars/shell/rc_ext.zsh ] && source /home/dgronskiy/.tars/shell/rc_ext.zsh
+[[ -r "$HOME/.tars/shell/rc_ext.zsh" ]] && source "$HOME/.tars/shell/rc_ext.zsh"
